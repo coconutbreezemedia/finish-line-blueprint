@@ -86,6 +86,30 @@
     toastTimer = setTimeout(() => { t.className = "toast"; t.hidden = true; }, 2600);
   }
 
+  // ---------- animation utils ----------
+  const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function animateCount(el, to) {
+    if (!el) return;
+    to = Number(to);
+    if (reduceMotion || !isFinite(to) || to <= 0) { el.textContent = isFinite(to) ? to : el.textContent; return; }
+    const dur = Math.min(1100, 300 + to * 3);
+    const start = performance.now();
+    function tick(now) {
+      const p = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(to * eased);
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = to;
+    }
+    requestAnimationFrame(tick);
+  }
+  function animateProgressFill(el, targetPct) {
+    if (!el) return;
+    if (reduceMotion) { el.style.width = targetPct + "%"; return; }
+    el.style.width = "0%";
+    requestAnimationFrame(() => requestAnimationFrame(() => { el.style.width = targetPct + "%"; }));
+  }
+
   // ---------- HERO ----------
   function renderHero() {
     const hy = raceDate("hyrox");
@@ -126,12 +150,15 @@
       <div class="progress">
         <div class="progress__track">
           <div class="progress__fill" style="width:${todayPct}%"></div>
-          <div class="progress__marker" style="left:${hyPct}%" title="Hyrox"><span>🏁</span></div>
-          <div class="progress__marker progress__marker--end" title="Tri"><span>🏁</span></div>
+          <div class="progress__marker" style="left:${hyPct}%" title="Hyrox"><span class="mk">${window.ICON.flag}</span></div>
+          <div class="progress__marker progress__marker--end" title="Tri"><span class="mk">${window.ICON.flag}</span></div>
           <div class="progress__today" style="left:${todayPct}%" title="You are here"></div>
         </div>
         <div class="progress__caption"><span>Season start</span><span>Hyrox</span><span>Tri finish</span></div>
       </div>`;
+
+    animateCount($("#hero .race-count__num"), primary.n);
+    animateProgressFill($("#hero .progress__fill"), todayPct);
   }
 
   // ---------- TODAY ----------
@@ -161,7 +188,7 @@
       head = `<p class="eyebrow">Prep · Day ${loc.prepOffset + 1} of ${P.prep.length}</p><h2 class="big">${esc(p.title)}</h2><p class="muted">Two days to set up for a clean Monday start.</p>`;
       body = `<div class="card"><ul class="tasklist">${p.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul></div>`;
     } else if (loc.state === "beyond") {
-      head = `<p class="eyebrow">Phase 1 complete 🎉</p><h2 class="big">Nice work.</h2><p class="muted">Come back to build Phase 2 (Hyrox). Keep the foot protocol going.</p>`;
+      head = `<p class="eyebrow">Phase 1 complete <span class="mk mk--sun">${window.ICON.sun}</span></p><h2 class="big">Nice work.</h2><p class="muted">Come back to build Phase 2 (Hyrox). Keep the foot protocol going.</p>`;
     } else {
       const w = loc.week, day = loc.day;
       head = `<p class="eyebrow">Week ${w.n} · ${DOW[loc.dayIndex]} · Phase ${w.phase}</p>
@@ -220,7 +247,7 @@
       <div class="card footcard">
         <div class="footcard__head">
           <h3 class="section-title">Foot protocol · today</h3>
-          <span class="streak-pill" title="Foot-protocol streak">🔥 ${footStreak()}d</span>
+          <span class="streak-pill" title="Foot-protocol streak"><span class="mk mk--sun">${window.ICON.sun}</span><span class="streak-pill__n">${footStreak()}</span>d</span>
         </div>
         <div class="checklist" id="today-foot">${footChecklistHTML(dateStr)}</div>
       </div>
@@ -252,8 +279,8 @@
   }
 
   function renderHeroStreakBits() {
-    const pill = $(".streak-pill");
-    if (pill) pill.textContent = `🔥 ${footStreak()}d`;
+    const n = $(".streak-pill .streak-pill__n");
+    if (n) n.textContent = footStreak();
   }
 
   function saveTodayLog(dateStr) {
@@ -338,7 +365,7 @@
         <button class="week__head" aria-expanded="${open}">
           <span class="week__n">Week ${w.n}</span>
           <span class="week__focus">${esc(w.focus)}</span>
-          <span class="week__chev">▾</span>
+          <span class="week__chev">${window.ICON.chevron}</span>
         </button>
         <div class="week__panel">
           <div class="week__guide">${esc(w.runGuidance)}</div>
@@ -371,7 +398,7 @@
     const dateStr = fmtISO(today());
     $("#panel-foot").innerHTML = `
       <div class="card streakcard">
-        <div class="streak"><div class="streak__num">${footStreak()}</div><div class="streak__label">day foot-protocol streak 🔥</div></div>
+        <div class="streak"><div class="streak__num">${footStreak()}</div><div class="streak__label">day foot-protocol streak <span class="mk mk--sun">${window.ICON.sun}</span></div></div>
         <p class="muted">All six boxes checked = today counts. Miss a day and the streak resets — that's the point.</p>
       </div>
       <div class="card">
@@ -560,9 +587,29 @@
     renderFoot();
     renderLog();
     renderInfo();
+    animateCount($("#panel-foot .streak__num"), footStreak());
+    $$("#panel-log .stat__num").forEach((el) => animateCount(el, el.textContent));
+  }
+
+  function injectChrome() {
+    const brand = $("#brand");
+    if (brand && window.LOGO_LOCKUP) brand.innerHTML = window.LOGO_LOCKUP;
+    const gear = $("#open-settings");
+    if (gear && window.ICON) gear.innerHTML = window.ICON.gear;
+    const close = $("#close-settings");
+    if (close && window.ICON) close.innerHTML = window.ICON.close;
+  }
+
+  function registerSW() {
+    if (!("serviceWorker" in navigator)) return;
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("service-worker.js").catch(() => {});
+    });
   }
 
   function init() {
+    injectChrome();
+    registerSW();
     renderAll();
     $$(".tab").forEach((t) => t.addEventListener("click", () => switchTab(t.dataset.panel)));
     $("#open-settings").addEventListener("click", openDrawer);

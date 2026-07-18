@@ -3,21 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#0a0a0a" />
-  <title>Finish Line Blueprint</title>
-  <meta name="description" content="A beginner's low-impact training blueprint for Hyrox + a Sprint Triathlon." />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏁</text></svg>" />
+  <meta name="theme-color" content="#071a24" />
+  <title>Fit Bitch</title>
+  <meta name="description" content="Fit Bitch — a bold, surf-flavored training app for Hyrox + a Sprint Triathlon, built around a low-impact ramp and daily foot care." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%23071a24' stroke='%2316c2b3' stroke-width='2'/><circle cx='16' cy='17' r='7' fill='%23ff8c42'/><rect x='6' y='17' width='20' height='1.6' fill='%23071a24'/><path d='M5 22 q4 -3 8 0 t8 0 t8 0' stroke='%2316c2b3' stroke-width='1.6' fill='none'/></svg>" />
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Fit Bitch" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="app" id="app">
     <!-- Top bar -->
     <header class="topbar">
-      <div class="brand">
-        <span class="brand__flag" aria-hidden="true">🏁</span>
-        <span class="brand__name">FINISH LINE<br /><span class="brand__name-2">BLUEPRINT</span></span>
-      </div>
-      <button class="icon-btn" id="open-settings" aria-label="Settings">⚙</button>
+      <div class="brand" id="brand"><!-- logo lockup injected by JS --></div>
+      <button class="icon-btn" id="open-settings" aria-label="Settings"><!-- gear --></button>
     </header>
 
     <!-- Hero: race countdown + season progress -->
@@ -51,7 +55,7 @@
   <aside class="drawer" id="drawer" hidden aria-label="Settings">
     <div class="drawer__head">
       <h2>Settings &amp; Sync</h2>
-      <button class="icon-btn" id="close-settings" aria-label="Close">✕</button>
+      <button class="icon-btn" id="close-settings" aria-label="Close"><!-- close --></button>
     </div>
     <div class="drawer__body" id="drawer-body"><!-- rendered by JS --></div>
   </aside>
@@ -60,6 +64,7 @@
   <div class="toast" id="toast" hidden></div>
 
   <script src="plan.js"></script>
+  <script src="icons.js"></script>
   <script src="airtable.js"></script>
   <script src="app.js"></script>
 </body>

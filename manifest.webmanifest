@@ -1,0 +1,17 @@
+{
+  "name": "Fit Bitch",
+  "short_name": "Fit Bitch",
+  "description": "A bold, surf-flavored training app for Hyrox + a Sprint Triathlon — built around a low-impact ramp and daily foot care.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#071a24",
+  "theme_color": "#071a24",
+  "categories": ["health", "fitness", "lifestyle"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

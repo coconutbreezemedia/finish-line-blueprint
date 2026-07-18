@@ -1176,3 +1176,123 @@ a { color: inherit; text-decoration: none; }
   .drawer { transition: none; }
   .toast { transition: none; }
 }
+
+/* ============================================================
+   SURF THEME v2 — twilight-surf identity + animations
+   (appended: later rules win the cascade)
+   ============================================================ */
+:root {
+  --bg: #071a24;
+  --card-bg: #0d2731;
+  --card-border: #17414c;
+  --text: #fdf6ec;
+  --muted: #7fa0a6;
+  --gold: #ffc24b;
+  --sun1: #ffd15c;
+  --sun2: #ff8c42;
+  --coral: #ff6b4a;
+  --teal: #16c2b3;
+  --cyan: #35d0c5;
+  --gray: #7fa0a6;
+  --lime: #ffc24b;            /* remap old accent -> surf gold */
+  --amber: #ffb020;
+  --input-bg: #0a2029;
+  --input-border: #1c4a56;
+  --sunset: linear-gradient(120deg, #ffd15c 0%, #ff9d4d 45%, #ff6b4a 100%);
+}
+
+/* grounds */
+body {
+  background: radial-gradient(130% 90% at 50% -10%, #0e3040 0%, #071a24 52%, #04121a 100%) fixed;
+  color: var(--text);
+}
+.tabs { background: rgba(7,26,36,0.92); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.drawer { background: #0a222c; }
+.input, .textarea { background: var(--input-bg); border-color: var(--input-border); }
+.input:focus, .textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(255,194,75,0.18); outline: none; }
+
+/* ---- logo lockup + icon chrome ---- */
+.brand { display: flex; align-items: center; }
+.logo-lockup { height: 42px; width: auto; display: block; }
+.icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px; border-radius: 50%;
+  background: #0d2731; border: 1px solid var(--card-border); color: var(--text);
+}
+.icon-btn:active { transform: scale(0.92); }
+.icon-btn svg { width: 20px; height: 20px; }
+.mk { display: inline-flex; align-items: center; }
+.mk svg { width: 1em; height: 1em; }
+.mk--sun { color: var(--gold); }
+.week__chev svg { width: 20px; height: 20px; display: block; }
+
+/* ---- surf accents ---- */
+.eyebrow { color: var(--gold); }
+.race-count__num {
+  background: var(--sunset);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.race-count--tri .race-count__num { background: linear-gradient(120deg,#35d0c5,#16c2b3 60%,#0fae9f); -webkit-background-clip: text; background-clip: text; }
+.btn--primary { background: var(--sunset); color: #08202a; border: none; font-weight: 800; }
+.btn--primary:active { transform: translateY(1px) scale(0.99); }
+.tab.is-active { color: var(--text); border-bottom-color: var(--gold); }
+.progress__fill { background: var(--sunset); transition: width 1.1s cubic-bezier(0.22,1,0.36,1); }
+.progress__today { background: var(--sand); box-shadow: 0 0 8px rgba(253,246,236,0.7); }
+.progress__marker .mk { color: var(--gold); }
+.progress__marker .mk svg { width: 15px; height: 15px; }
+.streak-pill { display: inline-flex; align-items: center; gap: 5px; }
+.streak-pill .mk--sun svg { width: 15px; height: 15px; }
+.rule--star { border-color: var(--gold); box-shadow: inset 3px 0 0 var(--gold); }
+.rule__cat { color: var(--gold); }
+.section-title { color: var(--text); }
+
+/* session-kind chips remapped to surf hues */
+.session-kind--strength { background: rgba(255,194,75,0.16); color: var(--gold); }
+.session-kind--bike { background: rgba(22,194,179,0.16); color: var(--teal); }
+.session-kind--swim { background: rgba(53,208,197,0.16); color: var(--cyan); }
+.session-kind--run { background: rgba(255,107,74,0.18); color: var(--coral); }
+.session-kind--brick { background: rgba(255,176,32,0.16); color: var(--amber); }
+.session-kind--rest { background: rgba(127,160,166,0.16); color: var(--muted); }
+.phase-chip--1 { background: rgba(255,194,75,0.14); color: var(--gold); border-color: rgba(255,194,75,0.35); }
+.phase-chip--2 { background: rgba(255,176,32,0.14); color: var(--amber); border-color: rgba(255,176,32,0.32); }
+.phase-chip--3 { background: rgba(255,107,74,0.14); color: var(--coral); border-color: rgba(255,107,74,0.32); }
+.gate-warning { background: rgba(255,107,74,0.12); border-left: 3px solid var(--coral); color: #ffd8cf; }
+.badge--zero { background: rgba(22,194,179,0.16); color: var(--teal); }
+.badge--low { background: rgba(255,176,32,0.16); color: var(--amber); }
+.badge--high { background: rgba(255,107,74,0.18); color: var(--coral); }
+.is-today { box-shadow: inset 3px 0 0 var(--gold); }
+
+/* wave divider under the top bar */
+.topbar { position: relative; }
+.topbar::after {
+  content: ""; position: absolute; left: -16px; right: -16px; bottom: -1px; height: 6px;
+  background: repeating-linear-gradient(90deg, var(--teal) 0 10px, transparent 10px 20px);
+  -webkit-mask: radial-gradient(6px 6px at 10px -3px, transparent 6px, #000 6px) repeat-x 0 0/20px 6px;
+  mask: radial-gradient(6px 6px at 10px -3px, transparent 6px, #000 6px) repeat-x 0 0/20px 6px;
+  opacity: 0.5;
+}
+
+/* ---- animations ---- */
+@keyframes flbRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes flbPop { 0% { transform: scale(1); } 45% { transform: scale(1.18); } 100% { transform: scale(1); } }
+@keyframes flbSun { 0%,100% { transform: rotate(0) scale(1); } 50% { transform: rotate(18deg) scale(1.08); } }
+@keyframes flbBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-1.5px); } }
+
+.panel.is-active > * { animation: flbRise 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+.panel.is-active > *:nth-child(2) { animation-delay: 0.05s; }
+.panel.is-active > *:nth-child(3) { animation-delay: 0.10s; }
+.panel.is-active > *:nth-child(4) { animation-delay: 0.15s; }
+.panel.is-active > *:nth-child(5) { animation-delay: 0.20s; }
+.panel.is-active > *:nth-child(n+6) { animation-delay: 0.24s; }
+.check.is-checked .check__box { animation: flbPop 0.3s var(--ease); }
+.streak-pill .mk--sun, .streak .mk--sun { animation: flbSun 3.2s ease-in-out infinite; transform-origin: center; }
+.logo-lockup { animation: flbBob 4s ease-in-out infinite; }
+.hero__count { animation: flbRise 0.6s cubic-bezier(0.22,1,0.36,1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .panel.is-active > *, .hero__count, .logo-lockup,
+  .streak-pill .mk--sun, .streak .mk--sun, .check.is-checked .check__box {
+    animation: none !important;
+  }
+  .progress__fill { transition: none !important; }
+}
