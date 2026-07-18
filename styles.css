@@ -1296,3 +1296,30 @@ body {
   }
   .progress__fill { transition: none !important; }
 }
+
+/* ============================================================
+   Safe-area insets — keep the header clear of the notch /
+   status bar / Dynamic Island on installed iOS PWAs.
+   (env() resolves to 0 on devices without insets, so this is
+   a no-op on desktop.)
+   ============================================================ */
+/* opaque strip filling the status-bar area so content never shows through */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: env(safe-area-inset-top);
+  background: #071a24;
+  z-index: 100;
+  pointer-events: none;
+}
+.app {
+  padding-top: env(safe-area-inset-top);
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
+  padding-bottom: max(80px, env(safe-area-inset-bottom));
+}
+/* sticky tab bar parks just below the notch, not under it */
+.tabs { top: env(safe-area-inset-top); }
+/* drawer + its header also clear the notch */
+.drawer { padding-top: env(safe-area-inset-top); }
