@@ -161,8 +161,9 @@
     animateProgressFill($("#hero .progress__fill"), todayPct);
   }
 
-  // ---------- TODAY ----------
-  function todayLog() { return store.logs()[fmtISO(today())] || {}; }
+  // ---------- CALENDAR (home) + day detail ----------
+  let calSelected = fmtISO(today());
+  let calView = { y: today().getFullYear(), m: today().getMonth() };
 
   function footChecklistHTML(dateStr) {
     const logs = store.logs();
@@ -175,107 +176,137 @@
       </label>`).join("");
   }
 
-  function renderToday() {
-    const loc = locate(today());
-    const dateStr = fmtISO(today());
-    let head = "";
-    let body = "";
+  function renderCalendar() {
+    const panel = $("#panel-cal");
+    const { y, m } = calView;
+    const logs = store.logs();
+    const todayISO = fmtISO(today());
 
-    if (loc.state === "pre") {
-      head = `<p class="eyebrow">Prep starts soon</p><h2 class="big">${loc.daysToStart} days</h2><p class="muted">until your Prep block begins.</p>`;
-    } else if (loc.state === "prep") {
-      const p = loc.prep;
-      head = `<p class="eyebrow">Prep · Day ${loc.prepOffset + 1} of ${P.prep.length}</p><h2 class="big">${esc(p.title)}</h2><p class="muted">Two days to set up for a clean Monday start.</p>`;
-      body = `<div class="card"><ul class="tasklist">${p.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul></div>`;
-    } else if (loc.state === "beyond") {
-      head = `<p class="eyebrow">Phase 1 complete <span class="mk mk--sun">${window.ICON.sun}</span></p><h2 class="big">Nice work.</h2><p class="muted">Come back to build Phase 2 (Hyrox). Keep the foot protocol going.</p>`;
-    } else {
+    let html = `<div class="cal">
+      <div class="cal__head">
+        <button class="cal__nav" data-dir="-1" aria-label="Previous month">${window.ICON.chevron}</button>
+        <div class="cal__title">${MONTHS[m]} ${y}</div>
+        <button class="cal__nav cal__nav--next" data-dir="1" aria-label="Next month">${window.ICON.chevron}</button>
+      </div>
+      <div class="cal__dow">${DOW.map((d) => `<div>${d}</div>`).join("")}</div>
+      <div class="cal__grid">`;
+
+    const offset = (new Date(y, m, 1).getDay() + 6) % 7;
+    for (let i = 0; i < offset; i++) html += `<div class="cal__blank"></div>`;
+
+    const daysInMonth = new Date(y, m + 1, 0).getDate();
+    for (let d = 1; d <= daysInMonth; d++) {
+      const iso = fmtISO(new Date(y, m, d));
+      const loc = locate(parseDate(iso));
+      let cls = "cal__cell", dot = "";
+      if (loc.state === "in") {
+        dot = `<span class="cal__dot cal__dot--${loc.day.k}"></span>`;
+        if (loc.day.run) cls += " cal__cell--run";
+      } else if (loc.state === "prep") {
+        dot = `<span class="cal__dot cal__dot--prep"></span>`;
+      }
+      if (logs[iso] && logs[iso].completed) cls += " cal__cell--done";
+      if (iso === todayISO) cls += " cal__cell--today";
+      if (iso === calSelected) cls += " cal__cell--sel";
+      html += `<button class="${cls}" data-date="${iso}"><span class="cal__num">${d}</span>${dot}</button>`;
+    }
+    html += `</div></div><div id="day-detail"></div>`;
+    panel.innerHTML = html;
+
+    $$("#panel-cal .cal__cell").forEach((cell) =>
+      cell.addEventListener("click", () => { calSelected = cell.dataset.date; renderCalendar(); }));
+    $$("#panel-cal .cal__nav").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        let nm = calView.m + parseInt(btn.dataset.dir, 10), ny = calView.y;
+        if (nm < 0) { nm = 11; ny--; } else if (nm > 11) { nm = 0; ny++; }
+        calView = { y: ny, m: nm };
+        renderCalendar();
+      }));
+
+    renderDayDetail(calSelected);
+  }
+
+  function renderDayDetail(dateStr) {
+    const el = $("#day-detail");
+    if (!el) return;
+    const loc = locate(parseDate(dateStr));
+    const log = store.logs()[dateStr] || {};
+    const dt = parseDate(dateStr);
+    let html = `<div class="today-head"><p class="eyebrow">${prettyDate(dt)}</p>`;
+    let sessionTitle = "Off-plan";
+
+    if (loc.state === "in") {
       const w = loc.week, day = loc.day;
-      head = `<p class="eyebrow">Week ${w.n} · ${DOW[loc.dayIndex]} · Phase ${w.phase}</p>
-        <h2 class="big">${esc(day.t)}</h2>
-        <p class="muted">${esc(w.focus)}</p>`;
-      const gate = day.run
-        ? `<div class="gate-warning">★ Run day — only go if morning heel pain has been ≤3/10. Otherwise swap in an easy bike or rower session.</div>`
-        : "";
-      body = `
+      sessionTitle = day.t;
+      html += `<h2 class="big">${esc(day.t)}</h2><p class="muted">Week ${w.n} · Phase ${w.phase} · ${esc(w.focus)}</p></div>
         <div class="session-card">
-          <div class="session-card__head">
-            <span class="session-kind session-kind--${esc(day.k)}">${esc(day.k)}</span>
-            ${badge(day.impact)}
-            <span class="session-mins">${day.min} min</span>
-          </div>
+          <div class="session-card__head"><span class="session-kind session-kind--${esc(day.k)}">${esc(day.k)}</span>${badge(day.impact)}<span class="session-mins">${day.min} min</span></div>
           <p class="session-card__detail">${esc(day.d)}</p>
-          ${gate}
+          ${day.run ? `<div class="gate-warning">★ Run day — only go if morning heel pain has been ≤3/10. Otherwise swap in an easy bike or rower session.</div>` : ""}
         </div>`;
+    } else if (loc.state === "prep") {
+      sessionTitle = "Prep: " + loc.prep.title;
+      html += `<h2 class="big">${esc(loc.prep.title)}</h2><p class="muted">Prep · Day ${loc.prepOffset + 1} of ${P.prep.length}</p></div>
+        <div class="card"><ul class="tasklist">${loc.prep.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul></div>`;
+    } else if (loc.state === "pre") {
+      html += `<h2 class="big">Nothing scheduled</h2><p class="muted">Your plan starts ${prettyDate(parseDate(P.meta.seasonStart))}.</p></div>`;
+    } else {
+      html += `<h2 class="big">Season stretch</h2><p class="muted">You're past the planned 8 weeks — keep the momentum and build Phase 2.</p></div>`;
     }
 
-    const log = todayLog();
-    const canLog = loc.state === "prep" || loc.state === "in" || loc.state === "beyond";
-    const sessionTitle = loc.state === "in" ? loc.day.t : (loc.state === "prep" ? "Prep: " + loc.prep.title : "Off-plan");
+    html += `<div class="card footcard">
+      <div class="footcard__head"><h3 class="section-title">Foot protocol</h3>
+        <span class="streak-pill" title="Foot-protocol streak"><span class="mk mk--sun">${window.ICON.sun}</span><span class="streak-pill__n">${footStreak()}</span>d</span></div>
+      <div class="checklist" id="day-foot">${footChecklistHTML(dateStr)}</div>
+    </div>`;
 
-    const logForm = canLog ? `
-      <div class="card logcard">
-        <h3 class="section-title">Log today</h3>
+    if (dt <= today()) {
+      html += `<div class="card logcard">
+        <h3 class="section-title">Log this day</h3>
         <div class="logform">
           <label class="check ${log.completed ? "is-checked" : ""} check--big">
             <input type="checkbox" id="log-completed" ${log.completed ? "checked" : ""} />
             <span class="check__box"></span>
             <span class="check__label"><strong>Session done</strong><em>${esc(sessionTitle)}</em></span>
           </label>
-          <div class="field">
-            <label class="field__label" for="log-heel">Morning heel pain <span class="muted">(0 none – 10 worst)</span></label>
-            <input class="input" id="log-heel" type="number" min="0" max="10" inputmode="numeric" value="${log.heelPain != null ? log.heelPain : ""}" placeholder="e.g. 2" />
-          </div>
-          <div class="field">
-            <label class="field__label" for="log-rpe">How hard did it feel? <span class="muted">RPE 1–10</span></label>
-            <input class="input" id="log-rpe" type="number" min="1" max="10" inputmode="numeric" value="${log.rpe != null ? log.rpe : ""}" placeholder="optional" />
-          </div>
-          <div class="field">
-            <label class="field__label" for="log-notes">Notes</label>
-            <textarea class="input textarea" id="log-notes" rows="2" placeholder="How'd it go?">${esc(log.notes || "")}</textarea>
-          </div>
-          <div class="btnrow">
-            <button class="btn btn--primary" id="save-log">Save today</button>
-            <span class="sync-hint" id="sync-hint">${window.Backend.canSync() ? "Syncs to Airtable" : "Saved on this device"}</span>
-          </div>
+          <div class="field"><label class="field__label" for="log-heel">Morning heel pain <span class="muted">(0 none – 10 worst)</span></label>
+            <input class="input" id="log-heel" type="number" min="0" max="10" inputmode="numeric" value="${log.heelPain != null ? log.heelPain : ""}" placeholder="e.g. 2" /></div>
+          <div class="field"><label class="field__label" for="log-rpe">How hard did it feel? <span class="muted">RPE 1–10</span></label>
+            <input class="input" id="log-rpe" type="number" min="1" max="10" inputmode="numeric" value="${log.rpe != null ? log.rpe : ""}" placeholder="optional" /></div>
+          <div class="field"><label class="field__label" for="log-notes">Notes</label>
+            <textarea class="input textarea" id="log-notes" rows="2" placeholder="How'd it go?">${esc(log.notes || "")}</textarea></div>
+          <div class="btnrow"><button class="btn btn--primary" id="save-log">Save</button>
+            <span class="sync-hint">${window.Backend.canSync() ? "Syncs to Airtable" : "Saved on this device"}</span></div>
         </div>
-      </div>` : "";
+      </div>`;
+    } else {
+      html += `<div class="card"><p class="muted">Future session — nothing to log yet. Check back on the day.</p></div>`;
+    }
 
-    $("#panel-today").innerHTML = `
-      <div class="today-head">${head}</div>
-      ${body}
-      <div class="card footcard">
-        <div class="footcard__head">
-          <h3 class="section-title">Foot protocol · today</h3>
-          <span class="streak-pill" title="Foot-protocol streak"><span class="mk mk--sun">${window.ICON.sun}</span><span class="streak-pill__n">${footStreak()}</span>d</span>
-        </div>
-        <div class="checklist" id="today-foot">${footChecklistHTML(dateStr)}</div>
-      </div>
-      ${logForm}`;
-
-    wireToday(dateStr);
+    el.innerHTML = html;
+    wireDayDetail(dateStr);
   }
 
-  function wireToday(dateStr) {
-    // foot checklist toggles (auto-save)
-    $$('#today-foot input[data-foot]').forEach((cb) => {
+  function wireDayDetail(dateStr) {
+    $$("#day-foot input[data-foot]").forEach((cb) => {
       cb.addEventListener("change", () => {
         const logs = store.logs();
-        const entry = logs[dateStr] || {};
+        const entry = logs[dateStr] || { date: dateStr };
         entry.footItems = entry.footItems || {};
         entry.footItems[cb.dataset.foot] = cb.checked;
-        // footDone = all items checked
         entry.footDone = P.footProtocol.every((f) => entry.footItems[f.key]);
         entry.date = dateStr;
         logs[dateStr] = entry;
         store.saveLogs(logs);
         cb.closest(".check").classList.toggle("is-checked", cb.checked);
         renderHeroStreakBits();
+        const pillN = $("#day-detail .streak-pill__n");
+        if (pillN) pillN.textContent = footStreak();
         maybeSync(dateStr);
       });
     });
     const save = $("#save-log");
-    if (save) save.addEventListener("click", () => saveTodayLog(dateStr));
+    if (save) save.addEventListener("click", () => { saveTodayLog(dateStr); renderCalendar(); });
   }
 
   function renderHeroStreakBits() {
@@ -565,7 +596,7 @@
   // ---------- render all ----------
   function renderAll() {
     renderHero();
-    renderToday();
+    renderCalendar();
     renderPlan();
     renderFoot();
     renderLog();
