@@ -63,9 +63,22 @@
   <!-- Toast -->
   <div class="toast" id="toast" hidden></div>
 
+  <!-- Login gate -->
+  <div class="login" id="login" hidden>
+    <div class="login__card">
+      <div class="login__badge" id="login-badge"><!-- badge injected --></div>
+      <p class="login__eyebrow">Salt life · est. 2026</p>
+      <p class="login__sub">Enter your access key to log in and sync.</p>
+      <input class="input login__input" id="login-input" type="password" autocomplete="current-password" placeholder="access key" />
+      <button class="btn btn--primary login__go" id="login-go">Let's ride</button>
+      <p class="login__err" id="login-err" hidden></p>
+      <button class="login__skip" id="login-skip">Use offline, without syncing</button>
+    </div>
+  </div>
+
   <script src="plan.js"></script>
   <script src="icons.js"></script>
-  <script src="airtable.js"></script>
+  <script src="backend.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

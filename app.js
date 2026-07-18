@@ -236,7 +236,7 @@
           </div>
           <div class="btnrow">
             <button class="btn btn--primary" id="save-log">Save today</button>
-            <span class="sync-hint" id="sync-hint">${window.AirtableSync.isConnected() ? "Syncs to Airtable" : "Saved on this device"}</span>
+            <span class="sync-hint" id="sync-hint">${window.Backend.canSync() ? "Syncs to Airtable" : "Saved on this device"}</span>
           </div>
         </div>
       </div>` : "";
@@ -303,13 +303,13 @@
   }
 
   async function maybeSync(dateStr) {
-    if (!window.AirtableSync.isConnected()) return;
+    if (!window.Backend.canSync()) return;
     const s = store.settings();
     if (s.syncOff) return;
     const e = store.logs()[dateStr];
     if (!e) return;
     try {
-      await window.AirtableSync.pushLog({
+      await window.Backend.pushLog({
         name: `${dateStr} · ${e.session || "log"}`,
         date: dateStr,
         session: e.session,
@@ -496,8 +496,8 @@
   // ---------- SETTINGS DRAWER ----------
   function renderDrawer() {
     const s = store.settings();
-    const at = store.airtable() || {};
     const rd = { hyrox: raceDate("hyrox"), tri: raceDate("tri") };
+    const synced = window.Backend.canSync();
     $("#drawer-body").innerHTML = `
       <div class="field">
         <label class="field__label" for="set-name">Your name <span class="muted">(this device only)</span></label>
@@ -513,27 +513,23 @@
         <div class="field"><label class="field__label" for="set-tri">Tri date</label>
           <input class="input" id="set-tri" type="date" value="${fmtISO(rd.tri.date)}" /></div>
       </div>
-
-      <hr class="rule-line" />
-      <h3 class="section-title">Airtable sync <span class="muted">(optional)</span></h3>
-      <p class="muted small">Your logs already save on this device. Connect Airtable to mirror them to your base. Your token is stored only in this browser — use a token scoped to just this base.</p>
-      <div class="field">
-        <label class="field__label" for="set-base">Base ID</label>
-        <input class="input mono" id="set-base" value="${esc(at.baseId || "")}" placeholder="app…" />
-      </div>
-      <div class="field">
-        <label class="field__label" for="set-token">Personal Access Token</label>
-        <input class="input mono" id="set-token" type="password" value="${esc(at.token || "")}" placeholder="pat…" />
-      </div>
+      ${synced ? `
       <label class="check ${s.syncOff ? "" : "is-checked"} check--inline">
         <input type="checkbox" id="set-sync" ${s.syncOff ? "" : "checked"} />
-        <span class="check__box"></span><span class="check__label"><strong>Auto-sync my logs</strong></span>
-      </label>
+        <span class="check__box"></span><span class="check__label"><strong>Auto-sync my workouts to Airtable</strong></span>
+      </label>` : ""}
       <div class="btnrow">
         <button class="btn btn--primary" id="save-settings">Save</button>
-        <button class="btn btn--ghost" id="test-airtable">Test connection</button>
       </div>
-      <p class="conn-status" id="conn-status"></p>`;
+
+      <hr class="rule-line" />
+      <h3 class="section-title">Account</h3>
+      <p class="conn-status ${synced ? "conn-status--ok" : ""}">${synced
+        ? "Logged in — workouts sync to Airtable automatically."
+        : "Using offline (no sync). Log in to sync to Airtable."}</p>
+      <div class="btnrow">
+        <button class="btn btn--ghost" id="logout-btn">${synced ? "Log out" : "Log in"}</button>
+      </div>`;
 
     $("#save-settings").addEventListener("click", () => {
       const ns = store.settings();
@@ -542,30 +538,17 @@
       ns.races = ns.races || {};
       ns.races.hyrox = $("#set-hyrox").value || null;
       ns.races.tri = $("#set-tri").value || null;
-      ns.syncOff = !$("#set-sync").checked;
+      if ($("#set-sync")) ns.syncOff = !$("#set-sync").checked;
       store.saveSettings(ns);
-      const base = $("#set-base").value.trim();
-      const token = $("#set-token").value.trim();
-      if (base || token) store.saveAirtable({ baseId: base, token });
       toast("Settings saved ✓");
       renderAll();
       closeDrawer();
     });
 
-    $("#test-airtable").addEventListener("click", async () => {
-      const base = $("#set-base").value.trim();
-      const token = $("#set-token").value.trim();
-      store.saveAirtable({ baseId: base, token });
-      const st = $("#conn-status");
-      st.textContent = "Testing…"; st.className = "conn-status";
-      try {
-        await window.AirtableSync.test();
-        st.textContent = "Connected ✓ — found your Workout Log table.";
-        st.className = "conn-status conn-status--ok";
-      } catch (e) {
-        st.textContent = "Couldn't connect. Check the Base ID, token, and that the token has data.records:write on this base.";
-        st.className = "conn-status conn-status--err";
-      }
+    $("#logout-btn").addEventListener("click", () => {
+      window.Backend.logout();
+      closeDrawer();
+      showLogin();
     });
   }
 
@@ -598,6 +581,8 @@
     if (gear && window.ICON) gear.innerHTML = window.ICON.gear;
     const close = $("#close-settings");
     if (close && window.ICON) close.innerHTML = window.ICON.close;
+    const lb = $("#login-badge");
+    if (lb && window.LOGO_BADGE) lb.innerHTML = window.LOGO_BADGE;
   }
 
   function registerSW() {
@@ -607,14 +592,45 @@
     });
   }
 
+  // ---------- login gate ----------
+  function showLogin() {
+    const el = $("#login");
+    el.hidden = false;
+    requestAnimationFrame(() => el.classList.add("is-open"));
+    const input = $("#login-input");
+    if (input) setTimeout(() => input.focus(), 120);
+  }
+  function hideLogin() {
+    const el = $("#login");
+    el.classList.remove("is-open");
+    setTimeout(() => { el.hidden = true; }, 250);
+  }
+  function wireLogin() {
+    const go = $("#login-go"), input = $("#login-input"), err = $("#login-err"), skip = $("#login-skip");
+    async function attempt() {
+      const pw = input.value.trim();
+      if (!pw) { input.focus(); return; }
+      go.disabled = true; go.textContent = "Checking…"; err.hidden = true;
+      const res = await window.Backend.login(pw);
+      go.disabled = false; go.textContent = "Let's ride";
+      if (res.ok) { hideLogin(); toast("You're in ✓"); renderAll(); }
+      else { err.textContent = res.error; err.hidden = false; }
+    }
+    go.addEventListener("click", attempt);
+    input.addEventListener("keydown", (e) => { if (e.key === "Enter") attempt(); });
+    skip.addEventListener("click", () => { window.Backend.loginOffline(); hideLogin(); renderAll(); });
+  }
+
   function init() {
     injectChrome();
     registerSW();
     renderAll();
+    wireLogin();
     $$(".tab").forEach((t) => t.addEventListener("click", () => switchTab(t.dataset.panel)));
     $("#open-settings").addEventListener("click", openDrawer);
     $("#close-settings").addEventListener("click", closeDrawer);
     $("#drawer-backdrop").addEventListener("click", closeDrawer);
+    if (!window.Backend.isLoggedIn()) showLogin();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

@@ -1,12 +1,12 @@
 /* service-worker.js — offline app shell for Fit Bitch (PWA). */
-const CACHE = "fitbitch-v1";
+const CACHE = "fitbitch-v2";
 const SHELL = [
   "./",
   "index.html",
   "styles.css",
   "plan.js",
   "icons.js",
-  "airtable.js",
+  "backend.js",
   "app.js",
   "manifest.webmanifest",
   "icons/icon-192.png",
