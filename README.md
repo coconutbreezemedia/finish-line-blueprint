@@ -1,10 +1,11 @@
-# Finish Line Blueprint 🏁
+# Fit Bitch
 
-A bold, mobile-first training app for a beginner taking on **Hyrox + a Sprint Triathlon** in the same season — built around a low-impact ramp and a daily foot-care protocol so run-heavy training doesn't wreck your feet.
+A bold, surf-flavored, mobile-first training app for a beginner taking on **Hyrox + a Sprint Triathlon** in the same season — built around a low-impact ramp and a daily foot-care protocol so run-heavy training doesn't wreck your feet.
 
-It's a single-page static web app. The whole plan is baked in, so it works offline with zero setup. Your daily logs save on your device and can optionally mirror to your own Airtable base.
+It's an installable **PWA** (offline-capable). The whole plan is baked in, so it works with zero setup. Your daily logs save on your device and can optionally mirror to your own Airtable base.
 
 **Live:** https://coconutbreezemedia.github.io/finish-line-blueprint/
+**Install:** open the link on your phone → Share → *Add to Home Screen* (iOS) / install prompt (Android).
 
 ---
 
@@ -48,9 +49,11 @@ Push to the default branch, then **Settings → Pages → Deploy from branch →
 |------|-----------|
 | `index.html` | App shell |
 | `plan.js` | The plan data (generic — no personal info) |
-| `app.js` | Rendering, date logic, local logging |
+| `app.js` | Rendering, date logic, local logging, animations |
 | `airtable.js` | Optional Airtable sync layer |
-| `styles.css` | Bold/energetic design system |
+| `icons.js` | Inline SVG icon set + header logo lockup |
+| `styles.css` | Surf design system + animations |
+| `manifest.webmanifest` · `service-worker.js` · `icons/` | PWA install + offline shell + app icons |
 
 ## A note on privacy & safety
 
