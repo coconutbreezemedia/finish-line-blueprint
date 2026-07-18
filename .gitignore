@@ -1,0 +1,17 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# Secrets — never commit tokens. The app stores the Airtable token in the
+# browser only; there are no secrets in this repo by design.
+.env
+.env.*
+*.pat
+secrets.*
+
+# Temp / diagnostic
+_diag*.html
+_v_*.html

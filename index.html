@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>Finish Line Blueprint</title>
+  <meta name="description" content="A beginner's low-impact training blueprint for Hyrox + a Sprint Triathlon." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏁</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app" id="app">
+    <!-- Top bar -->
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand__flag" aria-hidden="true">🏁</span>
+        <span class="brand__name">FINISH LINE<br /><span class="brand__name-2">BLUEPRINT</span></span>
+      </div>
+      <button class="icon-btn" id="open-settings" aria-label="Settings">⚙</button>
+    </header>
+
+    <!-- Hero: race countdown + season progress -->
+    <section class="hero" id="hero"><!-- rendered by JS --></section>
+
+    <!-- Tabs -->
+    <nav class="tabs" id="tabs" role="tablist">
+      <button class="tab is-active" data-panel="today" role="tab">Today</button>
+      <button class="tab" data-panel="plan" role="tab">Plan</button>
+      <button class="tab" data-panel="foot" role="tab">Foot</button>
+      <button class="tab" data-panel="log" role="tab">Log</button>
+      <button class="tab" data-panel="info" role="tab">Info</button>
+    </nav>
+
+    <main class="panels">
+      <section class="panel is-active" id="panel-today" role="tabpanel"></section>
+      <section class="panel" id="panel-plan" role="tabpanel"></section>
+      <section class="panel" id="panel-foot" role="tabpanel"></section>
+      <section class="panel" id="panel-log" role="tabpanel"></section>
+      <section class="panel" id="panel-info" role="tabpanel"></section>
+    </main>
+
+    <footer class="foot-note">
+      <p>Not medical advice. Get cleared before Day 1 and stop on sharp pain.</p>
+      <p class="foot-credit">Built with Coconut Breeze Media</p>
+    </footer>
+  </div>
+
+  <!-- Settings / Connect drawer -->
+  <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+  <aside class="drawer" id="drawer" hidden aria-label="Settings">
+    <div class="drawer__head">
+      <h2>Settings &amp; Sync</h2>
+      <button class="icon-btn" id="close-settings" aria-label="Close">✕</button>
+    </div>
+    <div class="drawer__body" id="drawer-body"><!-- rendered by JS --></div>
+  </aside>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" hidden></div>
+
+  <script src="plan.js"></script>
+  <script src="airtable.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
