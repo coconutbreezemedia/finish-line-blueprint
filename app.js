@@ -251,7 +251,7 @@
     } else if (loc.state === "pre") {
       html += `<h2 class="big">Nothing scheduled</h2><p class="muted">Your plan starts ${prettyDate(parseDate(P.meta.seasonStart))}.</p></div>`;
     } else {
-      html += `<h2 class="big">Season stretch</h2><p class="muted">You're past the planned 8 weeks — keep the momentum and build Phase 2.</p></div>`;
+      html += `<h2 class="big">Season complete</h2><p class="muted">You're past week ${P.weeks.length} — both finish lines are behind you. Time to pick the next one.</p></div>`;
     }
 
     html += `<div class="card footcard">
@@ -261,23 +261,27 @@
     </div>`;
 
     if (dt <= today()) {
+      // Three checkoffs, nothing else. Sets/reps/paces live in Hevy and the
+      // run/bike/swim apps — this is only "did it happen".
+      const items = dayChecklistItems(loc);
       html += `<div class="card logcard">
-        <h3 class="section-title">Log this day</h3>
-        <div class="logform">
-          <label class="check ${log.completed ? "is-checked" : ""} check--big">
-            <input type="checkbox" id="log-completed" ${log.completed ? "checked" : ""} />
-            <span class="check__box"></span>
-            <span class="check__label"><strong>Session done</strong><em>${esc(sessionTitle)}</em></span>
-          </label>
-          <div class="field"><label class="field__label" for="log-heel">Morning heel pain <span class="muted">(0 none – 10 worst)</span></label>
-            <input class="input" id="log-heel" type="number" min="0" max="10" inputmode="numeric" value="${log.heelPain != null ? log.heelPain : ""}" placeholder="e.g. 2" /></div>
-          <div class="field"><label class="field__label" for="log-rpe">How hard did it feel? <span class="muted">RPE 1–10</span></label>
-            <input class="input" id="log-rpe" type="number" min="1" max="10" inputmode="numeric" value="${log.rpe != null ? log.rpe : ""}" placeholder="optional" /></div>
-          <div class="field"><label class="field__label" for="log-notes">Notes</label>
-            <textarea class="input textarea" id="log-notes" rows="2" placeholder="How'd it go?">${esc(log.notes || "")}</textarea></div>
-          <div class="btnrow"><button class="btn btn--primary" id="save-log">Save</button>
-            <span class="sync-hint">${window.Backend.canSync() ? "Syncs to Airtable" : "Saved on this device"}</span></div>
+        <h3 class="section-title">Done today?</h3>
+        <div class="checklist checklist--day" id="day-check">
+          ${items.map((it) => `
+            <label class="check check--big ${log[it.key] ? "is-checked" : ""}">
+              <input type="checkbox" data-day-check="${it.key}" ${log[it.key] ? "checked" : ""} />
+              <span class="check__box"></span>
+              <span class="check__label"><strong>${esc(it.label)}</strong><em>${esc(it.sub)}</em></span>
+            </label>`).join("")}
         </div>
+        <div class="heelrow">
+          <div class="heelrow__label">Morning heel pain <span class="muted">— gates your running</span></div>
+          <div class="heelscale" id="heel-scale">
+            ${Array.from({ length: 11 }, (_, i) => `
+              <button type="button" class="heelscale__btn ${log.heelPain === i ? "is-on" : ""}" data-heel="${i}">${i}</button>`).join("")}
+          </div>
+        </div>
+        <span class="sync-hint">${window.Backend.canSync() ? "Syncs to Airtable" : "Saved on this device"}</span>
       </div>`;
     } else {
       html += `<div class="card"><p class="muted">Future session — nothing to log yet. Check back on the day.</p></div>`;
@@ -287,7 +291,65 @@
     wireDayDetail(dateStr);
   }
 
+  // The three checkoffs. Sub-labels pull from the day's prescription so the
+  // checklist still tells you WHAT to do, even though you log it elsewhere.
+  const CARDIO_KINDS = ["run", "bike", "swim", "erg", "brick", "hyrox"];
+  function dayChecklistItems(loc) {
+    const day = loc.state === "in" ? loc.day : null;
+    const isStrength = day && day.k === "strength";
+    const isCardio = day && CARDIO_KINDS.indexOf(day.k) !== -1;
+    return [
+      { key: "strengthDone", label: "Strength",
+        sub: isStrength ? day.t + " · logged in Hevy" : "Not scheduled today" },
+      { key: "cardioDone", label: "Cardio",
+        sub: isCardio ? day.t : (day && day.k === "rest" ? "Rest day" : "Not scheduled today") },
+      { key: "footDone", label: "Foot protocol", sub: "All " + P.footProtocol.length + " items" },
+    ];
+  }
+
   function wireDayDetail(dateStr) {
+    // Day checklist — auto-saves on tap, no Save button.
+    $$("#day-check input[data-day-check]").forEach((cb) => {
+      cb.addEventListener("change", () => {
+        const logs = store.logs();
+        const entry = logs[dateStr] || { date: dateStr };
+        const key = cb.dataset.dayCheck;
+        entry[key] = cb.checked;
+        entry.date = dateStr;
+        // Ticking "Foot protocol" ticks all 6 sub-items, and vice versa, so the
+        // streak and the detailed card can never disagree.
+        if (key === "footDone") {
+          entry.footItems = {};
+          P.footProtocol.forEach((f) => { entry.footItems[f.key] = cb.checked; });
+        }
+        entry.completed = !!(entry.strengthDone || entry.cardioDone);
+        const loc = locate(parseDate(dateStr));
+        entry.session = loc.state === "in" ? loc.day.t : (loc.state === "prep" ? "Prep: " + loc.prep.title : "Off-plan");
+        logs[dateStr] = entry;
+        store.saveLogs(logs);
+        cb.closest(".check").classList.toggle("is-checked", cb.checked);
+        if (key === "footDone") { renderDayDetail(dateStr); renderHeroStreakBits(); }
+        renderCalendar();
+        maybeSync(dateStr);
+      });
+    });
+
+    // Heel pain 0–10. Tap targets instead of a number input — no keyboard on mobile.
+    $$("#heel-scale .heelscale__btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const logs = store.logs();
+        const entry = logs[dateStr] || { date: dateStr };
+        const v = Number(btn.dataset.heel);
+        entry.heelPain = entry.heelPain === v ? null : v;  // tap again to clear
+        entry.date = dateStr;
+        logs[dateStr] = entry;
+        store.saveLogs(logs);
+        $$("#heel-scale .heelscale__btn").forEach((b) =>
+          b.classList.toggle("is-on", Number(b.dataset.heel) === entry.heelPain));
+        maybeSync(dateStr);
+      });
+    });
+
     $$("#day-foot input[data-foot]").forEach((cb) => {
       cb.addEventListener("change", () => {
         const logs = store.logs();
@@ -299,14 +361,19 @@
         logs[dateStr] = entry;
         store.saveLogs(logs);
         cb.closest(".check").classList.toggle("is-checked", cb.checked);
+        // Keep the master "Foot protocol" checkoff honest when sub-items change.
+        const master = $('#day-check input[data-day-check="footDone"]');
+        if (master) {
+          master.checked = entry.footDone;
+          master.closest(".check").classList.toggle("is-checked", entry.footDone);
+        }
         renderHeroStreakBits();
         const pillN = $("#day-detail .streak-pill__n");
         if (pillN) pillN.textContent = footStreak();
+        renderCalendar();
         maybeSync(dateStr);
       });
     });
-    const save = $("#save-log");
-    if (save) save.addEventListener("click", () => { saveTodayLog(dateStr); renderCalendar(); });
   }
 
   function renderHeroStreakBits() {
@@ -314,48 +381,75 @@
     if (n) n.textContent = footStreak();
   }
 
-  function saveTodayLog(dateStr) {
-    const logs = store.logs();
-    const entry = logs[dateStr] || {};
-    entry.date = dateStr;
-    entry.completed = $("#log-completed") ? $("#log-completed").checked : entry.completed;
-    const heel = $("#log-heel").value;
-    entry.heelPain = heel === "" ? null : Math.max(0, Math.min(10, Number(heel)));
-    const rpe = $("#log-rpe").value;
-    entry.rpe = rpe === "" ? null : Math.max(1, Math.min(10, Number(rpe)));
-    entry.notes = $("#log-notes").value.trim();
-    const loc = locate(parseDate(dateStr));
-    entry.session = loc.state === "in" ? loc.day.t : (loc.state === "prep" ? "Prep: " + loc.prep.title : "Off-plan");
-    logs[dateStr] = entry;
-    store.saveLogs(logs);
-    toast("Saved ✓");
-    maybeSync(dateStr);
-    renderLog();
-  }
-
   async function maybeSync(dateStr) {
-    if (!window.Backend.canSync()) return;
     const s = store.settings();
-    if (s.syncOff) return;
+    // Sync deliberately paused in Settings — that's a choice, not a failure.
+    if (s.syncOff) { setSyncHint("Sync paused in Settings"); return; }
+    // Not logged in for sync. Never silent: the banner says so permanently.
+    if (!window.Backend.canSync()) { renderSyncBanner(); setSyncHint("Not syncing — on this device only"); return; }
     const e = store.logs()[dateStr];
     if (!e) return;
-    try {
-      await window.Backend.pushLog({
-        name: `${dateStr} · ${e.session || "log"}`,
-        date: dateStr,
-        session: e.session,
-        completed: e.completed,
-        heelPain: e.heelPain,
-        footDone: e.footDone,
-        rpe: e.rpe,
-        notes: e.notes,
-      });
-      const hint = $("#sync-hint");
-      if (hint) hint.textContent = "Synced ✓";
-    } catch (err) {
-      toast("Sync failed — saved locally", true);
-      console.warn(err);
-    }
+
+    setSyncHint("Syncing…");
+    const res = await window.Backend.pushLog({
+      name: `${dateStr} · ${e.session || "log"}`,
+      date: dateStr,
+      session: e.session,
+      completed: !!(e.strengthDone || e.cardioDone),
+      strengthDone: !!e.strengthDone,
+      cardioDone: !!e.cardioDone,
+      footDone: !!e.footDone,
+      heelPain: e.heelPain,
+    });
+
+    if (res.ok) { setSyncHint("Synced ✓"); renderSyncBanner(); return; }
+
+    const msg = {
+      rejected: "Access key rejected — nothing is syncing",
+      unreachable: "Can't reach the server — saved locally",
+      server: "Server error — saved locally",
+      offline: "Not syncing — on this device only",
+    }[res.reason] || "Sync failed — saved locally";
+    setSyncHint(msg);
+    toast(msg, true);
+    renderSyncBanner();
+    if (res.detail) console.warn("sync failed:", res.reason, res.detail);
+  }
+
+  // The log card's inline status line. Was `$("#sync-hint")` against markup that
+  // only ever had class="sync-hint", so "Synced ✓" never actually appeared.
+  function setSyncHint(text) {
+    const hint = $(".sync-hint");
+    if (hint) hint.textContent = text;
+  }
+
+  // Persistent bar under the topbar whenever logs are NOT reaching Airtable.
+  // This is the thing that was missing: failure used to be a silent early return.
+  function renderSyncBanner() {
+    const el = $("#sync-banner");
+    if (!el) return;
+    const s = store.settings();
+    const state = s.syncOff ? "paused" : window.Backend.syncState();
+    if (!state) { el.hidden = true; el.innerHTML = ""; return; }
+
+    const copy = {
+      offline: ["Not syncing", "Logs are saved on this device only.", "Log in to sync"],
+      rejected: ["Sync broken", "The server rejected your access key. Nothing is reaching Airtable.", "Re-enter key"],
+      unreachable: ["Sync offline", "Can't reach the sync server. Logs are saved locally and will need a re-save.", "Retry"],
+      server: ["Sync erroring", "The sync server returned an error. Logs are saved locally.", "Retry"],
+      paused: ["Sync paused", "You turned sync off in Settings.", "Settings"],
+    }[state];
+
+    el.hidden = false;
+    el.className = "syncbar" + (state === "rejected" || state === "server" ? " syncbar--bad" : "");
+    el.innerHTML = `
+      <div class="syncbar__text"><strong>${copy[0]}</strong><span>${copy[1]}</span></div>
+      <button class="syncbar__btn" id="syncbar-action">${copy[2]}</button>`;
+    $("#syncbar-action").addEventListener("click", () => {
+      if (state === "paused") { openDrawer(); return; }
+      window.Backend.clearBroken();
+      showLogin();
+    });
   }
 
   // ---------- PLAN ----------
@@ -377,7 +471,7 @@
         </div>
       </div>`;
 
-    const weeks = P.weeks.map((w) => {
+    const weekHTML = (w) => {
       const start = parseDate(w.start);
       const open = loc.state === "in" && loc.weekIndex === P.weeks.indexOf(w);
       const rows = w.days.map((d, i) => {
@@ -392,9 +486,9 @@
           </div>
         </div>`;
       }).join("");
-      return `<div class="week ${open ? "is-open" : ""}">
+      return `<div class="week ${open ? "is-open" : ""}${w.deload ? " week--deload" : ""}">
         <button class="week__head" aria-expanded="${open}">
-          <span class="week__n">Week ${w.n}</span>
+          <span class="week__n">Week ${w.n}${w.deload ? `<span class="week__tag">deload</span>` : ""}</span>
           <span class="week__focus">${esc(w.focus)}</span>
           <span class="week__chev">${window.ICON.chevron}</span>
         </button>
@@ -403,18 +497,33 @@
           ${rows}
         </div>
       </div>`;
-    }).join("");
+    };
 
+    const curPhase = loc.state === "in" ? loc.week.phase : 0;
     const phases = `
       <div class="phases">
-        ${P.phases.map((ph) => `<div class="phase-chip phase-chip--${ph.n}">
+        ${P.phases.map((ph) => `<div class="phase-chip phase-chip--${ph.n}${ph.n === curPhase ? " is-now" : ""}">
           <span class="phase-chip__n">Phase ${ph.n}</span>
           <span class="phase-chip__name">${esc(ph.name)}</span>
           <span class="phase-chip__range">${esc(ph.range)}</span>
         </div>`).join("")}
       </div>`;
 
-    $("#panel-plan").innerHTML = phases + prep + `<div class="weeks">${weeks}</div>`;
+    // Weeks grouped under their phase, not one flat 40-week list.
+    const blocks = P.phases.map((ph) => {
+      const mine = P.weeks.filter((w) => w.n >= ph.weeks[0] && w.n <= ph.weeks[1]);
+      return `<section class="phaseblock ${ph.n === curPhase ? "is-now" : ""}">
+        <div class="phaseblock__head">
+          <h3 class="phaseblock__title">Phase ${ph.n} · ${esc(ph.name)}${ph.n === curPhase ? `<span class="phaseblock__now">you are here</span>` : ""}</h3>
+          <p class="phaseblock__range">${esc(ph.range)}</p>
+          <p class="phaseblock__focus">${esc(ph.focus)}</p>
+          <p class="phaseblock__goal"><strong>Goal:</strong> ${esc(ph.goal)}</p>
+        </div>
+        <div class="weeks">${mine.map(weekHTML).join("")}</div>
+      </section>`;
+    }).join("");
+
+    $("#panel-plan").innerHTML = phases + prep + blocks;
     $$("#panel-plan .week__head").forEach((h) => {
       h.addEventListener("click", () => {
         const w = h.closest(".week");
@@ -464,26 +573,28 @@
   function renderLog() {
     const logs = store.logs();
     const dates = Object.keys(logs).sort().reverse();
-    const done = dates.filter((d) => logs[d].completed).length;
+    const strength = dates.filter((d) => logs[d].strengthDone).length;
+    const cardio = dates.filter((d) => logs[d].cardioDone).length;
     const stats = `
       <div class="logstats">
-        <div class="stat"><div class="stat__num">${done}</div><div class="stat__label">sessions done</div></div>
+        <div class="stat"><div class="stat__num">${strength}</div><div class="stat__label">strength</div></div>
+        <div class="stat"><div class="stat__num">${cardio}</div><div class="stat__label">cardio</div></div>
         <div class="stat"><div class="stat__num">${footStreak()}</div><div class="stat__label">foot streak</div></div>
-        <div class="stat"><div class="stat__num">${dates.length}</div><div class="stat__label">days logged</div></div>
       </div>`;
     const rows = dates.length ? dates.map((d) => {
       const e = logs[d];
       const dt = parseDate(d);
+      const tags = [
+        e.strengthDone ? `<span class="tick tick--on">strength</span>` : `<span class="tick">strength</span>`,
+        e.cardioDone ? `<span class="tick tick--on">cardio</span>` : `<span class="tick">cardio</span>`,
+        e.footDone ? `<span class="tick tick--on">foot</span>` : `<span class="tick">foot</span>`,
+      ].join("");
       return `<div class="logrow">
         <div class="logrow__date">${prettyDate(dt)}</div>
         <div class="logrow__body">
-          <div class="logrow__title">${e.completed ? "✅" : "⬜"} ${esc(e.session || "—")}</div>
-          <div class="logrow__meta">
-            ${e.heelPain != null ? `heel ${e.heelPain}/10` : ""}
-            ${e.rpe != null ? ` · RPE ${e.rpe}` : ""}
-            ${e.footDone ? " · foot ✓" : ""}
-          </div>
-          ${e.notes ? `<div class="logrow__notes">${esc(e.notes)}</div>` : ""}
+          <div class="logrow__title">${esc(e.session || "—")}</div>
+          <div class="logrow__ticks">${tags}</div>
+          ${e.heelPain != null ? `<div class="logrow__meta">heel ${e.heelPain}/10</div>` : ""}
         </div>
       </div>`;
     }).join("") : `<p class="muted empty">No entries yet. Log your first day from the Today tab.</p>`;
@@ -595,6 +706,7 @@
 
   // ---------- render all ----------
   function renderAll() {
+    renderSyncBanner();
     renderHero();
     renderCalendar();
     renderPlan();
