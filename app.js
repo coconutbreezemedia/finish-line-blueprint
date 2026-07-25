@@ -439,8 +439,27 @@
     return entry;
   }
 
-  // One-line summary of what was actually done — goes to Airtable's Notes so
-  // the detail survives without needing a column per modality.
+  // "4:38" -> 278s, "1:02:30" -> 3750s, bare "31" -> 1860s (minutes).
+  // Airtable Duration fields take a number of SECONDS, so all conversion
+  // happens here and the app keeps storing whatever you actually typed.
+  function toSeconds(v) {
+    if (v == null || v === "") return null;
+    const s = String(v).trim();
+    if (!s) return null;
+    const parts = s.split(":");
+    if (parts.length === 1) {
+      const mins = Number(parts[0]);
+      return isFinite(mins) ? Math.round(mins * 60) : null;
+    }
+    const nums = parts.map(Number);
+    if (nums.some((n) => !isFinite(n))) return null;
+    if (nums.length === 2) return Math.round(nums[0] * 60 + nums[1]);        // mm:ss
+    if (nums.length === 3) return Math.round(nums[0] * 3600 + nums[1] * 60 + nums[2]); // h:mm:ss
+    return null;
+  }
+
+  // One-line summary of what was actually done — still sent to Notes as a
+  // human-readable fallback alongside the structured per-modality fields.
   function entrySummary(e) {
     const bits = [];
     if (e.strengthDone) bits.push("Strength" + (e.strengthType ? ` (${e.strengthType})` : ""));
@@ -477,10 +496,20 @@
       session: e.session,
       completed: !!(e.strengthDone || e.cardioDone),
       strengthDone: !!e.strengthDone,
-      cardioDone: !!e.cardioDone,
+      strengthType: e.strengthType || "",
       footDone: !!e.footDone,
       heelPain: e.heelPain,
       notes: entrySummary(e),
+      // Per-modality detail. Distances as typed; times normalised to seconds
+      // for Airtable Duration fields.
+      modalities: ["run", "ski", "row", "bike", "swim"].reduce((acc, k) => {
+        acc[k] = {
+          done: !!e[k + "Done"],
+          dist: e[k + "Dist"] != null && e[k + "Dist"] !== "" ? Number(e[k + "Dist"]) : null,
+          seconds: toSeconds(e[k + "Time"]),
+        };
+        return acc;
+      }, {}),
     });
 
     if (res.ok) { setSyncHint("Synced ✓"); renderSyncBanner(); return; }
