@@ -261,18 +261,11 @@
     </div>`;
 
     if (dt <= today()) {
-      // Three checkoffs, nothing else. Sets/reps/paces live in Hevy and the
-      // run/bike/swim apps — this is only "did it happen".
-      const items = dayChecklistItems(loc);
+      const planDay = loc.state === "in" ? loc.day : null;
       html += `<div class="card logcard">
         <h3 class="section-title">Done today?</h3>
         <div class="checklist checklist--day" id="day-check">
-          ${items.map((it) => `
-            <label class="check check--big ${log[it.key] ? "is-checked" : ""}">
-              <input type="checkbox" data-day-check="${it.key}" ${log[it.key] ? "checked" : ""} />
-              <span class="check__box"></span>
-              <span class="check__label"><strong>${esc(it.label)}</strong><em>${esc(it.sub)}</em></span>
-            </label>`).join("")}
+          ${MODALITIES.map((m) => modalityRowHTML(m, log, planDay)).join("")}
         </div>
         <div class="heelrow">
           <div class="heelrow__label">Morning heel pain <span class="muted">— gates your running</span></div>
@@ -291,20 +284,53 @@
     wireDayDetail(dateStr);
   }
 
-  // The three checkoffs. Sub-labels pull from the day's prescription so the
-  // checklist still tells you WHAT to do, even though you log it elsewhere.
-  const CARDIO_KINDS = ["run", "bike", "swim", "erg", "brick", "hyrox"];
-  function dayChecklistItems(loc) {
-    const day = loc.state === "in" ? loc.day : null;
-    const isStrength = day && day.k === "strength";
-    const isCardio = day && CARDIO_KINDS.indexOf(day.k) !== -1;
-    return [
-      { key: "strengthDone", label: "Strength",
-        sub: isStrength ? day.t + " · logged in Hevy" : "Not scheduled today" },
-      { key: "cardioDone", label: "Cardio",
-        sub: isCardio ? day.t : (day && day.k === "rest" ? "Rest day" : "Not scheduled today") },
-      { key: "footDone", label: "Foot protocol", sub: "All " + P.footProtocol.length + " items" },
-    ];
+  // What you can tick off on a day. Sets/reps/splits still live in Hevy and the
+  // erg/run apps — these fields are just enough to see the trend here.
+  // `kinds` = which planned session kinds light this row up as "on the plan today".
+  const MODALITIES = [
+    { key: "strength", label: "Strength", kinds: ["strength"],
+      fields: [{ k: "Type", prop: "strengthType", type: "text", ph: "legs · push · Strength A" }] },
+    { key: "run", label: "Run", kinds: ["run", "brick"],
+      fields: [{ k: "Dist", prop: "runDist", type: "number", ph: "km" },
+               { k: "Time", prop: "runTime", type: "text", ph: "min" }] },
+    { key: "ski", label: "SkiErg", kinds: ["erg", "hyrox"],
+      fields: [{ k: "Dist", prop: "skiDist", type: "number", ph: "m" },
+               { k: "Time", prop: "skiTime", type: "text", ph: "mm:ss" }] },
+    { key: "row", label: "Row", kinds: ["erg", "hyrox"],
+      fields: [{ k: "Dist", prop: "rowDist", type: "number", ph: "m" },
+               { k: "Time", prop: "rowTime", type: "text", ph: "mm:ss" }] },
+    { key: "bike", label: "Bike", kinds: ["bike", "brick"],
+      fields: [{ k: "Dist", prop: "bikeDist", type: "number", ph: "km" },
+               { k: "Time", prop: "bikeTime", type: "text", ph: "min" }] },
+    { key: "swim", label: "Swim", kinds: ["swim"],
+      fields: [{ k: "Dist", prop: "swimDist", type: "number", ph: "m" },
+               { k: "Time", prop: "swimTime", type: "text", ph: "min" }] },
+    { key: "foot", label: "Foot protocol", kinds: [], fields: [] },
+  ];
+  const CARDIO_KEYS = ["run", "ski", "row", "bike", "swim"];
+
+  function modalityRowHTML(m, log, day) {
+    const on = !!log[m.key + "Done"];
+    const scheduled = day && m.kinds.indexOf(day.k) !== -1;
+    const sub = m.key === "foot" ? "All " + P.footProtocol.length + " items"
+      : scheduled ? day.t
+      : "";
+    return `<div class="modality ${on ? "is-on" : ""}">
+      <label class="check check--big ${on ? "is-checked" : ""}">
+        <input type="checkbox" data-day-check="${m.key}Done" ${on ? "checked" : ""} />
+        <span class="check__box"></span>
+        <span class="check__label"><strong>${esc(m.label)}</strong>${
+          scheduled ? `<span class="modality__flag">on plan</span>` : ""
+        }${sub ? `<em>${esc(sub)}</em>` : ""}</span>
+      </label>
+      ${m.fields.length ? `<div class="modality__fields" ${on ? "" : "hidden"}>
+        ${m.fields.map((f) => `<label class="minifield">
+          <span>${f.k}</span>
+          <input class="input input--mini" type="${f.type}" ${f.type === "number" ? 'inputmode="decimal" step="any" min="0"' : ""}
+                 data-prop="${f.prop}" placeholder="${f.ph}" value="${log[f.prop] != null ? esc(String(log[f.prop])) : ""}" />
+        </label>`).join("")}
+      </div>` : ""}
+    </div>`;
   }
 
   function wireDayDetail(dateStr) {
@@ -322,16 +348,41 @@
           entry.footItems = {};
           P.footProtocol.forEach((f) => { entry.footItems[f.key] = cb.checked; });
         }
-        entry.completed = !!(entry.strengthDone || entry.cardioDone);
-        const loc = locate(parseDate(dateStr));
-        entry.session = loc.state === "in" ? loc.day.t : (loc.state === "prep" ? "Prep: " + loc.prep.title : "Off-plan");
+        stampEntry(entry, dateStr);
         logs[dateStr] = entry;
         store.saveLogs(logs);
+        const row = cb.closest(".modality");
         cb.closest(".check").classList.toggle("is-checked", cb.checked);
+        if (row) {
+          row.classList.toggle("is-on", cb.checked);
+          const fields = row.querySelector(".modality__fields");
+          if (fields) {
+            fields.hidden = !cb.checked;
+            if (cb.checked) { const first = fields.querySelector("input"); if (first) first.focus(); }
+          }
+        }
         if (key === "footDone") { renderDayDetail(dateStr); renderHeroStreakBits(); }
         renderCalendar();
         maybeSync(dateStr);
       });
+    });
+
+    // Distance / time / type inputs. Saved on blur + change so we don't write
+    // (and sync) on every keystroke.
+    $$("#day-check input[data-prop]").forEach((inp) => {
+      const commit = () => {
+        const logs = store.logs();
+        const entry = logs[dateStr] || { date: dateStr };
+        const v = inp.value.trim();
+        if (v === "") delete entry[inp.dataset.prop];
+        else entry[inp.dataset.prop] = inp.type === "number" ? Number(v) : v;
+        stampEntry(entry, dateStr);
+        logs[dateStr] = entry;
+        store.saveLogs(logs);
+        maybeSync(dateStr);
+      };
+      inp.addEventListener("change", commit);
+      inp.addEventListener("blur", commit);
     });
 
     // Heel pain 0–10. Tap targets instead of a number input — no keyboard on mobile.
@@ -357,7 +408,7 @@
         entry.footItems = entry.footItems || {};
         entry.footItems[cb.dataset.foot] = cb.checked;
         entry.footDone = P.footProtocol.every((f) => entry.footItems[f.key]);
-        entry.date = dateStr;
+        stampEntry(entry, dateStr);
         logs[dateStr] = entry;
         store.saveLogs(logs);
         cb.closest(".check").classList.toggle("is-checked", cb.checked);
@@ -374,6 +425,35 @@
         maybeSync(dateStr);
       });
     });
+  }
+
+  // Derived fields every write goes through, so `completed`, `cardioDone` and
+  // `session` can never drift out of step with the individual checkoffs.
+  function stampEntry(entry, dateStr) {
+    entry.date = dateStr;
+    entry.cardioDone = CARDIO_KEYS.some((k) => entry[k + "Done"]);
+    entry.completed = !!(entry.strengthDone || entry.cardioDone);
+    const loc = locate(parseDate(dateStr));
+    entry.session = loc.state === "in" ? loc.day.t
+      : (loc.state === "prep" ? "Prep: " + loc.prep.title : "Off-plan");
+    return entry;
+  }
+
+  // One-line summary of what was actually done — goes to Airtable's Notes so
+  // the detail survives without needing a column per modality.
+  function entrySummary(e) {
+    const bits = [];
+    if (e.strengthDone) bits.push("Strength" + (e.strengthType ? ` (${e.strengthType})` : ""));
+    [["run", "Run", "km"], ["ski", "SkiErg", "m"], ["row", "Row", "m"],
+     ["bike", "Bike", "km"], ["swim", "Swim", "m"]].forEach(([k, label, unit]) => {
+      if (!e[k + "Done"]) return;
+      const d = e[k + "Dist"], t = e[k + "Time"];
+      let s = label;
+      if (d != null && d !== "") s += ` ${d}${unit}`;
+      if (t) s += ` / ${t}`;
+      bits.push(s);
+    });
+    return bits.join(" · ");
   }
 
   function renderHeroStreakBits() {
@@ -400,6 +480,7 @@
       cardioDone: !!e.cardioDone,
       footDone: !!e.footDone,
       heelPain: e.heelPain,
+      notes: entrySummary(e),
     });
 
     if (res.ok) { setSyncHint("Synced ✓"); renderSyncBanner(); return; }
@@ -584,16 +665,15 @@
     const rows = dates.length ? dates.map((d) => {
       const e = logs[d];
       const dt = parseDate(d);
-      const tags = [
-        e.strengthDone ? `<span class="tick tick--on">strength</span>` : `<span class="tick">strength</span>`,
-        e.cardioDone ? `<span class="tick tick--on">cardio</span>` : `<span class="tick">cardio</span>`,
-        e.footDone ? `<span class="tick tick--on">foot</span>` : `<span class="tick">foot</span>`,
-      ].join("");
+      const tags = MODALITIES.filter((m) => e[m.key + "Done"])
+        .map((m) => `<span class="tick tick--on">${esc(m.label)}</span>`).join("");
+      const summary = entrySummary(e);
       return `<div class="logrow">
         <div class="logrow__date">${prettyDate(dt)}</div>
         <div class="logrow__body">
           <div class="logrow__title">${esc(e.session || "—")}</div>
-          <div class="logrow__ticks">${tags}</div>
+          ${tags ? `<div class="logrow__ticks">${tags}</div>` : ""}
+          ${summary ? `<div class="logrow__notes">${esc(summary)}</div>` : ""}
           ${e.heelPain != null ? `<div class="logrow__meta">heel ${e.heelPain}/10</div>` : ""}
         </div>
       </div>`;

@@ -1492,3 +1492,29 @@ body::before {
   color: var(--muted); border: 1px solid var(--card-border);
 }
 .week--deload .week__head { opacity: 0.82; }
+
+/* ---------- MODALITY ROWS (checkoff + distance/time) ---------- */
+.modality {
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+/* .check ships with 16px vertical padding for the foot list — too airy once
+   seven of them stack, so tighten it inside a modality row. */
+.modality .check { padding: 7px 0; }
+.modality.is-on { border-color: var(--card-border); background: rgba(255,255,255,0.025); }
+.modality__flag {
+  font-size: 0.58rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;
+  margin-left: 7px; padding: 2px 6px; border-radius: 99px;
+  color: #071a24; background: var(--gold); vertical-align: middle;
+}
+.modality__fields { display: flex; gap: 8px; margin-top: 9px; padding-left: 38px; }
+.modality__fields[hidden] { display: none; }
+.minifield { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
+.minifield > span {
+  font-size: 0.64rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--muted);
+}
+.input--mini { padding: 7px 9px; font-size: 0.85rem; width: 100%; }
+@media (max-width: 380px) { .modality__fields { padding-left: 0; } }

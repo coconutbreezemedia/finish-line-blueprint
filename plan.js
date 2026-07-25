@@ -23,8 +23,8 @@ window.PLAN = {
   },
 
   races: [
-    { key: "hyrox", label: "Hyrox", date: "2027-02-28", estimated: true,
-      note: "8×1km run + 8 stations: SkiErg 1000m, sled push 50m, sled pull 50m, burpee broad jump 80m, row 1000m, farmers carry 200m, sandbag lunge 100m, 100 wall balls." },
+    { key: "hyrox", label: "Hyrox", date: "2027-02-28", estimated: true, division: "Women's Doubles",
+      note: "Women's Doubles. You BOTH run all 8×1km together (within 5s of each other). Stations are split you-go-I-go, but the loads are full Women's Open: SkiErg 1000m · sled push 50m @ 102kg · sled pull 50m @ 78kg · burpee broad jump 80m · row 1000m · farmers carry 200m @ 2×16kg · sandbag lunge 100m @ 10kg · 100 wall balls @ 4kg." },
     { key: "tri", label: "Sprint Triathlon", date: "2027-04-25", estimated: true,
       note: "750m swim · 20km bike · 5km run. Built on the same engine, sharpened after Hyrox." },
   ],
@@ -40,7 +40,7 @@ window.PLAN = {
       ],
       "range": "Weeks 1–6 · Jul–Aug",
       "focus": "Build a real aerobic engine on zero-impact modalities, rebuild foot tolerance, and start Hyrox station work from day one. Running phases in on the foot's terms.",
-      "goal": "Run 25 min continuous pain-free, and post a first honest 1000m SkiErg + 1000m row benchmark."
+      "goal": "Run 25 min continuous pain-free, post a first honest 1000m SkiErg + row benchmark — and lock in a doubles partner whose easy 1km pace matches yours."
     },
     {
       "n": 2,
@@ -51,8 +51,8 @@ window.PLAN = {
         22
       ],
       "range": "Weeks 7–22 · Aug–Dec",
-      "focus": "Ramp running to the full 8km race volume, hammer station strength-endurance, and run compromised (off a station) every single week. Monthly simulations of increasing completeness.",
-      "goal": "Complete a full 8-station Hyrox simulation and run 8 × 1km at a pace you could hold on race day."
+      "focus": "Ramp running to the full 8km race volume (doubles doesn't split the running — you run all of it), and train stations as short violent you-go-I-go intervals at full race load. Monthly doubles simulations of increasing completeness.",
+      "goal": "Complete a full doubles simulation — 8km of running plus your half of all 8 stations — and run 8 × 1km at a pace you and your partner can both hold."
     },
     {
       "n": 3,
@@ -63,8 +63,8 @@ window.PLAN = {
         32
       ],
       "range": "Weeks 23–32 · Dec–Feb",
-      "focus": "Volume stops growing; everything moves to race pace. Three full simulations, then a three-week taper into race day.",
-      "goal": "Cross the Hyrox finish line on Sun 28 Feb 2027, faster than your week 20 simulation."
+      "focus": "Volume stops growing; everything moves to race pace. Three full doubles simulations with your agreed changeover splits, then a three-week taper into race day.",
+      "goal": "Cross the Hyrox Women's Doubles finish line on Sun 28 Feb 2027, faster than your week 20 simulation — together, within 5 seconds, the whole way."
     },
     {
       "n": 4,
@@ -115,7 +115,17 @@ window.PLAN = {
     { cat: "Safety", text:
       "Get medical clearance before Day 1. Sharp, worsening, or lingering pain is a stop sign — back off and check with a professional." },
     { cat: "Recovery", text:
-      "Recovery is training. Cold plunge post-session, 7–9h sleep, and at least one full rest day (Sundays) every week." },
+      "Recovery is training. Cold plunge post-session, 7–9h sleep, and at least one full rest day (Sundays) every week." },,
+    { star: true, cat: "Doubles · running", text:
+      "You and your partner run all 8km together, within 5 seconds of each other — more than that is a 1-minute penalty, and three penalties puts you out of competition. Running is the one thing doubles does NOT split, so it's the one thing you can't be carried on. Train the runs as if you were racing singles." },
+    { cat: "Doubles · loads", text:
+      "Doubles does not reduce the weights. You still push the full 102kg sled and lunge the full 10kg bag — you just do fewer metres of it. Keep training the heavy loads; only the volume drops." },
+    { cat: "Doubles · you-go-I-go", text:
+      "Stations are split however you like, switching as often as you like. That makes them ~1:1 work-to-rest intervals at a much higher intensity than singles. Train short violent bursts, not long grinds — and practise recovering ON YOUR FEET, since the resting partner isn't allowed to kneel or sit." },
+    { cat: "Doubles · your partner", text:
+      "Pick a partner whose easy 1km pace matches yours. Mismatched run pace is the single most common way doubles teams bleed time and collect penalties — it matters far more than who's stronger on the sled." },
+    { cat: "Doubles · changeovers", text:
+      "Eight stations × several switches each = a lot of handovers. Sloppy changeovers cost more time than a slow rep. Agree your splits BEFORE the race (e.g. wall balls 10-at-a-time, row 250m each) and rehearse them in your sim sessions." }
   ],
 
   fueling: [
@@ -536,7 +546,7 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 5×5, hinge 4×6, farmers carry 4×100m, walking lunge 4×20, wall balls 5×25.",
+          "d": "Hevy: Squat 5×5, hinge 4×6, farmers carry 6×50m @ 2×16kg (race weight, short bursts), walking lunge 4×20, wall balls 6×15 fast.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -552,7 +562,7 @@ window.PLAN = {
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "SkiErg 8 × 500m @ hard, 60s rest. Then row 2000m steady.",
+          "d": "DOUBLES PACING: SkiErg 8 × 250m @ SPRINT, 60s standing rest (that's your partner's 250m). Then row 1000m steady. Short violent efforts, standing recovery.",
           "min": 55,
           "impact": "zero",
           "hyrox": true
@@ -560,7 +570,7 @@ window.PLAN = {
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 10×25m, sled pull 8×25m, overhead press 4×8, burpee broad jump 5×20m, plank 3×60s.",
+          "d": "Hevy: Sled push 12×12.5m @ race weight, sled pull 10×12.5m, overhead press 4×8, burpee broad jump 8×10m, plank 3×60s.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -599,7 +609,7 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 5×5, hinge 4×6, farmers carry 4×100m, walking lunge 4×20, wall balls 5×25.",
+          "d": "Hevy: Squat 5×5, hinge 4×6, farmers carry 6×50m @ 2×16kg (race weight, short bursts), walking lunge 4×20, wall balls 6×15 fast.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -615,7 +625,7 @@ window.PLAN = {
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "Row 6 × 750m @ hard, 90s rest. SkiErg 1000m to finish.",
+          "d": "Row 10 × 250m @ SPRINT, 60s standing rest. Then SkiErg 500m. Practise starting hard from cold — every changeover is a cold start.",
           "min": 55,
           "impact": "zero",
           "hyrox": true
@@ -623,7 +633,7 @@ window.PLAN = {
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 10×25m, sled pull 8×25m, overhead press 4×8, burpee broad jump 5×20m, plank 3×60s.",
+          "d": "Hevy: Sled push 12×12.5m @ race weight, sled pull 10×12.5m, overhead press 4×8, burpee broad jump 8×10m, plank 3×60s.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -662,7 +672,7 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 5×5, hinge 4×6, farmers carry 4×100m, walking lunge 4×20, wall balls 5×25.",
+          "d": "Hevy: Squat 5×5, hinge 4×6, farmers carry 6×50m @ 2×16kg (race weight, short bursts), walking lunge 4×20, wall balls 6×15 fast.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -678,7 +688,7 @@ window.PLAN = {
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "SkiErg 1000m + Row 1000m + SkiErg 1000m, 3 min rest between. Race-pace effort.",
+          "d": "Alternating you-go-I-go sim: 4 × (SkiErg 250m sprint / 60s standing rest), then 4 × (row 250m sprint / 60s standing rest). This is exactly what a doubles station feels like.",
           "min": 55,
           "impact": "zero",
           "hyrox": true
@@ -686,7 +696,7 @@ window.PLAN = {
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 10×25m, sled pull 8×25m, overhead press 4×8, burpee broad jump 5×20m, plank 3×60s.",
+          "d": "Hevy: Sled push 12×12.5m @ race weight, sled pull 10×12.5m, overhead press 4×8, burpee broad jump 8×10m, plank 3×60s.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -725,7 +735,7 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 5×5, hinge 4×6, farmers carry 4×100m, walking lunge 4×20, wall balls 5×25.",
+          "d": "Hevy: Squat 5×5, hinge 4×6, farmers carry 6×50m @ 2×16kg (race weight, short bursts), walking lunge 4×20, wall balls 6×15 fast.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -741,7 +751,7 @@ window.PLAN = {
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "Row 8 × 500m @ hard, 60s rest.",
+          "d": "Row 8 × 250m @ SPRINT, 45s standing rest. Then SkiErg 4 × 250m same. Tight turnarounds.",
           "min": 55,
           "impact": "zero",
           "hyrox": true
@@ -749,7 +759,7 @@ window.PLAN = {
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 10×25m, sled pull 8×25m, overhead press 4×8, burpee broad jump 5×20m, plank 3×60s.",
+          "d": "Hevy: Sled push 12×12.5m @ race weight, sled pull 10×12.5m, overhead press 4×8, burpee broad jump 8×10m, plank 3×60s.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -788,7 +798,7 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 5×5 (+load), hinge 4×5, farmers carry 4×120m, sandbag lunge 4×25m, wall balls 6×25.",
+          "d": "Hevy: Squat 5×5 (+load), hinge 4×5, farmers carry 6×60m @ race weight, sandbag lunge 5×20m @ 10kg, wall balls 8×15 fast.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -804,7 +814,7 @@ window.PLAN = {
         {
           "t": "Hyrox sim",
           "k": "hyrox",
-          "d": "HALF SIM: 4 rounds of (1km run → one station). Stations: SkiErg 1000m, sled push 50m, burpee broad jump 80m, row 1000m. Rest as needed — completion, not time.",
+          "d": "DOUBLES HALF SIM: 4 rounds of (FULL 1km run → your half of a station). Stations: SkiErg 500m, sled push 25m @ race weight, burpee broad jump 40m, row 500m. Between your reps, stand and rest ~equal to your work. Note total time.",
           "min": 90,
           "impact": "high",
           "hyrox": true,
@@ -813,7 +823,7 @@ window.PLAN = {
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 12×25m heavy, sled pull 10×25m, push press 4×6, burpee broad jump 6×20m.",
+          "d": "Hevy: Sled push 14×12.5m @ race weight, sled pull 12×12.5m, push press 4×6, burpee broad jump 8×10m.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -852,7 +862,7 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 5×5 (+load), hinge 4×5, farmers carry 4×120m, sandbag lunge 4×25m, wall balls 6×25.",
+          "d": "Hevy: Squat 5×5 (+load), hinge 4×5, farmers carry 6×60m @ race weight, sandbag lunge 5×20m @ 10kg, wall balls 8×15 fast.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -868,7 +878,7 @@ window.PLAN = {
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "SkiErg 10 × 500m @ hard, 60s rest. Brutal but zero impact.",
+          "d": "SkiErg 12 × 250m @ SPRINT, 45s standing rest. Brutal, zero impact, and the exact rhythm of a doubles station.",
           "min": 55,
           "impact": "zero",
           "hyrox": true
@@ -876,7 +886,7 @@ window.PLAN = {
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 12×25m heavy, sled pull 10×25m, push press 4×6, burpee broad jump 6×20m.",
+          "d": "Hevy: Sled push 14×12.5m @ race weight, sled pull 12×12.5m, push press 4×6, burpee broad jump 8×10m.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -915,7 +925,7 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 5×5 (+load), hinge 4×5, farmers carry 4×120m, sandbag lunge 4×25m, wall balls 6×25.",
+          "d": "Hevy: Squat 5×5 (+load), hinge 4×5, farmers carry 6×60m @ race weight, sandbag lunge 5×20m @ 10kg, wall balls 8×15 fast.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -931,7 +941,7 @@ window.PLAN = {
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "Row 5 × 1000m @ race effort, 2 min rest. Match your week 6 benchmark on every rep.",
+          "d": "Row 6 × 500m @ race effort, 90s standing rest. Then SkiErg 500m. Compare your 500m split to your week 6 benchmark.",
           "min": 55,
           "impact": "zero",
           "hyrox": true
@@ -939,7 +949,7 @@ window.PLAN = {
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 12×25m heavy, sled pull 10×25m, push press 4×6, burpee broad jump 6×20m.",
+          "d": "Hevy: Sled push 14×12.5m @ race weight, sled pull 12×12.5m, push press 4×6, burpee broad jump 8×10m.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -978,7 +988,7 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 5×5 (+load), hinge 4×5, farmers carry 4×120m, sandbag lunge 4×25m, wall balls 6×25.",
+          "d": "Hevy: Squat 5×5 (+load), hinge 4×5, farmers carry 6×60m @ race weight, sandbag lunge 5×20m @ 10kg, wall balls 8×15 fast.",
           "min": 45,
           "impact": "low",
           "hyrox": true
@@ -994,7 +1004,7 @@ window.PLAN = {
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "SkiErg 4 × 500m easy. Row 2000m easy. Nothing hard.",
+          "d": "SkiErg 4 × 250m easy. Row 1500m easy. Nothing hard.",
           "min": 55,
           "impact": "zero",
           "hyrox": true
@@ -1002,7 +1012,7 @@ window.PLAN = {
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 12×25m heavy, sled pull 10×25m, push press 4×6, burpee broad jump 6×20m.",
+          "d": "Hevy: Sled push 14×12.5m @ race weight, sled pull 12×12.5m, push press 4×6, burpee broad jump 8×10m.",
           "min": 45,
           "impact": "low",
           "hyrox": true
@@ -1041,7 +1051,7 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Front squat 5×5, deadlift 4×5, farmers carry 3×150m, lunge 4×25m, wall balls 5×30.",
+          "d": "Hevy: Front squat 5×5, deadlift 4×5, farmers carry 4×100m @ race weight, lunge 5×20m, wall balls 6×20 unbroken.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -1057,7 +1067,7 @@ window.PLAN = {
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "SkiErg 1000m, row 1000m, SkiErg 1000m, row 1000m @ race effort, 2 min rest.",
+          "d": "8 × 250m alternating SkiErg/row @ race effort, 60s standing rest between. Changeover practice: get on the machine and pull hard within 3 seconds.",
           "min": 55,
           "impact": "zero",
           "hyrox": true
@@ -1065,7 +1075,7 @@ window.PLAN = {
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 8×50m (race distance), sled pull 6×50m, press 4×6, burpee broad jump 4×40m.",
+          "d": "Hevy: Sled push 8×25m (half the race distance = your likely split), sled pull 8×25m, press 4×6, burpee broad jump 6×20m.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -1104,7 +1114,7 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Front squat 5×5, deadlift 4×5, farmers carry 3×150m, lunge 4×25m, wall balls 5×30.",
+          "d": "Hevy: Front squat 5×5, deadlift 4×5, farmers carry 4×100m @ race weight, lunge 5×20m, wall balls 6×20 unbroken.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -1120,7 +1130,7 @@ window.PLAN = {
         {
           "t": "Hyrox sim",
           "k": "hyrox",
-          "d": "3/4 SIM: 6 rounds of (1km run → station). SkiErg 1000m, sled push 50m, sled pull 50m, burpee broad jump 80m, row 1000m, farmers carry 200m.",
+          "d": "DOUBLES 3/4 SIM: 6 rounds of (FULL 1km run → your half). SkiErg 500m, sled push 25m, sled pull 25m, burpee broad jump 40m, row 500m, farmers carry 100m @ 2×16kg. Standing rest only.",
           "min": 90,
           "impact": "high",
           "hyrox": true,
@@ -1129,7 +1139,7 @@ window.PLAN = {
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 8×50m (race distance), sled pull 6×50m, press 4×6, burpee broad jump 4×40m.",
+          "d": "Hevy: Sled push 8×25m (half the race distance = your likely split), sled pull 8×25m, press 4×6, burpee broad jump 6×20m.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -1168,7 +1178,7 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Front squat 5×5, deadlift 4×5, farmers carry 3×150m, lunge 4×25m, wall balls 5×30.",
+          "d": "Hevy: Front squat 5×5, deadlift 4×5, farmers carry 4×100m @ race weight, lunge 5×20m, wall balls 6×20 unbroken.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -1184,7 +1194,7 @@ window.PLAN = {
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "Row 6 × 1000m @ race effort, 90s rest.",
+          "d": "Row 8 × 250m @ SPRINT, 45s standing rest, then SkiErg 8 × 250m same. Sixteen changeovers — that's a realistic race count.",
           "min": 55,
           "impact": "zero",
           "hyrox": true
@@ -1192,7 +1202,7 @@ window.PLAN = {
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 8×50m (race distance), sled pull 6×50m, press 4×6, burpee broad jump 4×40m.",
+          "d": "Hevy: Sled push 8×25m (half the race distance = your likely split), sled pull 8×25m, press 4×6, burpee broad jump 6×20m.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -1231,7 +1241,7 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Front squat 5×5, deadlift 4×5, farmers carry 3×150m, lunge 4×25m, wall balls 5×30.",
+          "d": "Hevy: Front squat 5×5, deadlift 4×5, farmers carry 4×100m @ race weight, lunge 5×20m, wall balls 6×20 unbroken.",
           "min": 45,
           "impact": "low",
           "hyrox": true
@@ -1247,7 +1257,7 @@ window.PLAN = {
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "Easy SkiErg 3 × 500m, row 1500m. Recovery only.",
+          "d": "Easy SkiErg 3 × 250m, row 1200m. Recovery only.",
           "min": 55,
           "impact": "zero",
           "hyrox": true
@@ -1255,7 +1265,7 @@ window.PLAN = {
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 8×50m (race distance), sled pull 6×50m, press 4×6, burpee broad jump 4×40m.",
+          "d": "Hevy: Sled push 8×25m (half the race distance = your likely split), sled pull 8×25m, press 4×6, burpee broad jump 6×20m.",
           "min": 45,
           "impact": "low",
           "hyrox": true
@@ -1294,7 +1304,7 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 4×6 @ heavy, hinge 4×5, carry 3×200m (race distance — unbroken), wall balls 6×25.",
+          "d": "Hevy: Squat 4×6 @ heavy, hinge 4×5, carry 2×100m (your likely doubles split — unbroken), wall balls 5×25 unbroken.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -1310,7 +1320,7 @@ window.PLAN = {
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "SkiErg 12 × 500m @ hard, 45s rest.",
+          "d": "SkiErg 14 × 250m @ SPRINT, 40s standing rest. Peak erg session of the build.",
           "min": 55,
           "impact": "zero",
           "hyrox": true
@@ -1318,7 +1328,7 @@ window.PLAN = {
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 6×50m heavy, sled pull 6×50m, press 5×5, burpee broad jump 80m for time.",
+          "d": "Hevy: Sled push 6×25m @ heavy, sled pull 6×25m, press 5×5, burpee broad jump 40m for time (your half).",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -1357,7 +1367,7 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 4×6 @ heavy, hinge 4×5, carry 3×200m (race distance — unbroken), wall balls 6×25.",
+          "d": "Hevy: Squat 4×6 @ heavy, hinge 4×5, carry 2×100m (your likely doubles split — unbroken), wall balls 5×25 unbroken.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -1373,7 +1383,7 @@ window.PLAN = {
         {
           "t": "Hyrox sim",
           "k": "hyrox",
-          "d": "FULL SIM #1: all 8 stations with 1km runs between. Take rests where needed. Record the total time.",
+          "d": "DOUBLES FULL SIM #1: all 8 stations, FULL 8km of running, your half of every station (SkiErg 500m, sled push 25m, sled pull 25m, BBJ 40m, row 500m, carry 100m, lunge 50m, 50 wall balls). Do it WITH your partner if you have one. Record the total time.",
           "min": 90,
           "impact": "high",
           "hyrox": true,
@@ -1382,7 +1392,7 @@ window.PLAN = {
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 6×50m heavy, sled pull 6×50m, press 5×5, burpee broad jump 80m for time.",
+          "d": "Hevy: Sled push 6×25m @ heavy, sled pull 6×25m, press 5×5, burpee broad jump 40m for time (your half).",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -1421,7 +1431,7 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 4×6 @ heavy, hinge 4×5, carry 3×200m (race distance — unbroken), wall balls 6×25.",
+          "d": "Hevy: Squat 4×6 @ heavy, hinge 4×5, carry 2×100m (your likely doubles split — unbroken), wall balls 5×25 unbroken.",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -1437,7 +1447,7 @@ window.PLAN = {
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "Row 8 × 750m @ hard, 60s. SkiErg 1000m @ race effort to close.",
+          "d": "Row 10 × 250m @ SPRINT, 45s standing rest. SkiErg 500m @ race effort to close.",
           "min": 55,
           "impact": "zero",
           "hyrox": true
@@ -1445,7 +1455,7 @@ window.PLAN = {
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 6×50m heavy, sled pull 6×50m, press 5×5, burpee broad jump 80m for time.",
+          "d": "Hevy: Sled push 6×25m @ heavy, sled pull 6×25m, press 5×5, burpee broad jump 40m for time (your half).",
           "min": 65,
           "impact": "low",
           "hyrox": true
@@ -1484,7 +1494,7 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 4×6 @ heavy, hinge 4×5, carry 3×200m (race distance — unbroken), wall balls 6×25.",
+          "d": "Hevy: Squat 4×6 @ heavy, hinge 4×5, carry 2×100m (your likely doubles split — unbroken), wall balls 5×25 unbroken.",
           "min": 45,
           "impact": "low",
           "hyrox": true
@@ -1508,7 +1518,7 @@ window.PLAN = {
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 6×50m heavy, sled pull 6×50m, press 5×5, burpee broad jump 80m for time.",
+          "d": "Hevy: Sled push 6×25m @ heavy, sled pull 6×25m, press 5×5, burpee broad jump 40m for time (your half).",
           "min": 45,
           "impact": "low",
           "hyrox": true
@@ -1563,7 +1573,7 @@ window.PLAN = {
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "SkiErg 1000m + row 1000m @ race effort, then 8 × 100m wall-ball sprints.",
+          "d": "SkiErg 500m + row 500m @ race effort, then 4 × 25 wall balls unbroken (your likely split), 60s standing rest between.",
           "min": 45,
           "impact": "zero",
           "hyrox": true
@@ -1626,7 +1636,7 @@ window.PLAN = {
         {
           "t": "Hyrox sim",
           "k": "hyrox",
-          "d": "FULL SIM #2: all 8 stations. Push the pace this time. Compare to your week 20 time.",
+          "d": "DOUBLES FULL SIM #2: all 8 stations, full 8km running, your half of each. Push the pace. Compare to week 20. Rehearse your actual changeover splits.",
           "min": 90,
           "impact": "high",
           "hyrox": true,
@@ -1690,7 +1700,7 @@ window.PLAN = {
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "SkiErg 10 × 500m @ hard, 45s rest. Row 3 × 1000m @ race effort.",
+          "d": "SkiErg 12 × 250m @ SPRINT, 40s standing rest. Row 6 × 250m @ SPRINT, 40s standing rest.",
           "min": 45,
           "impact": "zero",
           "hyrox": true
@@ -1816,7 +1826,7 @@ window.PLAN = {
         {
           "t": "Hyrox sim",
           "k": "hyrox",
-          "d": "6 rounds: 1km run → station, at race intensity. Pick your 6 weakest stations.",
+          "d": "6 rounds: FULL 1km run → your half of a station, at race intensity. Pick the 6 stations you're weakest on.",
           "min": 90,
           "impact": "high",
           "hyrox": true,
@@ -1880,7 +1890,7 @@ window.PLAN = {
         {
           "t": "Hyrox sim",
           "k": "hyrox",
-          "d": "FULL SIM #3: all 8 stations, raced. This is your dress rehearsal — same kit, same fuel, same warm-up as race day.",
+          "d": "DOUBLES FULL SIM #3: all 8 stations raced, with your partner, using your agreed splits. Dress rehearsal — same kit, same fuel, same warm-up, same changeovers as race day.",
           "min": 90,
           "impact": "high",
           "hyrox": true,
@@ -1944,7 +1954,7 @@ window.PLAN = {
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "SkiErg 4 × 500m @ race effort. Row 2 × 1000m @ race effort. Stop while it still feels good.",
+          "d": "SkiErg 4 × 250m @ race effort. Row 4 × 250m @ race effort. Stop while it still feels good.",
           "min": 45,
           "impact": "zero",
           "hyrox": true
@@ -2007,7 +2017,7 @@ window.PLAN = {
         {
           "t": "Hyrox sim",
           "k": "hyrox",
-          "d": "One round of each station at race pace, generous rest. Movement quality only.",
+          "d": "One round of your half of each station at race pace, generous rest. Movement quality and changeovers only.",
           "min": 45,
           "impact": "high",
           "hyrox": true,
@@ -2071,7 +2081,7 @@ window.PLAN = {
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "SkiErg 500m + row 500m @ race pace. 15 min total. Walk away feeling fresh.",
+          "d": "SkiErg 250m + row 250m @ race pace. 15 min total. Walk away feeling fresh.",
           "min": 45,
           "impact": "zero",
           "hyrox": true
@@ -2162,7 +2172,7 @@ window.PLAN = {
         {
           "t": "★ HYROX — RACE DAY",
           "k": "hyrox",
-          "d": "8 × 1km run + 8 stations: SkiErg 1000m · sled push 50m · sled pull 50m · burpee broad jump 80m · row 1000m · farmers carry 200m · sandbag lunge 100m · 100 wall balls. Go get it.",
+          "d": "DOUBLES. You both run all 8 × 1km together (stay within 5s). Split every station you-go-I-go: SkiErg 1000m · sled push 50m · sled pull 50m · burpee broad jump 80m · row 1000m · farmers carry 200m · sandbag lunge 100m · 100 wall balls. Go get it.",
           "min": 150,
           "impact": "high",
           "hyrox": true,
