@@ -1518,3 +1518,42 @@ body::before {
 }
 .input--mini { padding: 7px 9px; font-size: 0.85rem; width: 100%; }
 @media (max-width: 380px) { .modality__fields { padding-left: 0; } }
+
+/* ---------- READINESS TAB ---------- */
+.section-title--loose { margin: 26px 0 10px; }
+.rready__intro { margin-bottom: 14px; }
+
+/* Race readiness bars — longest effort vs what race day asks */
+.rbar { margin-bottom: 16px; }
+.rbar__top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+.rbar__label { font-size: 0.85rem; font-weight: 800; }
+.rbar__val { font-size: 0.8rem; font-weight: 700; }
+.rbar__track { height: 8px; border-radius: 99px; background: rgba(255,255,255,0.07); overflow: hidden; }
+.rbar__fill {
+  height: 100%; border-radius: 99px;
+  background: linear-gradient(90deg, var(--gold), var(--coral));
+  transition: width 0.5s ease;
+}
+.rbar__fill.is-full { background: linear-gradient(90deg, var(--teal), var(--gold)); }
+.rbar__note { font-size: 0.72rem; color: var(--muted); margin-top: 5px; }
+
+/* Personal bests */
+.pbs { display: flex; flex-direction: column; gap: 12px; }
+.pb { padding: 14px; border-radius: var(--radius); background: var(--card-bg); border: 1px solid var(--card-border); }
+.pb__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.pb__head h4 { font-size: 0.95rem; font-weight: 800; }
+.pb__n { font-size: 0.7rem; color: var(--muted); }
+.pb__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.pb__grid > div { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.pb__k { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-weight: 700; }
+.pb__v { font-size: 0.95rem; font-weight: 800; }
+.pb__trend { margin-top: 12px; }
+.pb__trendlabel { display: block; font-size: 0.68rem; color: var(--muted); margin-top: 2px; }
+/* The base `.spark polyline` rule hard-sets stroke to --lime, which beats any
+   `color` inheritance — so the trend colour has to be set on the polyline too. */
+.spark { width: 100%; height: 44px; display: block; }
+.spark--good polyline { stroke: var(--teal); }
+.spark--flat polyline { stroke: var(--gold); }
+
+.logrow__summary { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
+@media (max-width: 380px) { .pb__v { font-size: 0.85rem; } .pb__grid { gap: 6px; } }

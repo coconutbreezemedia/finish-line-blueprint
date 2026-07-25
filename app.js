@@ -267,6 +267,11 @@
         <div class="checklist checklist--day" id="day-check">
           ${MODALITIES.map((m) => modalityRowHTML(m, log, planDay)).join("")}
         </div>
+        <div class="notesrow">
+          <label class="heelrow__label" for="day-notes">Notes <span class="muted">— yours, optional</span></label>
+          <textarea class="input textarea" id="day-notes" rows="2"
+            placeholder="How'd it go? Anything worth remembering.">${esc(log.notes || "")}</textarea>
+        </div>
         <div class="heelrow">
           <div class="heelrow__label">Morning heel pain <span class="muted">— gates your running</span></div>
           <div class="heelscale" id="heel-scale">
@@ -385,6 +390,22 @@
       inp.addEventListener("blur", commit);
     });
 
+    // Notes — yours to write. Saved on blur/change, never auto-generated.
+    const notes = $("#day-notes");
+    if (notes) {
+      const commitNotes = () => {
+        const logs = store.logs();
+        const entry = logs[dateStr] || { date: dateStr };
+        entry.notes = notes.value.trim();
+        stampEntry(entry, dateStr);
+        logs[dateStr] = entry;
+        store.saveLogs(logs);
+        maybeSync(dateStr);
+      };
+      notes.addEventListener("change", commitNotes);
+      notes.addEventListener("blur", commitNotes);
+    }
+
     // Heel pain 0–10. Tap targets instead of a number input — no keyboard on mobile.
     $$("#heel-scale .heelscale__btn").forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -499,7 +520,9 @@
       strengthType: e.strengthType || "",
       footDone: !!e.footDone,
       heelPain: e.heelPain,
-      notes: entrySummary(e),
+      // Always send notes — including "" — so clearing a note in the app clears
+      // it in Airtable rather than leaving a stale one behind.
+      notes: e.notes || "",
       // Per-modality detail. Distances as typed; times normalised to seconds
       // for Airtable Duration fields.
       modalities: ["run", "ski", "row", "bike", "swim"].reduce((acc, k) => {
@@ -702,25 +725,156 @@
         <div class="logrow__body">
           <div class="logrow__title">${esc(e.session || "—")}</div>
           ${tags ? `<div class="logrow__ticks">${tags}</div>` : ""}
-          ${summary ? `<div class="logrow__notes">${esc(summary)}</div>` : ""}
+          ${summary ? `<div class="logrow__summary">${esc(summary)}</div>` : ""}
+          ${e.notes ? `<div class="logrow__notes">${esc(e.notes)}</div>` : ""}
           ${e.heelPain != null ? `<div class="logrow__meta">heel ${e.heelPain}/10</div>` : ""}
         </div>
       </div>`;
     }).join("") : `<p class="muted empty">No entries yet. Log your first day from the Today tab.</p>`;
 
-    const painData = dates.slice().reverse().filter((d) => logs[d].heelPain != null);
-    let painChart = "";
-    if (painData.length > 1) {
-      const pts = painData.map((d) => logs[d].heelPain);
-      const w = 300, h = 60, max = 10;
-      const step = w / (pts.length - 1);
-      const path = pts.map((v, i) => `${i === 0 ? "M" : "L"}${(i * step).toFixed(1)},${(h - (v / max) * h).toFixed(1)}`).join(" ");
-      painChart = `<div class="card"><h3 class="section-title">Morning heel pain trend</h3>
-        <svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><path d="${path}" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-        <p class="muted">Lower is better. This is your running gate.</p></div>`;
+    // Heel-pain trend moved to the Ready tab, alongside the other progress views.
+    $("#panel-log").innerHTML = stats + `<div class="logrows">${rows}</div>`;
+  }
+
+  // ---------- READINESS ----------
+  // Progress over time + personal bests. Everything here is derived from the
+  // logs — nothing extra to enter.
+
+  function fmtDur(s) {
+    if (s == null || !isFinite(s)) return "—";
+    s = Math.round(s);
+    const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+    const pad = (n) => String(n).padStart(2, "0");
+    return h ? `${h}:${pad(m)}:${pad(sec)}` : `${m}:${pad(sec)}`;
+  }
+
+  // Per modality: how to express "speed" so efforts of different lengths are
+  // comparable, and what the race actually asks of you.
+  const READY_SPEC = [
+    { key: "run",  label: "Run",    unit: "km", distDp: 1,
+      paceLabel: "best pace", per: (d, s) => s / d, paceSuffix: "/km",
+      target: 8, targetNote: "8 km — you run every metre in doubles" },
+    { key: "ski",  label: "SkiErg", unit: "m", distDp: 0,
+      paceLabel: "best 500m split", per: (d, s) => s / (d / 500), paceSuffix: "/500m",
+      target: 1000, targetNote: "1000 m station · ~500 m is your half" },
+    { key: "row",  label: "Row",    unit: "m", distDp: 0,
+      paceLabel: "best 500m split", per: (d, s) => s / (d / 500), paceSuffix: "/500m",
+      target: 1000, targetNote: "1000 m station · ~500 m is your half" },
+    { key: "bike", label: "Bike",   unit: "km", distDp: 1,
+      paceLabel: "best pace", per: (d, s) => s / d, paceSuffix: "/km",
+      target: 20, targetNote: "20 km — sprint-tri bike leg" },
+    { key: "swim", label: "Swim",   unit: "m", distDp: 0,
+      paceLabel: "best 100m pace", per: (d, s) => s / (d / 100), paceSuffix: "/100m",
+      target: 750, targetNote: "750 m — sprint-tri swim leg" },
+  ];
+
+  function readyStats() {
+    const logs = store.logs();
+    const dates = Object.keys(logs).sort();
+    return READY_SPEC.map((spec) => {
+      const rows = dates
+        .filter((d) => logs[d][spec.key + "Done"])
+        .map((d) => ({ date: d, dist: Number(logs[d][spec.key + "Dist"]), sec: toSeconds(logs[d][spec.key + "Time"]) }))
+        .filter((r) => isFinite(r.dist) && r.dist > 0);
+      const withTime = rows.filter((r) => r.sec > 0);
+      const longest = rows.reduce((a, r) => (!a || r.dist > a.dist ? r : a), null);
+      const longestTime = withTime.reduce((a, r) => (!a || r.sec > a.sec ? r : a), null);
+      const paced = withTime.map((r) => ({ ...r, pace: spec.per(r.dist, r.sec) }));
+      const best = paced.reduce((a, r) => (!a || r.pace < a.pace ? r : a), null);
+      return { spec, rows, sessions: rows.length, longest, longestTime, best, paced };
+    });
+  }
+
+  // Minimal sparkline. `lowerBetter` only flips the colour, not the geometry.
+  function spark(values, lowerBetter) {
+    if (!values || values.length < 2) return "";
+    const w = 300, h = 44;
+    const min = Math.min(...values), max = Math.max(...values);
+    const span = max - min || 1;
+    const step = w / (values.length - 1);
+    const pts = values.map((v, i) => `${(i * step).toFixed(1)},${(h - ((v - min) / span) * (h - 6) - 3).toFixed(1)}`);
+    const improving = lowerBetter ? values[values.length - 1] <= values[0] : values[values.length - 1] >= values[0];
+    return `<svg class="spark ${improving ? "spark--good" : "spark--flat"}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+      <polyline points="${pts.join(" ")}" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linejoin="round" stroke-linecap="round" /></svg>`;
+  }
+
+  function renderReadiness() {
+    const el = $("#panel-ready");
+    if (!el) return;
+    const logs = store.logs();
+    const dates = Object.keys(logs).sort();
+    const stats = readyStats();
+    const any = stats.some((s) => s.sessions > 0);
+
+    if (!any) {
+      el.innerHTML = `<div class="card"><h3 class="section-title">Readiness</h3>
+        <p class="muted empty">Nothing logged yet. Tick off a session with a distance and time on the Cal tab and your bests and trends start building here.</p></div>`;
+      return;
     }
 
-    $("#panel-log").innerHTML = stats + painChart + `<div class="logrows">${rows}</div>`;
+    // Race readiness — longest single effort vs what the race asks.
+    const bars = stats.filter((s) => s.longest).map((s) => {
+      const pct = Math.max(0, Math.min(100, (s.longest.dist / s.spec.target) * 100));
+      return `<div class="rbar">
+        <div class="rbar__top">
+          <span class="rbar__label">${esc(s.spec.label)}</span>
+          <span class="rbar__val">${s.longest.dist.toFixed(s.spec.distDp)}${s.spec.unit} <span class="muted">/ ${s.spec.target}${s.spec.unit}</span></span>
+        </div>
+        <div class="rbar__track"><div class="rbar__fill ${pct >= 100 ? "is-full" : ""}" style="width:${pct.toFixed(1)}%"></div></div>
+        <div class="rbar__note">${esc(s.spec.targetNote)}</div>
+      </div>`;
+    }).join("");
+
+    // Personal bests per modality.
+    const cards = stats.filter((s) => s.sessions > 0).map((s) => `
+      <div class="pb">
+        <div class="pb__head"><h4>${esc(s.spec.label)}</h4><span class="pb__n">${s.sessions} session${s.sessions === 1 ? "" : "s"}</span></div>
+        <div class="pb__grid">
+          <div><span class="pb__k">longest</span><span class="pb__v">${s.longest ? s.longest.dist.toFixed(s.spec.distDp) + s.spec.unit : "—"}</span></div>
+          <div><span class="pb__k">${esc(s.spec.paceLabel)}</span><span class="pb__v">${s.best ? fmtDur(s.best.pace) + s.spec.paceSuffix : "—"}</span></div>
+          <div><span class="pb__k">longest time</span><span class="pb__v">${s.longestTime ? fmtDur(s.longestTime.sec) : "—"}</span></div>
+        </div>
+        ${s.paced.length > 1 ? `<div class="pb__trend">${spark(s.paced.map((r) => r.pace), true)}
+          <span class="pb__trendlabel">${esc(s.spec.paceLabel.replace("best ", ""))} over time · lower is better</span></div>` : ""}
+      </div>`).join("");
+
+    // Weekly training time — the load picture.
+    const weekly = {};
+    dates.forEach((d) => {
+      const dt = parseDate(d);
+      const monday = addDays(dt, -((dt.getDay() + 6) % 7));
+      const k = fmtISO(monday);
+      const e = logs[d];
+      const secs = ["run", "ski", "row", "bike", "swim"]
+        .reduce((a, m) => a + (e[m + "Done"] ? (toSeconds(e[m + "Time"]) || 0) : 0), 0);
+      weekly[k] = (weekly[k] || 0) + secs;
+    });
+    const wk = Object.keys(weekly).sort().slice(-12);
+    const weeklyBlock = wk.length > 1 ? `<div class="card">
+      <h3 class="section-title">Weekly training time</h3>
+      ${spark(wk.map((k) => weekly[k]), false)}
+      <p class="muted">Last ${wk.length} weeks · most recent ${fmtDur(weekly[wk[wk.length - 1]])}</p>
+    </div>` : "";
+
+    // Heel pain — the gate metric, and the one to watch alongside rising volume.
+    const painDates = dates.filter((d) => logs[d].heelPain != null);
+    const painBlock = painDates.length > 1 ? `<div class="card">
+      <h3 class="section-title">Morning heel pain</h3>
+      ${spark(painDates.map((d) => logs[d].heelPain), true)}
+      <p class="muted">Lower is better. This is your running gate — ≤3 for 5+ days unlocks progression.</p>
+    </div>` : "";
+
+    el.innerHTML = `
+      <div class="card">
+        <h3 class="section-title">Race readiness</h3>
+        <p class="muted rready__intro">Your longest single effort against what race day asks.</p>
+        ${bars}
+      </div>
+      ${weeklyBlock}
+      <h3 class="section-title section-title--loose">Personal bests</h3>
+      <div class="pbs">${cards}</div>
+      ${painBlock}`;
   }
 
   // ---------- INFO (rules + fueling) ----------
@@ -820,6 +974,7 @@
     renderCalendar();
     renderPlan();
     renderFoot();
+    renderReadiness();
     renderLog();
     renderInfo();
     animateCount($("#panel-foot .streak__num"), footStreak());
