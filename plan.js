@@ -115,7 +115,7 @@ window.PLAN = {
     { cat: "Safety", text:
       "Get medical clearance before Day 1. Sharp, worsening, or lingering pain is a stop sign — back off and check with a professional." },
     { cat: "Recovery", text:
-      "Recovery is training. Cold plunge post-session, 7–9h sleep, and at least one full rest day (Sundays) every week." },,
+      "Recovery is training. Cold plunge post-session, 7–9h sleep, and at least one full rest day (Sundays) every week." },
     { star: true, cat: "Doubles · running", text:
       "You and your partner run all 8km together, within 5 seconds of each other — more than that is a 1-minute penalty, and three penalties puts you out of competition. Running is the one thing doubles does NOT split, so it's the one thing you can't be carried on. Train the runs as if you were racing singles." },
     { cat: "Doubles · loads", text:
@@ -125,7 +125,9 @@ window.PLAN = {
     { cat: "Doubles · your partner", text:
       "Pick a partner whose easy 1km pace matches yours. Mismatched run pace is the single most common way doubles teams bleed time and collect penalties — it matters far more than who's stronger on the sled." },
     { cat: "Doubles · changeovers", text:
-      "Eight stations × several switches each = a lot of handovers. Sloppy changeovers cost more time than a slow rep. Agree your splits BEFORE the race (e.g. wall balls 10-at-a-time, row 250m each) and rehearse them in your sim sessions." }
+      "Eight stations × several switches each = a lot of handovers. Sloppy changeovers cost more time than a slow rep. Agree your splits BEFORE the race (e.g. wall balls 10-at-a-time, row 250m each) and rehearse them in your sim sessions." },
+    { cat: "Strength · machine first", text:
+      "Build strength on stable machines first: leg press or hack squat, seated leg curl or glute drive, chest-supported row or lat pulldown, and chest/shoulder press. Keep 2–3 clean reps in reserve. Free weights and functional tools enter after the machine work only when they train an actual Hyrox skill: farmers carry, sled, sandbag lunge, wall ball, and controlled burpee broad jump." }
   ],
 
   fueling: [
@@ -165,56 +167,63 @@ window.PLAN = {
       "deload": false,
       "days": [
         {
-          "t": "Strength A · full body",
+          "t": "Strength A · machine full body",
           "k": "strength",
-          "d": "Hevy: goblet squat 4×8, trap-bar/RDL hinge 4×8, farmers carry 4×40m heavy, walking lunge 3×20 steps, dead-bug 3×12. Log loads in Hevy — this is your Hyrox base.",
-          "min": 60,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: MACHINE FIRST. Leg press 4×8–10, seated leg curl 3×10, chest-supported row machine 3×10, chest press machine 3×10. Then Hyrox skill: farmers carry 4×40m + dead-bug 3×12. Log machine settings and loads in Hevy. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "SkiErg + Row intro",
           "k": "erg",
-          "d": "SkiErg 4 × 500m @ moderate, 90s rest. Then Row 3 × 500m @ moderate, 90s rest. Learn the stroke now — both are race stations.",
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: SkiErg 4 × 500m @ moderate, 90s rest. Then Row 3 × 500m @ moderate, 90s rest. Learn the stroke now — both are race stations. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Zone 2 Bike",
           "k": "bike",
-          "d": "45 min conversational spin. You should be able to talk in full sentences the whole way.",
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 45 min conversational spin. You should be able to talk in full sentences the whole way. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
-          "impact": "zero"
+          "impact": "zero",
+          "format": "otf45"
         },
         {
-          "t": "Strength B · posterior + press",
+          "t": "Strength B · machines + sled",
           "k": "strength",
-          "d": "Hevy: deadlift 4×6, overhead press 4×8, sled push 6×20m (or heavy incline walk), sandbag/DB lunge 3×20 steps, wall balls 3×20, plank 3×45s.",
-          "min": 60,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: MACHINE FIRST. Glute-drive/hip-thrust machine 4×8, shoulder press machine 3×10, lat pulldown 3×10, leg extension 3×10. Then Hyrox skill: sled push 6×20m, wall balls 3×12, plank 3×45s. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "800m total: 8 × 50m easy w/ 20s rest, then 400m continuous relaxed. Breathing first, speed never.",
-          "min": 40,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 800m total: 8 × 50m easy w/ 20s rest, then 400m continuous relaxed. Breathing first, speed never. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "75 min steady bike. Last 15 min a touch harder. Practice mid-session fuel + fluid.",
-          "min": 75,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike. Last 15 min a touch harder. Practice mid-session fuel + fluid. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -227,58 +236,65 @@ window.PLAN = {
       "deload": false,
       "days": [
         {
-          "t": "Strength A",
+          "t": "Strength A · machine full body",
           "k": "strength",
-          "d": "Same lifts, +2.5–5kg where week 1 felt clean. Carries 4×50m.",
-          "min": 60,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Repeat the machine circuit. Add the smallest stack increment only where week 1 felt clean; keep 2–3 reps in reserve. Farmers carries 4×50m after the machines. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Walk/Run trial",
           "k": "run",
-          "d": "GATED. 10 min brisk walk, then 6 × (1 min easy jog / 2 min walk), 5 min walk down. Grass or track. Total jog: 6 min — deliberately tiny.",
-          "min": 40,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 10 min brisk walk, then 6 × (1 min easy jog / 2 min walk), 5 min walk down. Grass or track. Total jog: 6 min — deliberately tiny. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "SkiErg intervals",
           "k": "erg",
-          "d": "SkiErg 6 × 500m @ moderate-hard, 90s rest. Target: hold the same split across all 6.",
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: SkiErg 6 × 500m @ moderate-hard, 90s rest. Target: hold the same split across all 6. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
-          "t": "Strength B",
+          "t": "Strength B · machines + sled",
           "k": "strength",
-          "d": "Progress loads. Sled push 8×20m. Wall balls 4×20 — get the squat depth honest.",
-          "min": 60,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Glute-drive machine, shoulder press machine, lat pulldown and leg extension: 3×10 each. Then sled push 8×20m and wall balls 4×15 — controlled depth before speed. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "1000m: 4 × 100m easy, 300m continuous, 4 × 50m build, 100m cool. ",
-          "min": 40,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 1000m: 4 × 100m easy, 300m continuous, 4 × 50m build, 100m cool.  Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic + row",
           "k": "bike",
-          "d": "60 min bike straight into 2000m row @ steady. Back-to-back modality is a Hyrox skill.",
-          "min": 80,
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block bike straight into 2000m row @ steady. Back-to-back modality is a Hyrox skill. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -291,57 +307,64 @@ window.PLAN = {
       "deload": false,
       "days": [
         {
-          "t": "Strength A",
+          "t": "Strength A · machine full body",
           "k": "strength",
-          "d": "Progress. Add step-ups 3×12/leg for single-leg strength (sled + lunges need it).",
-          "min": 60,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Leg press, seated leg curl, chest-supported row and chest press: 3×8–10 each. Then supported low step-ups 3×10/leg + farmers carry 4×50m. Machines stay the strength base. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Walk/Run",
           "k": "run",
-          "d": "GATED. 10 min walk, then 6 × (2 min jog / 90s walk), walk down. Total jog: 12 min.",
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 10 min walk, then 6 × (2 min jog / 90s walk), walk down. Total jog: 12 min. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Row intervals",
           "k": "erg",
-          "d": "Row 5 × 750m @ moderate-hard, 2 min rest. Then SkiErg 500m easy to finish.",
-          "min": 50,
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Row 5 × 750m @ moderate-hard, 2 min rest. Then SkiErg 500m easy to finish. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
-          "t": "Strength B",
+          "t": "Strength B · machines + sled",
           "k": "strength",
-          "d": "Deadlift 4×5 heavier. Sled 8×20m. Wall balls 4×25. Extra calf/foot work today.",
-          "min": 60,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Glute-drive machine 4×8, shoulder press machine 3×8–10, lat pulldown 3×10, leg extension 3×10. Then sled 8×20m + wall balls 4×15. Extra calf/foot work today. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "1200m: 200m warm, 6 × 100m @ steady w/ 20s rest, 300m continuous, 100m cool.",
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 1200m: 200m warm, 6 × 100m @ steady w/ 20s rest, 300m continuous, 100m cool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
-          "impact": "zero"
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "85 min steady bike. Hold a slightly firmer pace than week 2.",
-          "min": 85,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike. Hold a slightly firmer pace than week 2. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -354,57 +377,64 @@ window.PLAN = {
       "deload": false,
       "days": [
         {
-          "t": "Strength A",
+          "t": "Strength A · machine strength",
           "k": "strength",
-          "d": "Squat 4×6 heavier, hinge 4×6, carries 4×60m. Push the loads — form still first.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Leg press 4×6–8 heavier, seated leg curl 4×8, chest-supported row 3×8, chest press machine 3×8. Then farmers carries 4×60m. Increase the machine stack only with clean form. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Continuous run",
           "k": "run",
-          "d": "GATED. 10 min walk warm-up, then 15 min continuous easy jog (~1.5–2km), walk down. Slow is correct.",
-          "min": 40,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 10 min walk warm-up, then 15 min continuous easy jog (~1.5–2km), walk down. Slow is correct. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "SkiErg + Row",
           "k": "erg",
-          "d": "SkiErg 1000m @ race effort (this is the exact station distance — note your time). Rest 3 min. Row 1000m @ race effort. Note that too. These are your first benchmarks.",
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: SkiErg 1000m @ race effort (this is the exact station distance — note your time). Rest 3 min. Row 1000m @ race effort. Note that too. These are your first benchmarks. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
-          "t": "Strength B",
+          "t": "Strength B · machines + sled",
           "k": "strength",
-          "d": "Sled push 10×20m heavy. Wall balls 5×25. Sandbag lunge 4×25m. Overhead press 4×6.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Shoulder press machine 4×8, glute-drive machine 4×8 and lat pulldown 3×8. Then sled push 10×20m, wall balls 5×15 and supported sandbag lunge 3×15m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "1400m: 300m warm, 8 × 100m @ steady, 400m continuous, 100m cool.",
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 1400m: 300m warm, 8 × 100m @ steady, 400m continuous, 100m cool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
-          "impact": "zero"
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "90 min bike. Longest yet. Eat and drink on schedule, not by feel.",
-          "min": 90,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block bike. Longest yet. Eat and drink on schedule, not by feel. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -417,58 +447,65 @@ window.PLAN = {
       "deload": false,
       "days": [
         {
-          "t": "Strength A",
+          "t": "Strength A · machine strength",
           "k": "strength",
-          "d": "Progress all lifts. Carries 4×80m — race is 200m, we're building to it.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Progress the leg press, seated leg curl, chest-supported row and chest press machine by the smallest clean increment. Then farmers carries 4×80m — race is 200m, so this remains the specific free-weight skill. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Continuous run",
           "k": "run",
-          "d": "GATED. 20 min continuous easy jog (~2–2.5km). Conversational the whole way.",
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 20 min continuous easy jog (~2–2.5km). Conversational the whole way. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Compromised intervals",
           "k": "erg",
-          "d": "4 rounds: 500m row @ hard → 400m easy jog (or 3 min brisk walk if the foot's grumpy) → 90s rest. Legs will feel strange running off the erg. That's the point.",
-          "min": 50,
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 4 rounds: 500m row @ hard → 400m easy jog (or 3 min brisk walk if the foot's grumpy) → 90s rest. Legs will feel strange running off the erg. That's the point. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
           "hyrox": true,
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
-          "t": "Strength B",
+          "t": "Strength B · machines + sled",
           "k": "strength",
-          "d": "Sled push + pull 8×20m each. Wall balls 5×25. Burpee broad jump 4×10m — learn the movement now.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Glute-drive machine 3×8, shoulder press machine 3×8 and lat pulldown 3×10 first. Then sled push + pull 8×20m each, wall balls 5×15 and burpee broad jump 4×10m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "1600m: 300m warm, 10 × 100m @ steady w/ 15s rest, 200m continuous, 100m cool.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 1600m: 300m warm, 10 × 100m @ steady w/ 15s rest, 200m continuous, 100m cool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "95 min bike, steady. Or 70 min bike + 3000m row if weather's bad.",
-          "min": 95,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block bike, steady. Or the available work block bike + 3000m row if weather's bad. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -481,57 +518,64 @@ window.PLAN = {
       "deload": false,
       "days": [
         {
-          "t": "Strength A (light)",
+          "t": "Strength A · machines (light)",
           "k": "strength",
-          "d": "All lifts at ~75% of last week's loads. Move fast and clean, don't grind.",
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Leg press, seated leg curl, chest-supported row and chest press machine at ~75% of last week's loads. Two clean sets each; no grinding. Easy carries only if time remains. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Benchmark run",
           "k": "run",
-          "d": "GATED. Easy continuous jog as far as comfortable up to 25 min (~3km). Note distance + how the foot felt. This is your Phase 1 finish line.",
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. Easy continuous jog as far as comfortable up to 25 min (~3km). Note distance + how the foot felt. This is your Phase 1 finish line. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Benchmark ergs",
           "k": "erg",
-          "d": "SkiErg 1000m all-out. Rest 5 min. Row 1000m all-out. Write both times down — you'll chase them for 26 weeks.",
-          "min": 40,
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: SkiErg 1000m all-out. Rest 5 min. Row 1000m all-out. Write both times down — you'll chase them for 26 weeks. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
-          "t": "Strength B (light)",
+          "t": "Strength B · machines (light)",
           "k": "strength",
-          "d": "~75% loads. Good long foot-care session to close the phase.",
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Glute-drive, shoulder press, lat pulldown and leg-extension machines at ~75% loads, two clean sets each. Good long foot-care session to close the phase. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Easy swim",
           "k": "swim",
-          "d": "1000m relaxed, no clock, no intervals.",
-          "min": 35,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 1000m relaxed, no clock, no intervals. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic (easy)",
           "k": "bike",
-          "d": "60 min easy spin. Reflect: 6 weeks in, what's actually changed?",
-          "min": 60,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block easy spin. Reflect: 6 weeks in, what's actually changed? Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Rest + review. Log your benchmarks, then read the Phase 2 brief in the Plan tab.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Rest + review. Log your benchmarks, then read the Phase 2 brief in the Plan tab. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -546,55 +590,62 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 5×5, hinge 4×6, farmers carry 6×50m @ 2×16kg (race weight, short bursts), walking lunge 4×20, wall balls 6×15 fast.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: leg press 4×8, seated leg curl 4×10, chest press + chest-supported row 3×10 each. THEN RACE SKILL: farmers carry 6×50m @ 2×16kg and wall balls 6×15. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · 3km",
           "k": "run",
-          "d": "GATED. 3 × 1km @ easy-steady w/ 2 min walk between. First time touching race distance.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 3 × 1km @ easy-steady w/ 2 min walk between. First time touching race distance. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "DOUBLES PACING: SkiErg 8 × 250m @ SPRINT, 60s standing rest (that's your partner's 250m). Then row 1000m steady. Short violent efforts, standing recovery.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: DOUBLES PACING: SkiErg 8 × 250m @ SPRINT, 60s standing rest (that's your partner's 250m). Then row 1000m steady. Short violent efforts, standing recovery. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 12×12.5m @ race weight, sled pull 10×12.5m, overhead press 4×8, burpee broad jump 8×10m, plank 3×60s.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: shoulder press machine 3×10, lat pulldown 3×10, glute-drive machine 3×8. THEN RACE SKILL: sled push 12×12.5m, sled pull 10×12.5m, burpee broad jump 6×10m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "1600m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 1600m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "95 min steady bike (or 70 min bike + 3000m row). Zero impact, pure engine.",
-          "min": 95,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike (or the available work block bike + 3000m row). Zero impact, pure engine. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -609,55 +660,62 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 5×5, hinge 4×6, farmers carry 6×50m @ 2×16kg (race weight, short bursts), walking lunge 4×20, wall balls 6×15 fast.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: leg press 4×8, seated leg curl 4×10, chest press + chest-supported row 3×10 each. THEN RACE SKILL: farmers carry 6×50m @ 2×16kg and wall balls 6×15. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · 4km",
           "k": "run",
-          "d": "GATED. 4 × 1km @ easy-steady, 2 min walk. Hold an even pace across all four.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 4 × 1km @ easy-steady, 2 min walk. Hold an even pace across all four. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "Row 10 × 250m @ SPRINT, 60s standing rest. Then SkiErg 500m. Practise starting hard from cold — every changeover is a cold start.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Row 10 × 250m @ SPRINT, 60s standing rest. Then SkiErg 500m. Practise starting hard from cold — every changeover is a cold start. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 12×12.5m @ race weight, sled pull 10×12.5m, overhead press 4×8, burpee broad jump 8×10m, plank 3×60s.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: shoulder press machine 3×10, lat pulldown 3×10, glute-drive machine 3×8. THEN RACE SKILL: sled push 12×12.5m, sled pull 10×12.5m, burpee broad jump 6×10m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "1800m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 1800m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "100 min steady bike (or 70 min bike + 3000m row). Zero impact, pure engine.",
-          "min": 100,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike (or the available work block bike + 3000m row). Zero impact, pure engine. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -672,55 +730,62 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 5×5, hinge 4×6, farmers carry 6×50m @ 2×16kg (race weight, short bursts), walking lunge 4×20, wall balls 6×15 fast.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: leg press 4×8, seated leg curl 4×10, chest press + chest-supported row 3×10 each. THEN RACE SKILL: farmers carry 6×50m @ 2×16kg and wall balls 6×15. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · 5km",
           "k": "run",
-          "d": "GATED. 25–30 min continuous easy run (~4–5km). Longest continuous run yet.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 25–30 min continuous easy run (~4–5km). Longest continuous run yet. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "Alternating you-go-I-go sim: 4 × (SkiErg 250m sprint / 60s standing rest), then 4 × (row 250m sprint / 60s standing rest). This is exactly what a doubles station feels like.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Alternating you-go-I-go sim: 4 × (SkiErg 250m sprint / 60s standing rest), then 4 × (row 250m sprint / 60s standing rest). This is exactly what a doubles station feels like. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 12×12.5m @ race weight, sled pull 10×12.5m, overhead press 4×8, burpee broad jump 8×10m, plank 3×60s.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: shoulder press machine 3×10, lat pulldown 3×10, glute-drive machine 3×8. THEN RACE SKILL: sled push 12×12.5m, sled pull 10×12.5m, burpee broad jump 6×10m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2000m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2000m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "105 min steady bike (or 70 min bike + 3000m row). Zero impact, pure engine.",
-          "min": 105,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike (or the available work block bike + 3000m row). Zero impact, pure engine. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -735,55 +800,62 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 5×5, hinge 4×6, farmers carry 6×50m @ 2×16kg (race weight, short bursts), walking lunge 4×20, wall balls 6×15 fast.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: leg press 4×8, seated leg curl 4×10, chest press + chest-supported row 3×10 each. THEN RACE SKILL: farmers carry 6×50m @ 2×16kg and wall balls 6×15. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · 5km",
           "k": "run",
-          "d": "GATED. 5 × 1km @ steady, 90s walk. Shorter rest than week 8 — that's the progression.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 5 × 1km @ steady, 90s walk. Shorter rest than week 8 — that's the progression. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "Row 8 × 250m @ SPRINT, 45s standing rest. Then SkiErg 4 × 250m same. Tight turnarounds.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Row 8 × 250m @ SPRINT, 45s standing rest. Then SkiErg 4 × 250m same. Tight turnarounds. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 12×12.5m @ race weight, sled pull 10×12.5m, overhead press 4×8, burpee broad jump 8×10m, plank 3×60s.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: shoulder press machine 3×10, lat pulldown 3×10, glute-drive machine 3×8. THEN RACE SKILL: sled push 12×12.5m, sled pull 10×12.5m, burpee broad jump 6×10m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2000m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2000m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "110 min steady bike (or 70 min bike + 3000m row). Zero impact, pure engine.",
-          "min": 110,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike (or the available work block bike + 3000m row). Zero impact, pure engine. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -798,56 +870,63 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 5×5 (+load), hinge 4×5, farmers carry 6×60m @ race weight, sandbag lunge 5×20m @ 10kg, wall balls 8×15 fast.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: hack squat or leg press 4×8, glute-drive machine 4×8, lat pulldown + chest press 3×8–10. THEN RACE SKILL: carry 6×60m, sandbag lunge 4×15m, wall balls 6×15. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · 6km",
           "k": "run",
-          "d": "GATED. 30–35 min continuous easy run (~5–6km).",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 30–35 min continuous easy run (~5–6km). Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Hyrox sim",
           "k": "hyrox",
-          "d": "DOUBLES HALF SIM: 4 rounds of (FULL 1km run → your half of a station). Stations: SkiErg 500m, sled push 25m @ race weight, burpee broad jump 40m, row 500m. Between your reps, stand and rest ~equal to your work. Note total time.",
+          "d": "ASSESSMENT / EVENT — 90 MIN PLANNED. This is intentionally longer than the daily 45-minute class so pacing and late-race fatigue are tested honestly. TODAY'S TARGET: DOUBLES HALF SIM: 4 rounds of (FULL 1km run → your half of a station). Stations: SkiErg 500m, sled push 25m @ race weight, burpee broad jump 40m, row 500m. Between your reps, stand and rest ~equal to your work. Note total time.",
           "min": 90,
           "impact": "high",
           "hyrox": true,
-          "run": true
+          "run": true,
+          "format": "event"
         },
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 14×12.5m @ race weight, sled pull 12×12.5m, push press 4×6, burpee broad jump 8×10m.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: shoulder press machine + seated row 3×8–10, leg extension 3×10. THEN RACE SKILL: sled push 14×12.5m, sled pull 12×12.5m, burpee broad jump 8×10m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2200m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2200m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "110 min steady bike (or 70 min bike + 3000m row). Zero impact, pure engine.",
-          "min": 110,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike (or the available work block bike + 3000m row). Zero impact, pure engine. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -862,55 +941,62 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 5×5 (+load), hinge 4×5, farmers carry 6×60m @ race weight, sandbag lunge 5×20m @ 10kg, wall balls 8×15 fast.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: hack squat or leg press 4×8, glute-drive machine 4×8, lat pulldown + chest press 3×8–10. THEN RACE SKILL: carry 6×60m, sandbag lunge 4×15m, wall balls 6×15. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · 6km",
           "k": "run",
-          "d": "GATED. 6 × 1km @ steady, 90s walk.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 6 × 1km @ steady, 90s walk. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "SkiErg 12 × 250m @ SPRINT, 45s standing rest. Brutal, zero impact, and the exact rhythm of a doubles station.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: SkiErg 12 × 250m @ SPRINT, 45s standing rest. Brutal, zero impact, and the exact rhythm of a doubles station. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 14×12.5m @ race weight, sled pull 12×12.5m, push press 4×6, burpee broad jump 8×10m.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: shoulder press machine + seated row 3×8–10, leg extension 3×10. THEN RACE SKILL: sled push 14×12.5m, sled pull 12×12.5m, burpee broad jump 8×10m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2400m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2400m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "115 min steady bike (or 70 min bike + 3000m row). Zero impact, pure engine.",
-          "min": 115,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike (or the available work block bike + 3000m row). Zero impact, pure engine. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -925,55 +1011,62 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 5×5 (+load), hinge 4×5, farmers carry 6×60m @ race weight, sandbag lunge 5×20m @ 10kg, wall balls 8×15 fast.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: hack squat or leg press 4×8, glute-drive machine 4×8, lat pulldown + chest press 3×8–10. THEN RACE SKILL: carry 6×60m, sandbag lunge 4×15m, wall balls 6×15. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · 7km",
           "k": "run",
-          "d": "GATED. 35–40 min continuous run (~6–7km). Fuel mid-run if it goes past 35 min.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 35–40 min continuous run (~6–7km). Fuel mid-run if it goes past 35 min. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "Row 6 × 500m @ race effort, 90s standing rest. Then SkiErg 500m. Compare your 500m split to your week 6 benchmark.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Row 6 × 500m @ race effort, 90s standing rest. Then SkiErg 500m. Compare your 500m split to your week 6 benchmark. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 14×12.5m @ race weight, sled pull 12×12.5m, push press 4×6, burpee broad jump 8×10m.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: shoulder press machine + seated row 3×8–10, leg extension 3×10. THEN RACE SKILL: sled push 14×12.5m, sled pull 12×12.5m, burpee broad jump 8×10m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2400m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2400m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "120 min steady bike (or 70 min bike + 3000m row). Zero impact, pure engine.",
-          "min": 120,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike (or the available work block bike + 3000m row). Zero impact, pure engine. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -988,55 +1081,62 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 5×5 (+load), hinge 4×5, farmers carry 6×60m @ race weight, sandbag lunge 5×20m @ 10kg, wall balls 8×15 fast.",
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: hack squat or leg press 4×8, glute-drive machine 4×8, lat pulldown + chest press 3×8–10. THEN RACE SKILL: carry 6×60m, sandbag lunge 4×15m, wall balls 6×15. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · 5km",
           "k": "run",
-          "d": "DELOAD. 4 × 1km @ easy, generous walk breaks.",
-          "min": 40,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: DELOAD. 4 × 1km @ easy, generous walk breaks. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "SkiErg 4 × 250m easy. Row 1500m easy. Nothing hard.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: SkiErg 4 × 250m easy. Row 1500m easy. Nothing hard. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 14×12.5m @ race weight, sled pull 12×12.5m, push press 4×6, burpee broad jump 8×10m.",
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: shoulder press machine + seated row 3×8–10, leg extension 3×10. THEN RACE SKILL: sled push 14×12.5m, sled pull 12×12.5m, burpee broad jump 8×10m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "1800m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 1800m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "75 min steady bike (or 70 min bike + 3000m row). Zero impact, pure engine.",
-          "min": 75,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike (or the available work block bike + 3000m row). Zero impact, pure engine. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -1051,55 +1151,62 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Front squat 5×5, deadlift 4×5, farmers carry 4×100m @ race weight, lunge 5×20m, wall balls 6×20 unbroken.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: GUIDED STRENGTH FIRST: hack squat 4×6, Smith-machine RDL 3×8 or seated leg curl 4×8, chest-supported row 3×8. THEN RACE SKILL: carry 4×100m, lunge 4×20m, wall balls 6×20. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · 7km",
           "k": "run",
-          "d": "GATED. 6 × 1km @ steady, 75s walk.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 6 × 1km @ steady, 75s walk. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "8 × 250m alternating SkiErg/row @ race effort, 60s standing rest between. Changeover practice: get on the machine and pull hard within 3 seconds.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 8 × 250m alternating SkiErg/row @ race effort, 60s standing rest between. Changeover practice: get on the machine and pull hard within 3 seconds. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 8×25m (half the race distance = your likely split), sled pull 8×25m, press 4×6, burpee broad jump 6×20m.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: shoulder press machine 4×8 + lat pulldown 3×8. THEN RACE SKILL: sled push 8×25m, sled pull 8×25m, burpee broad jump 6×20m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2600m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2600m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "115 min steady bike (or 70 min bike + 3000m row). Zero impact, pure engine.",
-          "min": 115,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike (or the available work block bike + 3000m row). Zero impact, pure engine. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -1114,56 +1221,63 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Front squat 5×5, deadlift 4×5, farmers carry 4×100m @ race weight, lunge 5×20m, wall balls 6×20 unbroken.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: GUIDED STRENGTH FIRST: hack squat 4×6, Smith-machine RDL 3×8 or seated leg curl 4×8, chest-supported row 3×8. THEN RACE SKILL: carry 4×100m, lunge 4×20m, wall balls 6×20. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · 8km",
           "k": "run",
-          "d": "GATED. 40–45 min continuous run (~7–8km).",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 40–45 min continuous run (~7–8km). Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Hyrox sim",
           "k": "hyrox",
-          "d": "DOUBLES 3/4 SIM: 6 rounds of (FULL 1km run → your half). SkiErg 500m, sled push 25m, sled pull 25m, burpee broad jump 40m, row 500m, farmers carry 100m @ 2×16kg. Standing rest only.",
+          "d": "ASSESSMENT / EVENT — 90 MIN PLANNED. This is intentionally longer than the daily 45-minute class so pacing and late-race fatigue are tested honestly. TODAY'S TARGET: DOUBLES 3/4 SIM: 6 rounds of (FULL 1km run → your half). SkiErg 500m, sled push 25m, sled pull 25m, burpee broad jump 40m, row 500m, farmers carry 100m @ 2×16kg. Standing rest only.",
           "min": 90,
           "impact": "high",
           "hyrox": true,
-          "run": true
+          "run": true,
+          "format": "event"
         },
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 8×25m (half the race distance = your likely split), sled pull 8×25m, press 4×6, burpee broad jump 6×20m.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: shoulder press machine 4×8 + lat pulldown 3×8. THEN RACE SKILL: sled push 8×25m, sled pull 8×25m, burpee broad jump 6×20m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2600m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2600m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "120 min steady bike (or 70 min bike + 3000m row). Zero impact, pure engine.",
-          "min": 120,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike (or the available work block bike + 3000m row). Zero impact, pure engine. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -1178,55 +1292,62 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Front squat 5×5, deadlift 4×5, farmers carry 4×100m @ race weight, lunge 5×20m, wall balls 6×20 unbroken.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: GUIDED STRENGTH FIRST: hack squat 4×6, Smith-machine RDL 3×8 or seated leg curl 4×8, chest-supported row 3×8. THEN RACE SKILL: carry 4×100m, lunge 4×20m, wall balls 6×20. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · 8km",
           "k": "run",
-          "d": "GATED. 8 × 1km @ steady, 60s walk. Race rep count for the first time.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 8 × 1km @ steady, 60s walk. Race rep count for the first time. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "Row 8 × 250m @ SPRINT, 45s standing rest, then SkiErg 8 × 250m same. Sixteen changeovers — that's a realistic race count.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Row 8 × 250m @ SPRINT, 45s standing rest, then SkiErg 8 × 250m same. Sixteen changeovers — that's a realistic race count. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 8×25m (half the race distance = your likely split), sled pull 8×25m, press 4×6, burpee broad jump 6×20m.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: shoulder press machine 4×8 + lat pulldown 3×8. THEN RACE SKILL: sled push 8×25m, sled pull 8×25m, burpee broad jump 6×20m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2800m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2800m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "120 min steady bike (or 70 min bike + 3000m row). Zero impact, pure engine.",
-          "min": 120,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike (or the available work block bike + 3000m row). Zero impact, pure engine. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -1241,55 +1362,62 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Front squat 5×5, deadlift 4×5, farmers carry 4×100m @ race weight, lunge 5×20m, wall balls 6×20 unbroken.",
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: GUIDED STRENGTH FIRST: hack squat 4×6, Smith-machine RDL 3×8 or seated leg curl 4×8, chest-supported row 3×8. THEN RACE SKILL: carry 4×100m, lunge 4×20m, wall balls 6×20. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · 6km",
           "k": "run",
-          "d": "DELOAD. 4 × 1km easy.",
-          "min": 40,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: DELOAD. 4 × 1km easy. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "Easy SkiErg 3 × 250m, row 1200m. Recovery only.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Easy SkiErg 3 × 250m, row 1200m. Recovery only. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 8×25m (half the race distance = your likely split), sled pull 8×25m, press 4×6, burpee broad jump 6×20m.",
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: shoulder press machine 4×8 + lat pulldown 3×8. THEN RACE SKILL: sled push 8×25m, sled pull 8×25m, burpee broad jump 6×20m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2000m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2000m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "80 min steady bike (or 70 min bike + 3000m row). Zero impact, pure engine.",
-          "min": 80,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike (or the available work block bike + 3000m row). Zero impact, pure engine. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -1304,55 +1432,62 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 4×6 @ heavy, hinge 4×5, carry 2×100m (your likely doubles split — unbroken), wall balls 5×25 unbroken.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: GUIDED STRENGTH FIRST: heavy leg press or Smith squat 4×6, glute-drive machine 4×6, machine row 3×8. THEN RACE SKILL: carry 2×100m unbroken and wall balls 5×20. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · 9km",
           "k": "run",
-          "d": "GATED. 45–50 min continuous run (~8–9km). Longest of the season.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 45–the available work block continuous run (~8–9km). Longest of the season. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "SkiErg 14 × 250m @ SPRINT, 40s standing rest. Peak erg session of the build.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: SkiErg 14 × 250m @ SPRINT, 40s standing rest. Peak erg session of the build. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 6×25m @ heavy, sled pull 6×25m, press 5×5, burpee broad jump 40m for time (your half).",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: shoulder press machine 4×6 + seated row 3×8. THEN RACE SKILL: sled push 6×25m heavy, sled pull 6×25m, burpee broad jump 40m for time. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2800m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2800m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "120 min steady bike (or 70 min bike + 3000m row). Zero impact, pure engine.",
-          "min": 120,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike (or the available work block bike + 3000m row). Zero impact, pure engine. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -1367,56 +1502,63 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 4×6 @ heavy, hinge 4×5, carry 2×100m (your likely doubles split — unbroken), wall balls 5×25 unbroken.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: GUIDED STRENGTH FIRST: heavy leg press or Smith squat 4×6, glute-drive machine 4×6, machine row 3×8. THEN RACE SKILL: carry 2×100m unbroken and wall balls 5×20. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · 8km",
           "k": "run",
-          "d": "GATED. 8 × 1km @ race pace, 60s walk. Faster than week 17, same volume.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 8 × 1km @ race pace, 60s walk. Faster than week 17, same volume. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Hyrox sim",
           "k": "hyrox",
-          "d": "DOUBLES FULL SIM #1: all 8 stations, FULL 8km of running, your half of every station (SkiErg 500m, sled push 25m, sled pull 25m, BBJ 40m, row 500m, carry 100m, lunge 50m, 50 wall balls). Do it WITH your partner if you have one. Record the total time.",
+          "d": "ASSESSMENT / EVENT — 90 MIN PLANNED. This is intentionally longer than the daily 45-minute class so pacing and late-race fatigue are tested honestly. TODAY'S TARGET: DOUBLES FULL SIM #1: all 8 stations, FULL 8km of running, your half of every station (SkiErg 500m, sled push 25m, sled pull 25m, BBJ 40m, row 500m, carry 100m, lunge 50m, 50 wall balls). Do it WITH your partner if you have one. Record the total time.",
           "min": 90,
           "impact": "high",
           "hyrox": true,
-          "run": true
+          "run": true,
+          "format": "event"
         },
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 6×25m @ heavy, sled pull 6×25m, press 5×5, burpee broad jump 40m for time (your half).",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: shoulder press machine 4×6 + seated row 3×8. THEN RACE SKILL: sled push 6×25m heavy, sled pull 6×25m, burpee broad jump 40m for time. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2800m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2800m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "110 min steady bike (or 70 min bike + 3000m row). Zero impact, pure engine.",
-          "min": 110,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike (or the available work block bike + 3000m row). Zero impact, pure engine. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -1431,55 +1573,62 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 4×6 @ heavy, hinge 4×5, carry 2×100m (your likely doubles split — unbroken), wall balls 5×25 unbroken.",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: GUIDED STRENGTH FIRST: heavy leg press or Smith squat 4×6, glute-drive machine 4×6, machine row 3×8. THEN RACE SKILL: carry 2×100m unbroken and wall balls 5×20. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · 9km",
           "k": "run",
-          "d": "GATED. 5 × 1.5km @ steady, 2 min walk. Longer reps, same total.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 5 × 1.5km @ steady, 2 min walk. Longer reps, same total. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "Row 10 × 250m @ SPRINT, 45s standing rest. SkiErg 500m @ race effort to close.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Row 10 × 250m @ SPRINT, 45s standing rest. SkiErg 500m @ race effort to close. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 6×25m @ heavy, sled pull 6×25m, press 5×5, burpee broad jump 40m for time (your half).",
-          "min": 65,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: shoulder press machine 4×6 + seated row 3×8. THEN RACE SKILL: sled push 6×25m heavy, sled pull 6×25m, burpee broad jump 40m for time. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "3000m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 3000m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "120 min steady bike (or 70 min bike + 3000m row). Zero impact, pure engine.",
-          "min": 120,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike (or the available work block bike + 3000m row). Zero impact, pure engine. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -1494,55 +1643,62 @@ window.PLAN = {
         {
           "t": "Strength A",
           "k": "strength",
-          "d": "Hevy: Squat 4×6 @ heavy, hinge 4×5, carry 2×100m (your likely doubles split — unbroken), wall balls 5×25 unbroken.",
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: GUIDED STRENGTH FIRST: heavy leg press or Smith squat 4×6, glute-drive machine 4×6, machine row 3×8. THEN RACE SKILL: carry 2×100m unbroken and wall balls 5×20. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · 7km",
           "k": "run",
-          "d": "DELOAD. 5 × 1km easy.",
-          "min": 40,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: DELOAD. 5 × 1km easy. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "Easy ergs, 20 min total, nothing above conversational.",
-          "min": 55,
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Easy ergs, 20 min total, nothing above conversational. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Strength B",
           "k": "strength",
-          "d": "Hevy: Sled push 6×25m @ heavy, sled pull 6×25m, press 5×5, burpee broad jump 40m for time (your half).",
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: MACHINE FIRST: shoulder press machine 4×6 + seated row 3×8. THEN RACE SKILL: sled push 6×25m heavy, sled pull 6×25m, burpee broad jump 40m for time. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2200m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2200m: 300m warm, main set of 100s and 200s @ steady, 200m easy cool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "80 min steady bike (or 70 min bike + 3000m row). Zero impact, pure engine.",
-          "min": 80,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike (or the available work block bike + 3000m row). Zero impact, pure engine. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -1555,57 +1711,64 @@ window.PLAN = {
       "deload": false,
       "days": [
         {
-          "t": "Strength A",
+          "t": "Strength A · machines + race skill",
           "k": "strength",
-          "d": "Hevy: squat 4×4 @ heavy, hinge 3×4, carry 2×200m, wall balls 4×25. Sharp and short.",
-          "min": 50,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: leg press or hack squat 4×6, glute-drive machine 3×6, machine row 3×8; then carry 2×200m + wall balls 4×20. Sharp and short. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · race pace",
           "k": "run",
-          "d": "GATED. 6 × 1km @ RACE PACE, 60s walk. Pick a pace you could hold for eight. Hold it.",
-          "min": 50,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 6 × 1km @ RACE PACE, 60s walk. Pick a pace you could hold for eight. Hold it. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "SkiErg 500m + row 500m @ race effort, then 4 × 25 wall balls unbroken (your likely split), 60s standing rest between.",
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: SkiErg 500m + row 500m @ race effort, then 4 × 25 wall balls unbroken (your likely split), 60s standing rest between. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
-          "t": "Strength B",
+          "t": "Strength B · machines + sled",
           "k": "strength",
-          "d": "Hevy: sled push 6×50m, sled pull 6×50m, burpee broad jump 80m, press 4×5.",
-          "min": 50,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: shoulder press machine 4×6 + lat pulldown 3×8 first; then sled push 6×50m, sled pull 6×50m and burpee broad jump 80m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2600m easy — recovery, not training. Loosens everything up.",
-          "min": 40,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2600m easy — recovery, not training. Loosens everything up. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "100 min steady bike. Zero impact recovery volume.",
-          "min": 100,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike. Zero impact recovery volume. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -1618,58 +1781,65 @@ window.PLAN = {
       "deload": false,
       "days": [
         {
-          "t": "Strength A",
+          "t": "Strength A · machines + race skill",
           "k": "strength",
-          "d": "Hevy: squat 4×4 @ heavy, hinge 3×4, carry 2×200m, wall balls 4×25. Sharp and short.",
-          "min": 50,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: leg press or hack squat 4×6, glute-drive machine 3×6, machine row 3×8; then carry 2×200m + wall balls 4×20. Sharp and short. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · race pace",
           "k": "run",
-          "d": "GATED. 5 × (1km @ race pace → 20 wall balls) — run straight off the reps.",
-          "min": 50,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 5 × (1km @ race pace → 20 wall balls) — run straight off the reps. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Hyrox sim",
           "k": "hyrox",
-          "d": "DOUBLES FULL SIM #2: all 8 stations, full 8km running, your half of each. Push the pace. Compare to week 20. Rehearse your actual changeover splits.",
+          "d": "ASSESSMENT / EVENT — 90 MIN PLANNED. This is intentionally longer than the daily 45-minute class so pacing and late-race fatigue are tested honestly. TODAY'S TARGET: DOUBLES FULL SIM #2: all 8 stations, full 8km running, your half of each. Push the pace. Compare to week 20. Rehearse your actual changeover splits.",
           "min": 90,
           "impact": "high",
           "hyrox": true,
-          "run": true
+          "run": true,
+          "format": "event"
         },
         {
-          "t": "Strength B",
+          "t": "Strength B · machines + sled",
           "k": "strength",
-          "d": "Hevy: sled push 6×50m, sled pull 6×50m, burpee broad jump 80m, press 4×5.",
-          "min": 50,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: shoulder press machine 4×6 + lat pulldown 3×8 first; then sled push 6×50m, sled pull 6×50m and burpee broad jump 80m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2600m easy — recovery, not training. Loosens everything up.",
-          "min": 40,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2600m easy — recovery, not training. Loosens everything up. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "100 min steady bike. Zero impact recovery volume.",
-          "min": 100,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike. Zero impact recovery volume. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -1682,57 +1852,64 @@ window.PLAN = {
       "deload": false,
       "days": [
         {
-          "t": "Strength A",
+          "t": "Strength A · machines + race skill",
           "k": "strength",
-          "d": "Hevy: squat 4×4 @ heavy, hinge 3×4, carry 2×200m, wall balls 4×25. Sharp and short.",
-          "min": 50,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: leg press or hack squat 4×6, glute-drive machine 3×6, machine row 3×8; then carry 2×200m + wall balls 4×20. Sharp and short. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · race pace",
           "k": "run",
-          "d": "GATED. 8 × 1km @ race pace, 45s walk. The full race distance at the target pace.",
-          "min": 50,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 8 × 1km @ race pace, 45s walk. The full race distance at the target pace. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "SkiErg 12 × 250m @ SPRINT, 40s standing rest. Row 6 × 250m @ SPRINT, 40s standing rest.",
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: SkiErg 12 × 250m @ SPRINT, 40s standing rest. Row 6 × 250m @ SPRINT, 40s standing rest. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
-          "t": "Strength B",
+          "t": "Strength B · machines + sled",
           "k": "strength",
-          "d": "Hevy: sled push 6×50m, sled pull 6×50m, burpee broad jump 80m, press 4×5.",
-          "min": 50,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: shoulder press machine 4×6 + lat pulldown 3×8 first; then sled push 6×50m, sled pull 6×50m and burpee broad jump 80m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2800m easy — recovery, not training. Loosens everything up.",
-          "min": 40,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2800m easy — recovery, not training. Loosens everything up. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "110 min steady bike. Zero impact recovery volume.",
-          "min": 110,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike. Zero impact recovery volume. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -1745,57 +1922,64 @@ window.PLAN = {
       "deload": false,
       "days": [
         {
-          "t": "Strength A",
+          "t": "Strength A · machines + race skill",
           "k": "strength",
-          "d": "Hevy: squat 4×4 @ heavy, hinge 3×4, carry 2×200m, wall balls 4×25. Sharp and short.",
-          "min": 50,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: leg press or hack squat 4×6, glute-drive machine 3×6, machine row 3×8; then carry 2×200m + wall balls 4×20. Sharp and short. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · race pace",
           "k": "run",
-          "d": "GATED. 4 × 1km easy.",
-          "min": 50,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 4 × 1km easy. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "Easy ergs 20 min. Nothing hard.",
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Easy ergs 20 min. Nothing hard. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
-          "t": "Strength B",
+          "t": "Strength B · machines + sled",
           "k": "strength",
-          "d": "Hevy: sled push 6×50m, sled pull 6×50m, burpee broad jump 80m, press 4×5.",
-          "min": 50,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: shoulder press machine 4×6 + lat pulldown 3×8 first; then sled push 6×50m, sled pull 6×50m and burpee broad jump 80m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2000m easy — recovery, not training. Loosens everything up.",
-          "min": 40,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2000m easy — recovery, not training. Loosens everything up. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "75 min steady bike. Zero impact recovery volume.",
-          "min": 75,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike. Zero impact recovery volume. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -1808,58 +1992,65 @@ window.PLAN = {
       "deload": false,
       "days": [
         {
-          "t": "Strength A",
+          "t": "Strength A · machines + race skill",
           "k": "strength",
-          "d": "Hevy: squat 4×4 @ heavy, hinge 3×4, carry 2×200m, wall balls 4×25. Sharp and short.",
-          "min": 50,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: leg press or hack squat 4×6, glute-drive machine 3×6, machine row 3×8; then carry 2×200m + wall balls 4×20. Sharp and short. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · race pace",
           "k": "run",
-          "d": "GATED. 6 × 1km @ race pace, 45s walk.",
-          "min": 50,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 6 × 1km @ race pace, 45s walk. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Hyrox sim",
           "k": "hyrox",
-          "d": "6 rounds: FULL 1km run → your half of a station, at race intensity. Pick the 6 stations you're weakest on.",
-          "min": 90,
+          "d": "45-MIN COACHED · 0–5 WARM: easy cardio + movement prep · 5–17 TREAD: gated run/walk intervals · 17–29 ERG: SkiErg/row rotation · 29–40 FLOOR: sled/carry/lunge/wall-ball circuit · 40–45 COOL: walk + breathing. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 6 rounds: FULL 1km run → your half of a station, at race intensity. Pick the 6 stations you're weakest on. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
           "hyrox": true,
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
-          "t": "Strength B",
+          "t": "Strength B · machines + sled",
           "k": "strength",
-          "d": "Hevy: sled push 6×50m, sled pull 6×50m, burpee broad jump 80m, press 4×5.",
-          "min": 50,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: shoulder press machine 4×6 + lat pulldown 3×8 first; then sled push 6×50m, sled pull 6×50m and burpee broad jump 80m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2600m easy — recovery, not training. Loosens everything up.",
-          "min": 40,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2600m easy — recovery, not training. Loosens everything up. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "100 min steady bike. Zero impact recovery volume.",
-          "min": 100,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike. Zero impact recovery volume. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -1872,58 +2063,65 @@ window.PLAN = {
       "deload": false,
       "days": [
         {
-          "t": "Strength A",
+          "t": "Strength A · machines + race skill",
           "k": "strength",
-          "d": "Hevy: squat 4×4 @ heavy, hinge 3×4, carry 2×200m, wall balls 4×25. Sharp and short.",
-          "min": 50,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: leg press or hack squat 4×6, glute-drive machine 3×6, machine row 3×8; then carry 2×200m + wall balls 4×20. Sharp and short. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · race pace",
           "k": "run",
-          "d": "GATED. 8 × 1km @ race pace, 45s walk.",
-          "min": 50,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 8 × 1km @ race pace, 45s walk. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Hyrox sim",
           "k": "hyrox",
-          "d": "DOUBLES FULL SIM #3: all 8 stations raced, with your partner, using your agreed splits. Dress rehearsal — same kit, same fuel, same warm-up, same changeovers as race day.",
+          "d": "ASSESSMENT / EVENT — 90 MIN PLANNED. This is intentionally longer than the daily 45-minute class so pacing and late-race fatigue are tested honestly. TODAY'S TARGET: DOUBLES FULL SIM #3: all 8 stations raced, with your partner, using your agreed splits. Dress rehearsal — same kit, same fuel, same warm-up, same changeovers as race day.",
           "min": 90,
           "impact": "high",
           "hyrox": true,
-          "run": true
+          "run": true,
+          "format": "event"
         },
         {
-          "t": "Strength B",
+          "t": "Strength B · machines + sled",
           "k": "strength",
-          "d": "Hevy: sled push 6×50m, sled pull 6×50m, burpee broad jump 80m, press 4×5.",
-          "min": 50,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: shoulder press machine 4×6 + lat pulldown 3×8 first; then sled push 6×50m, sled pull 6×50m and burpee broad jump 80m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2800m easy — recovery, not training. Loosens everything up.",
-          "min": 40,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2800m easy — recovery, not training. Loosens everything up. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "105 min steady bike. Zero impact recovery volume.",
-          "min": 105,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike. Zero impact recovery volume. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -1936,57 +2134,64 @@ window.PLAN = {
       "deload": true,
       "days": [
         {
-          "t": "Strength A",
+          "t": "Strength A · machines + race skill",
           "k": "strength",
-          "d": "Hevy: squat 3×3 @ moderate, carry 1×200m, wall balls 2×20. Movement only — no grinding.",
-          "min": 35,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: leg press 3×6 moderate, machine row 2×8; then carry 1×200m + wall balls 2×15. Movement only — no grinding. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · race pace",
           "k": "run",
-          "d": "GATED. 4 × 1km @ race pace, 90s walk. Sharp, not tiring.",
-          "min": 35,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 4 × 1km @ race pace, 90s walk. Sharp, not tiring. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "SkiErg 4 × 250m @ race effort. Row 4 × 250m @ race effort. Stop while it still feels good.",
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: SkiErg 4 × 250m @ race effort. Row 4 × 250m @ race effort. Stop while it still feels good. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
-          "t": "Strength B",
+          "t": "Strength B · machines + sled",
           "k": "strength",
-          "d": "Hevy: sled push 3×50m light, burpee broad jump 40m, press 3×5. Keep it easy.",
-          "min": 35,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: shoulder press machine 2×8 first; then sled push 3×50m light + burpee broad jump 40m. Keep it easy. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2000m easy — recovery, not training. Loosens everything up.",
-          "min": 40,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2000m easy — recovery, not training. Loosens everything up. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "75 min steady bike. Zero impact recovery volume.",
-          "min": 75,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike. Zero impact recovery volume. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -1999,58 +2204,65 @@ window.PLAN = {
       "deload": true,
       "days": [
         {
-          "t": "Strength A",
+          "t": "Strength A · machines + race skill",
           "k": "strength",
-          "d": "Hevy: squat 3×3 @ moderate, carry 1×200m, wall balls 2×20. Movement only — no grinding.",
-          "min": 35,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: leg press 3×6 moderate, machine row 2×8; then carry 1×200m + wall balls 2×15. Movement only — no grinding. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · race pace",
           "k": "run",
-          "d": "GATED. 3 × 1km @ race pace, 2 min walk.",
-          "min": 35,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 3 × 1km @ race pace, 2 min walk. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Hyrox sim",
           "k": "hyrox",
-          "d": "One round of your half of each station at race pace, generous rest. Movement quality and changeovers only.",
+          "d": "45-MIN COACHED · 0–5 WARM: easy cardio + movement prep · 5–17 TREAD: gated run/walk intervals · 17–29 ERG: SkiErg/row rotation · 29–40 FLOOR: sled/carry/lunge/wall-ball circuit · 40–45 COOL: walk + breathing. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: One round of your half of each station at race pace, generous rest. Movement quality and changeovers only. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "high",
           "hyrox": true,
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
-          "t": "Strength B",
+          "t": "Strength B · machines + sled",
           "k": "strength",
-          "d": "Hevy: sled push 3×50m light, burpee broad jump 40m, press 3×5. Keep it easy.",
-          "min": 35,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: shoulder press machine 2×8 first; then sled push 3×50m light + burpee broad jump 40m. Keep it easy. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "1600m easy — recovery, not training. Loosens everything up.",
-          "min": 40,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 1600m easy — recovery, not training. Loosens everything up. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "60 min steady bike. Zero impact recovery volume.",
-          "min": 60,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike. Zero impact recovery volume. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -2063,57 +2275,64 @@ window.PLAN = {
       "deload": true,
       "days": [
         {
-          "t": "Strength A",
+          "t": "Strength A · machines + race skill",
           "k": "strength",
-          "d": "Hevy: squat 3×3 @ moderate, carry 1×200m, wall balls 2×20. Movement only — no grinding.",
-          "min": 35,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: leg press 3×6 moderate, machine row 2×8; then carry 1×200m + wall balls 2×15. Movement only — no grinding. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Run · race pace",
           "k": "run",
-          "d": "GATED. 2 × 1km @ race pace. Done.",
-          "min": 35,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: GATED. 2 × 1km @ race pace. Done. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Erg session",
           "k": "erg",
-          "d": "SkiErg 250m + row 250m @ race pace. 15 min total. Walk away feeling fresh.",
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: SkiErg 250m + row 250m @ race pace. 15 min total. Walk away feeling fresh. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
-          "t": "Strength B",
+          "t": "Strength B · machines + sled",
           "k": "strength",
-          "d": "Hevy: sled push 3×50m light, burpee broad jump 40m, press 3×5. Keep it easy.",
-          "min": 35,
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Hevy: shoulder press machine 2×8 first; then sled push 3×50m light + burpee broad jump 40m. Keep it easy. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "low",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "1200m easy — recovery, not training. Loosens everything up.",
-          "min": 40,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 1200m easy — recovery, not training. Loosens everything up. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long aerobic",
           "k": "bike",
-          "d": "45 min steady bike. Zero impact recovery volume.",
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 45 min steady bike. Zero impact recovery volume. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
-          "impact": "zero"
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -2128,55 +2347,62 @@ window.PLAN = {
         {
           "t": "Shakeout + mobility",
           "k": "rest",
-          "d": "20 min easy walk or spin, full foot protocol, then stay off your feet.",
-          "min": 25,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: 20 min easy walk or spin, full foot protocol, then stay off your feet. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Run · shakeout",
           "k": "run",
-          "d": "20 min easy jog with 4 × 20s strides. Should feel effortless.",
-          "min": 30,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 20 min easy jog with 4 × 20s strides. Should feel effortless. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Openers",
           "k": "erg",
-          "d": "10 min easy erg + a few race-pace strokes on SkiErg and rower. Wake the system, don't tire it.",
-          "min": 25,
+          "d": "45-MIN COACHED · 0–5 WARM: easy SkiErg/row · 5–17 BASE: technique + steady work · 17–29 PUSH: prescribed intervals · 29–40 POWER: short all-outs with standing recovery · 40–45 COOL: easy pull + lats/calves. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 10 min easy erg + a few race-pace strokes on SkiErg and rower. Wake the system, don't tire it. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "zero",
-          "hyrox": true
+          "hyrox": true,
+          "format": "otf45"
         },
         {
           "t": "Rest + kit check",
           "k": "rest",
-          "d": "Off your feet. Lay out kit, pin the bib, plan fuel and warm-up timings. Foot protocol as normal.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Off your feet. Lay out kit, pin the bib, plan fuel and warm-up timings. Foot protocol as normal. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Travel + shakeout",
           "k": "rest",
-          "d": "Travel, 10 min easy walk, full foot protocol. Early night.",
-          "min": 20,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Travel, 10 min easy walk, full foot protocol. Early night. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest",
           "k": "rest",
-          "d": "Complete rest. Hydrate, carbs, feet up. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Complete rest. Hydrate, carbs, feet up. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "★ HYROX — RACE DAY",
           "k": "hyrox",
-          "d": "DOUBLES. You both run all 8 × 1km together (stay within 5s). Split every station you-go-I-go: SkiErg 1000m · sled push 50m · sled pull 50m · burpee broad jump 80m · row 1000m · farmers carry 200m · sandbag lunge 100m · 100 wall balls. Go get it.",
+          "d": "ASSESSMENT / EVENT — 150 MIN PLANNED. This is intentionally longer than the daily 45-minute class so pacing and late-race fatigue are tested honestly. TODAY'S TARGET: DOUBLES. You both run all 8 × 1km together (stay within 5s). Split every station you-go-I-go: SkiErg 1000m · sled push 50m · sled pull 50m · burpee broad jump 80m · row 1000m · farmers carry 200m · sandbag lunge 100m · 100 wall balls. Go get it.",
           "min": 150,
           "impact": "high",
           "hyrox": true,
-          "run": true
+          "run": true,
+          "format": "event"
         }
       ]
     },
@@ -2189,55 +2415,62 @@ window.PLAN = {
       "deload": false,
       "days": [
         {
-          "t": "Strength (maintain)",
+          "t": "Strength · machine maintenance",
           "k": "strength",
-          "d": "Hevy: squat 3×6, hinge 3×6, carry 2×100m, core. Maintenance only — the racing is elsewhere now.",
-          "min": 40,
-          "impact": "low"
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: MACHINE FIRST: leg press 3×8, seated leg curl 3×10, chest-supported row + chest press 2×10. THEN RACE SKILL: carry 2×100m + core. Maintenance only. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "low",
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "1000m. Technique-focused: drills, then 100s @ steady. Sprint tri swim is 750m.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 1000m. Technique-focused: drills, then 100s @ steady. Sprint tri swim is 750m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Run",
           "k": "run",
-          "d": "Easy 20 min jog, walk breaks fine.",
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Easy 20 min jog, walk breaks fine. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Bike",
           "k": "bike",
-          "d": "Easy 45 min spin. Nothing structured.",
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Easy 45 min spin. Nothing structured. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
-          "impact": "zero"
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Swim #2",
           "k": "swim",
-          "d": "700m easy technique swim. Frequency beats volume in the pool.",
-          "min": 40,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 700m easy technique swim. Frequency beats volume in the pool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long ride or brick",
           "k": "brick",
-          "d": "65 min ride, last 20 min @ race effort, then 10 min jog off the bike.",
-          "min": 75,
+          "d": "45-MIN COACHED · 0–5 WARM: easy bike · 5–25 BIKE: base-to-push intervals · 25–27 TRANSITION: shoes + reset · 27–40 RUN: gated easy-to-push run/walk · 40–45 COOL: walk + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block ride, last 20 min @ race effort, then 10 min jog off the bike. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -2250,55 +2483,62 @@ window.PLAN = {
       "deload": false,
       "days": [
         {
-          "t": "Strength (maintain)",
+          "t": "Strength · machine maintenance",
           "k": "strength",
-          "d": "Hevy: squat 3×6, hinge 3×6, carry 2×100m, core. Maintenance only — the racing is elsewhere now.",
-          "min": 40,
-          "impact": "low"
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: MACHINE FIRST: leg press 3×8, seated leg curl 3×10, chest-supported row + chest press 2×10. THEN RACE SKILL: carry 2×100m + core. Maintenance only. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "low",
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "1600m. Technique-focused: drills, then 100s @ steady. Sprint tri swim is 750m.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 1600m. Technique-focused: drills, then 100s @ steady. Sprint tri swim is 750m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Run",
           "k": "run",
-          "d": "Easy 30 min continuous run.",
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Easy 30 min continuous run. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Bike",
           "k": "bike",
-          "d": "60 min steady bike with 4 × 3 min @ tempo.",
-          "min": 60,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block steady bike with 4 × 3 min @ tempo. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Swim #2",
           "k": "swim",
-          "d": "1120m easy technique swim. Frequency beats volume in the pool.",
-          "min": 40,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 1120m easy technique swim. Frequency beats volume in the pool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long ride or brick",
           "k": "brick",
-          "d": "80 min ride, last 20 min @ race effort, then 10 min jog off the bike.",
-          "min": 90,
+          "d": "45-MIN COACHED · 0–5 WARM: easy bike · 5–25 BIKE: base-to-push intervals · 25–27 TRANSITION: shoes + reset · 27–40 RUN: gated easy-to-push run/walk · 40–45 COOL: walk + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block ride, last 20 min @ race effort, then 10 min jog off the bike. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -2311,55 +2551,62 @@ window.PLAN = {
       "deload": false,
       "days": [
         {
-          "t": "Strength (maintain)",
+          "t": "Strength · machine maintenance",
           "k": "strength",
-          "d": "Hevy: squat 3×6, hinge 3×6, carry 2×100m, core. Maintenance only — the racing is elsewhere now.",
-          "min": 40,
-          "impact": "low"
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: MACHINE FIRST: leg press 3×8, seated leg curl 3×10, chest-supported row + chest press 2×10. THEN RACE SKILL: carry 2×100m + core. Maintenance only. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "low",
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2000m. Technique-focused: drills, then 100s @ steady. Sprint tri swim is 750m.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2000m. Technique-focused: drills, then 100s @ steady. Sprint tri swim is 750m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Run",
           "k": "run",
-          "d": "35 min run, last 10 min @ tempo.",
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 35 min run, last 10 min @ tempo. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Bike",
           "k": "bike",
-          "d": "70 min bike, 5 × 4 min @ 20km race effort.",
-          "min": 70,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block bike, 5 × 4 min @ 20km race effort. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Swim #2",
           "k": "swim",
-          "d": "1400m easy technique swim. Frequency beats volume in the pool.",
-          "min": 40,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 1400m easy technique swim. Frequency beats volume in the pool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long ride or brick",
           "k": "brick",
-          "d": "90 min ride, last 20 min @ race effort, then 10 min jog off the bike.",
-          "min": 100,
+          "d": "45-MIN COACHED · 0–5 WARM: easy bike · 5–25 BIKE: base-to-push intervals · 25–27 TRANSITION: shoes + reset · 27–40 RUN: gated easy-to-push run/walk · 40–45 COOL: walk + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block ride, last 20 min @ race effort, then 10 min jog off the bike. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -2372,55 +2619,62 @@ window.PLAN = {
       "deload": false,
       "days": [
         {
-          "t": "Strength (maintain)",
+          "t": "Strength · machine maintenance",
           "k": "strength",
-          "d": "Hevy: squat 3×6, hinge 3×6, carry 2×100m, core. Maintenance only — the racing is elsewhere now.",
-          "min": 40,
-          "impact": "low"
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: MACHINE FIRST: leg press 3×8, seated leg curl 3×10, chest-supported row + chest press 2×10. THEN RACE SKILL: carry 2×100m + core. Maintenance only. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "low",
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2200m. Technique-focused: drills, then 100s @ steady. Sprint tri swim is 750m.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2200m. Technique-focused: drills, then 100s @ steady. Sprint tri swim is 750m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Run",
           "k": "run",
-          "d": "BRICK. 40 min bike → 15 min run immediately. Legs will feel like concrete for 5 min, then clear.",
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: BRICK. 40 min bike → 15 min run immediately. Legs will feel like concrete for 5 min, then clear. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Bike",
           "k": "bike",
-          "d": "75 min bike with 6 × 3 min @ race effort.",
-          "min": 75,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block bike with 6 × 3 min @ race effort. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Swim #2",
           "k": "swim",
-          "d": "1540m easy technique swim. Frequency beats volume in the pool.",
-          "min": 40,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 1540m easy technique swim. Frequency beats volume in the pool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long ride or brick",
           "k": "brick",
-          "d": "95 min ride, last 20 min @ race effort, then 10 min jog off the bike.",
-          "min": 105,
+          "d": "45-MIN COACHED · 0–5 WARM: easy bike · 5–25 BIKE: base-to-push intervals · 25–27 TRANSITION: shoes + reset · 27–40 RUN: gated easy-to-push run/walk · 40–45 COOL: walk + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block ride, last 20 min @ race effort, then 10 min jog off the bike. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -2433,55 +2687,62 @@ window.PLAN = {
       "deload": false,
       "days": [
         {
-          "t": "Strength (maintain)",
+          "t": "Strength · machine maintenance",
           "k": "strength",
-          "d": "Hevy: squat 3×6, hinge 3×6, carry 2×100m, core. Maintenance only — the racing is elsewhere now.",
-          "min": 40,
-          "impact": "low"
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: MACHINE FIRST: leg press 3×8, seated leg curl 3×10, chest-supported row + chest press 2×10. THEN RACE SKILL: carry 2×100m + core. Maintenance only. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "low",
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2400m. Technique-focused: drills, then 100s @ steady. Sprint tri swim is 750m.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2400m. Technique-focused: drills, then 100s @ steady. Sprint tri swim is 750m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Run",
           "k": "run",
-          "d": "BRICK. 20km bike @ race effort → 5km run. Full race distance, one rehearsal.",
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: BRICK. 20km bike @ race effort → 5km run. Full race distance, one rehearsal. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Bike",
           "k": "bike",
-          "d": "Open water if you can get it — very different from a pool.",
-          "min": 80,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: Open water if you can get it — very different from a pool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Swim #2",
           "k": "swim",
-          "d": "1680m easy technique swim. Frequency beats volume in the pool.",
-          "min": 40,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 1680m easy technique swim. Frequency beats volume in the pool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long ride or brick",
           "k": "brick",
-          "d": "100 min ride, last 20 min @ race effort, then 10 min jog off the bike.",
-          "min": 110,
+          "d": "45-MIN COACHED · 0–5 WARM: easy bike · 5–25 BIKE: base-to-push intervals · 25–27 TRANSITION: shoes + reset · 27–40 RUN: gated easy-to-push run/walk · 40–45 COOL: walk + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block ride, last 20 min @ race effort, then 10 min jog off the bike. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -2494,55 +2755,62 @@ window.PLAN = {
       "deload": false,
       "days": [
         {
-          "t": "Strength (maintain)",
+          "t": "Strength · machine maintenance",
           "k": "strength",
-          "d": "Hevy: squat 3×6, hinge 3×6, carry 2×100m, core. Maintenance only — the racing is elsewhere now.",
-          "min": 40,
-          "impact": "low"
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: MACHINE FIRST: leg press 3×8, seated leg curl 3×10, chest-supported row + chest press 2×10. THEN RACE SKILL: carry 2×100m + core. Maintenance only. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "low",
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "2400m. Technique-focused: drills, then 100s @ steady. Sprint tri swim is 750m.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 2400m. Technique-focused: drills, then 100s @ steady. Sprint tri swim is 750m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Run",
           "k": "run",
-          "d": "BRICK. 40 min bike → 20 min run @ race pace.",
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: BRICK. 40 min bike → 20 min run @ race pace. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Bike",
           "k": "bike",
-          "d": "70 min bike, 4 × 5 min @ race effort.",
-          "min": 70,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block bike, 4 × 5 min @ race effort. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Swim #2",
           "k": "swim",
-          "d": "1680m easy technique swim. Frequency beats volume in the pool.",
-          "min": 40,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 1680m easy technique swim. Frequency beats volume in the pool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long ride or brick",
           "k": "brick",
-          "d": "90 min ride, last 20 min @ race effort, then 10 min jog off the bike.",
-          "min": 100,
+          "d": "45-MIN COACHED · 0–5 WARM: easy bike · 5–25 BIKE: base-to-push intervals · 25–27 TRANSITION: shoes + reset · 27–40 RUN: gated easy-to-push run/walk · 40–45 COOL: walk + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block ride, last 20 min @ race effort, then 10 min jog off the bike. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -2555,55 +2823,62 @@ window.PLAN = {
       "deload": true,
       "days": [
         {
-          "t": "Strength (maintain)",
+          "t": "Strength · machine maintenance",
           "k": "strength",
-          "d": "Hevy: squat 3×6, hinge 3×6, carry 2×100m, core. Maintenance only — the racing is elsewhere now.",
-          "min": 40,
-          "impact": "low"
+          "d": "45-MIN COACHED · 0–5 WARM: bike/row + dynamic joints · 5–17 MACHINES 1: lower body · 17–29 MACHINES 2: upper body · 29–40 HYROX SKILL: carries/sled/lunge/wall-ball intervals · 40–45 COOL: easy walk + calf/hip mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: MACHINE FIRST: leg press 3×8, seated leg curl 3×10, chest-supported row + chest press 2×10. THEN RACE SKILL: carry 2×100m + core. Maintenance only. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "low",
+          "format": "otf45"
         },
         {
           "t": "Swim",
           "k": "swim",
-          "d": "1600m. Technique-focused: drills, then 100s @ steady. Sprint tri swim is 750m.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 1600m. Technique-focused: drills, then 100s @ steady. Sprint tri swim is 750m. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Run",
           "k": "run",
-          "d": "25 min run with 4 × 90s @ race pace.",
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 25 min run with 4 × 90s @ race pace. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
           "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Bike",
           "k": "bike",
-          "d": "50 min easy spin with 3 × 2 min @ race effort.",
-          "min": 50,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block easy spin with 3 × 2 min @ race effort. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Swim #2",
           "k": "swim",
-          "d": "1120m easy technique swim. Frequency beats volume in the pool.",
-          "min": 40,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 1120m easy technique swim. Frequency beats volume in the pool. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Long ride or brick",
           "k": "brick",
-          "d": "70 min ride, last 20 min @ race effort, then 10 min jog off the bike.",
-          "min": 80,
+          "d": "45-MIN COACHED · 0–5 WARM: easy bike · 5–25 BIKE: base-to-push intervals · 25–27 TRANSITION: shoes + reset · 27–40 RUN: gated easy-to-push run/walk · 40–45 COOL: walk + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: the available work block ride, last 20 min @ race effort, then 10 min jog off the bike. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Rest + mobility",
           "k": "rest",
-          "d": "Full rest. Foot protocol + 10 min mobility flow. Nothing else.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Full rest. Foot protocol + 10 min mobility flow. Nothing else. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         }
       ]
     },
@@ -2618,54 +2893,61 @@ window.PLAN = {
         {
           "t": "Easy swim",
           "k": "swim",
-          "d": "600m relaxed. Feel the water, nothing more.",
-          "min": 30,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: relaxed swim · 5–15 SKILL: breathing + technique drills · 15–30 BASE: steady aerobic set · 30–40 PUSH: short strong repeats with easy recovery · 40–45 COOL: relaxed swim. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 600m relaxed. Feel the water, nothing more. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Shakeout run",
           "k": "run",
-          "d": "15 min easy jog with 4 × 20s strides.",
-          "min": 25,
+          "d": "45-MIN COACHED · 0–5 WARM: brisk walk + dynamic ankles · 5–17 BASE: conversational run/walk · 17–29 PUSH: controlled intervals · 29–40 POWER: short faster efforts with full walk recoveries · 40–45 COOL: easy walk + calf mobility. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 15 min easy jog with 4 × 20s strides. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Easy spin",
           "k": "bike",
-          "d": "30 min easy with 3 × 1 min @ race effort. Check the bike over.",
-          "min": 30,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 30 min easy with 3 × 1 min @ race effort. Check the bike over. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Rest + kit",
           "k": "rest",
-          "d": "Off your feet. Rack kit, plan transitions, check the bike again.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Off your feet. Rack kit, plan transitions, check the bike again. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "Openers",
           "k": "bike",
-          "d": "20 min spin + 5 min jog. Short and sharp.",
-          "min": 25,
+          "d": "45-MIN COACHED · 0–5 WARM: easy spin · 5–17 BASE: conversational cadence · 17–29 PUSH: controlled tempo · 29–40 POWER: short hill/all-out repeats with easy spin · 40–45 COOL: easy spin + calves/hips. EFFORT: Base = RPE 4–5, Push = 6–7, All Out = 8–9 for short bursts only. TODAY'S TARGET: 20 min spin + 5 min jog. Short and sharp. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
           "impact": "zero",
-          "run": true
+          "run": true,
+          "format": "otf45"
         },
         {
           "t": "Rest",
           "k": "rest",
-          "d": "Complete rest. Hydrate, eat well, feet up.",
-          "min": 15,
-          "impact": "zero"
+          "d": "45-MIN COACHED · 0–5 RESET: breathing + gentle joint circles · 5–15 EASY: relaxed walk or spin · 15–27 MOBILITY: calves, hips, thoracic spine · 27–40 FOOT: full foot protocol + heavy-slow calf raises if scheduled · 40–45 DOWN: easy stretch. EFFORT: Easy throughout at RPE 2–3; recovery quality is today's win. TODAY'S TARGET: Complete rest. Hydrate, eat well, feet up. Stop at 45:00 even if reps remain; log what you completed. On run/brick days, the morning heel-pain gate overrides every interval.",
+          "min": 45,
+          "impact": "zero",
+          "format": "otf45"
         },
         {
           "t": "★ SPRINT TRIATHLON — RACE DAY",
           "k": "brick",
-          "d": "750m swim · 20km bike · 5km run. The second finish line. You've earned this one twice over.",
+          "d": "ASSESSMENT / EVENT — 100 MIN PLANNED. This is intentionally longer than the daily 45-minute class so pacing and late-race fatigue are tested honestly. TODAY'S TARGET: 750m swim · 20km bike · 5km run. The second finish line. You've earned this one twice over.",
           "min": 100,
           "impact": "high",
-          "run": true
+          "run": true,
+          "format": "event"
         }
       ]
     }

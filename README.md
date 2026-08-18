@@ -9,10 +9,38 @@ It's an installable **PWA** (offline-capable). The whole plan is baked in, so it
 
 ---
 
+## The adaptive daily coach
+
+Every day's workout is **generated each morning**, not just read off the season
+template. The engine (`coach.js`) takes today's template day + your workout
+history + your weight baselines + a set of editable rules, and produces a
+structured 45-minute class card where **every line is checkable**:
+
+- **Strength days** prescribe exact machine work — *"Leg press — 4 × 8–10 @ 90 lb"* —
+  machine-first order (lower → upper → Hyrox skill). Weights progress by **double
+  progression**: tag an exercise *too easy / just right / too hard* after the
+  workout and the next session's load moves accordingly.
+- **Cardio days** (run, SkiErg, row, bike, swim) get pace targets computed from
+  *your own* best efforts in the last 28 days — e.g. a SkiErg split target a few
+  seconds off your recent best.
+- The **★ heel-pain run gate** still overrides everything: running only appears
+  when your morning heel readings have earned it, otherwise the day swaps to
+  zero-impact work automatically.
+- Two RPE ≥ 9 days in a row and the next day's Push/Power blocks demote to Base.
+- The **rules themselves learn**: consistent feedback slowly retunes the
+  progression knobs, and every change is explained in the Info tab.
+
+Starting weights are deliberately **pretend placeholders** — set your real
+numbers in **Settings → Weights** (or in the Airtable `Baselines` table). Editing
+a weight resets that exercise's progression from that date.
+
+A Vercel cron (`vercel-sync/api/generate`) runs the same engine every morning at
+5:30am ET and writes the day's plan to the Airtable `Daily Plans` table.
+
 ## What's inside
 
-- **Today** — the day's session, a running-gate warning on run days, the foot-protocol checklist, and a quick log (session done, morning heel pain, RPE, notes).
-- **Plan** — the three season phases, a 2-day prep block, and 8 weeks of Foundation training as expandable day-by-day cards.
+- **Cal** — the selected day's generated class card (timed blocks, per-item checkoffs, feedback chips), the foot-protocol checklist, and the numbers log that feeds tomorrow's targets.
+- **Plan** — four season phases, a 2-day prep block, and the full 40-week season as expandable day-by-day cards. Ordinary days use a consistent 45-minute Base / Push / All Out class rhythm; full simulations and races stay event-length.
 - **Foot** — the six-part plantar-fasciitis protocol (the load-bearing wall) plus a streak counter.
 - **Log** — your history, a heel-pain trend sparkline, and simple stats.
 - **Info** — the rules (the ★ running gate), fueling guidance, and your race dates.
@@ -48,9 +76,10 @@ Push to the default branch, then **Settings → Pages → Deploy from branch →
 | File | What it is |
 |------|-----------|
 | `index.html` | App shell |
-| `plan.js` | The plan data (generic — no personal info) |
+| `plan.js` | The season template data (generic — no personal info) |
+| `coach.js` | The adaptive daily generator (pure, deterministic, runs in browser + Node) |
 | `app.js` | Rendering, date logic, local logging, animations |
-| `airtable.js` | Optional Airtable sync layer |
+| `backend.js` | Sync layer (app → Vercel function → Airtable) |
 | `icons.js` | Inline SVG icon set + header logo lockup |
 | `styles.css` | Surf design system + animations |
 | `manifest.webmanifest` · `service-worker.js` · `icons/` | PWA install + offline shell + app icons |

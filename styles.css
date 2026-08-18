@@ -1557,3 +1557,105 @@ body::before {
 
 .logrow__summary { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
 @media (max-width: 380px) { .pb__v { font-size: 0.85rem; } .pb__grid { gap: 6px; } }
+
+/* ============================================================
+   COACH v3 — adaptive daily coach + de-clunk pass
+   Appended so it wins the cascade, same pattern as SURF THEME v2.
+   ============================================================ */
+
+/* fixes flagged in the codebase audit */
+:root { --sand: #ffd9a0; }
+.session-kind--erg { background: rgba(53, 208, 197, 0.16); color: var(--cyan); }
+.session-kind--hyrox { background: rgba(255, 209, 92, 0.18); color: var(--gold); }
+
+/* --- collapsible folds (foot protocol, log-your-numbers) --- */
+.fold summary { list-style: none; cursor: pointer; }
+.fold summary::-webkit-details-marker { display: none; }
+.fold__head { display: flex; align-items: center; gap: 10px; }
+.fold__head .section-title { margin: 0; flex: 1; }
+.fold__chev {
+  width: 8px; height: 8px; flex: none;
+  border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg); transition: transform 0.18s var(--ease, ease);
+  margin-right: 4px;
+}
+.fold[open] > summary .fold__chev { transform: rotate(-135deg); }
+.fold > summary { padding: 2px 0; }
+.fold[open] > summary { margin-bottom: 10px; }
+.fold--flat { border: 0; background: none; padding: 0; }
+
+/* --- the generated class card --- */
+.coach { padding-bottom: 12px; }
+.coach__progress {
+  margin-left: auto; font-size: 0.78rem; font-weight: 700;
+  color: var(--muted); letter-spacing: 0.04em;
+  padding: 3px 9px; border-radius: 999px; border: 1px solid var(--card-border);
+}
+.coach__progress.is-done { color: #071a24; background: var(--teal); border-color: transparent; }
+
+.coachblock { margin-top: 12px; }
+.coachblock__head {
+  display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px;
+}
+.coachblock__time {
+  font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em;
+  min-width: 44px;
+}
+.coachblock__label {
+  font-size: 0.7rem; font-weight: 800; letter-spacing: 0.14em;
+  color: var(--gold); text-transform: uppercase;
+}
+.coachitem { margin: 0; }
+/* the 16px .check padding is right for 6 foot items, far too airy when a
+   whole class stacks — same lesson as .modality .check, tightened further */
+.coachitem .check { padding: 6px 8px; border-radius: var(--radius-xs, 8px); }
+.coachitem .check__label { font-size: 0.88rem; line-height: 1.35; }
+.coachitem .check.is-checked .check__label { color: var(--muted); text-decoration: line-through; text-decoration-color: rgba(127,160,166,0.5); }
+
+/* feedback chips — the levers that move tomorrow's weights */
+.fbchips { display: flex; gap: 6px; margin: 2px 0 6px 40px; }
+.fbchip {
+  font: inherit; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.02em;
+  color: var(--muted); background: var(--input-bg, #0a2029);
+  border: 1px solid var(--input-border, #1c4a56); border-radius: 999px;
+  padding: 4px 10px; cursor: pointer; transition: all 0.15s var(--ease, ease);
+}
+.fbchip:hover { color: var(--cream); }
+.fbchip.is-on.is-easy { background: var(--teal); color: #071a24; border-color: transparent; }
+.fbchip.is-on.is-ok { background: var(--gold); color: #071a24; border-color: transparent; }
+.fbchip.is-on.is-hard { background: var(--coral); color: #071a24; border-color: transparent; }
+
+.coach__effort {
+  margin: 14px 0 0; font-size: 0.7rem; color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.coach__adjust {
+  margin-top: 12px; padding: 10px 12px;
+  background: rgba(255, 194, 75, 0.07);
+  border: 1px solid rgba(255, 194, 75, 0.25);
+  border-radius: var(--radius-sm, 10px);
+}
+.coach__adjust-title {
+  font-size: 0.68rem; font-weight: 800; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 6px;
+}
+.coach__adjust ul { margin: 0; padding-left: 16px; }
+.coach__adjust li { font-size: 0.8rem; color: var(--text); margin: 4px 0; line-height: 1.4; }
+.coach__foot { margin-top: 12px; display: flex; align-items: center; gap: 10px; }
+.btn--sm { padding: 8px 12px; font-size: 0.75rem; }
+
+/* --- settings: weight baselines grid --- */
+.blgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; margin: 10px 0 4px; }
+.blfield span { display: block; font-size: 0.72rem; color: var(--muted); margin-bottom: 3px; }
+.bl-pretend {
+  font-style: normal; font-size: 0.62rem; font-weight: 800;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--gold); background: rgba(255, 194, 75, 0.12);
+  border-radius: 4px; padding: 1px 5px; margin-left: 4px;
+}
+@media (max-width: 380px) { .blgrid { grid-template-columns: 1fr; } }
+
+/* RPE scale shares the heel scale skin; the meaning is effort, not pain */
+.heelscale--rpe .heelscale__btn:nth-child(-n+4).is-on { background: var(--teal); }
+.heelscale--rpe .heelscale__btn:nth-child(n+5):nth-child(-n+7).is-on { background: var(--gold); }
+.heelscale--rpe .heelscale__btn:nth-child(n+8).is-on { background: var(--coral); }
