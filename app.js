@@ -18,6 +18,14 @@
     saveSettings(o) { localStorage.setItem("flb.settings", JSON.stringify(o)); },
     airtable() { try { return JSON.parse(localStorage.getItem("flb.airtable") || "null"); } catch { return null; } },
     saveAirtable(o) { localStorage.setItem("flb.airtable", JSON.stringify(o)); },
+    // Adaptive coach state: frozen generated plans, weight baselines (your
+    // overrides of the pretend defaults), and rule-engine overrides + learn log.
+    dayplans() { try { return JSON.parse(localStorage.getItem("flb.dayplans") || "{}"); } catch { return {}; } },
+    saveDayplans(o) { localStorage.setItem("flb.dayplans", JSON.stringify(o)); },
+    baselines() { try { return JSON.parse(localStorage.getItem("flb.baselines") || "{}"); } catch { return {}; } },
+    saveBaselines(o) { localStorage.setItem("flb.baselines", JSON.stringify(o)); },
+    rules() { try { return JSON.parse(localStorage.getItem("flb.rules") || "{}"); } catch { return {}; } },
+    saveRules(o) { localStorage.setItem("flb.rules", JSON.stringify(o)); },
   };
 
   // ---------- dates (parse as LOCAL midnight; no UTC drift) ----------
@@ -57,6 +65,44 @@
     if (wi >= P.weeks.length) return { state: "beyond", week: P.weeks.length };
     const week = P.weeks[wi];
     return { state: "in", week, weekIndex: wi, dayIndex: di, day: week.days[di] };
+  }
+
+  // ---------- adaptive coach: today's generated workout ----------
+  // Deterministic: (template day + your history + baselines + rules) → plan.
+  // Today's and past plans freeze once generated so checkoffs stay aligned;
+  // future days preview live. "Regenerate" un-freezes a day on purpose.
+  function dayPlan(dateStr) {
+    if (!window.Coach) return null;
+    const loc = locate(parseDate(dateStr));
+    if (loc.state !== "in") return null;
+    const plans = store.dayplans();
+    if (plans[dateStr]) return plans[dateStr];
+    const plan = window.Coach.generate({
+      date: dateStr, day: loc.day, week: loc.week,
+      logs: store.logs(), baselines: store.baselines(), rules: store.rules(),
+    });
+    if (parseDate(dateStr) <= today()) { plans[dateStr] = plan; store.saveDayplans(plans); }
+    return plan;
+  }
+
+  // Once a day, let the rule engine look at recent feedback and tune ONE knob.
+  // Bounded, explained, and appended to the learn log shown in Info.
+  function ensureLearning() {
+    if (!window.Coach) return;
+    const s = store.settings();
+    const t = fmtISO(today());
+    if (s.lastLearn === t) return;
+    const change = window.Coach.learn(store.logs(), store.rules());
+    if (change) {
+      const r = store.rules();
+      r[change.rule] = Object.assign({}, r[change.rule], { [change.param]: change.to });
+      r.version = (r.version || 1) + 1;
+      r.log = (r.log || []).concat([{ date: t, note: change.note }]);
+      store.saveRules(r);
+      toast("Coach rule updated — see Info tab");
+    }
+    s.lastLearn = t;
+    store.saveSettings(s);
   }
 
   // ---------- streak (consecutive days incl. today with footDone) ----------
@@ -238,7 +284,9 @@
     if (loc.state === "in") {
       const w = loc.week, day = loc.day;
       sessionTitle = day.t;
-      html += `<h2 class="big">${esc(day.t)}</h2><p class="muted">Week ${w.n} · Phase ${w.phase} · ${esc(w.focus)}</p></div>
+      html += `<h2 class="big">${esc(day.t)}</h2><p class="muted">Week ${w.n} · Phase ${w.phase} · ${esc(w.focus)}</p></div>`;
+      const plan = dayPlan(dateStr);
+      html += plan ? coachCardHTML(plan, log, dateStr) : `
         <div class="session-card">
           <div class="session-card__head"><span class="session-kind session-kind--${esc(day.k)}">${esc(day.k)}</span>${badge(day.impact)}<span class="session-mins">${day.min} min</span></div>
           <p class="session-card__detail">${esc(day.d)}</p>
@@ -254,19 +302,24 @@
       html += `<h2 class="big">Season complete</h2><p class="muted">You're past week ${P.weeks.length} — both finish lines are behind you. Time to pick the next one.</p></div>`;
     }
 
-    html += `<div class="card footcard">
-      <div class="footcard__head"><h3 class="section-title">Foot protocol</h3>
-        <span class="streak-pill" title="Foot-protocol streak"><span class="mk mk--sun">${window.ICON.sun}</span><span class="streak-pill__n">${footStreak()}</span>d</span></div>
+    html += `<details class="card footcard fold" ${log.footDone ? "" : "open"}>
+      <summary class="fold__head"><h3 class="section-title">Foot protocol</h3>
+        <span class="streak-pill" title="Foot-protocol streak"><span class="mk mk--sun">${window.ICON.sun}</span><span class="streak-pill__n">${footStreak()}</span>d</span>
+        <span class="fold__chev"></span></summary>
       <div class="checklist" id="day-foot">${footChecklistHTML(dateStr)}</div>
-    </div>`;
+    </details>`;
 
     if (dt <= today()) {
       const planDay = loc.state === "in" ? loc.day : null;
       html += `<div class="card logcard">
-        <h3 class="section-title">Done today?</h3>
-        <div class="checklist checklist--day" id="day-check">
-          ${MODALITIES.map((m) => modalityRowHTML(m, log, planDay)).join("")}
-        </div>
+        <details class="fold fold--flat" open>
+          <summary class="fold__head"><h3 class="section-title">Log your numbers</h3>
+            <span class="muted small">distance + time feed tomorrow's targets</span>
+            <span class="fold__chev"></span></summary>
+          <div class="checklist checklist--day" id="day-check">
+            ${MODALITIES.map((m) => modalityRowHTML(m, log, planDay)).join("")}
+          </div>
+        </details>
         <div class="notesrow">
           <label class="heelrow__label" for="day-notes">Notes <span class="muted">— yours, optional</span></label>
           <textarea class="input textarea" id="day-notes" rows="2"
@@ -279,6 +332,13 @@
               <button type="button" class="heelscale__btn ${log.heelPain === i ? "is-on" : ""}" data-heel="${i}">${i}</button>`).join("")}
           </div>
         </div>
+        <div class="heelrow">
+          <div class="heelrow__label">Session effort (RPE) <span class="muted">— trains tomorrow's targets</span></div>
+          <div class="heelscale heelscale--rpe" id="rpe-scale">
+            ${Array.from({ length: 11 }, (_, i) => `
+              <button type="button" class="heelscale__btn ${log.rpe === i ? "is-on" : ""}" data-rpe="${i}">${i}</button>`).join("")}
+          </div>
+        </div>
         <span class="sync-hint">${window.Backend.canSync() ? "Syncs to Airtable" : "Saved on this device"}</span>
       </div>`;
     } else {
@@ -287,6 +347,45 @@
 
     el.innerHTML = html;
     wireDayDetail(dateStr);
+  }
+
+  // The generated class card: timed blocks, every line checkable, feedback
+  // chips on weighted exercises, and the coach's notes on what changed and why.
+  function coachCardHTML(plan, log, dateStr) {
+    const checks = log.checks || {};
+    const fb = log.fb || {};
+    const allItems = plan.blocks.reduce((a, b) => a.concat(b.items), []);
+    const doneN = allItems.filter((i) => checks[i.id]).length;
+    const isPast = parseDate(dateStr) <= today();
+    const chip = (key, val, label) =>
+      `<button type="button" class="fbchip ${fb[key] === val ? "is-on is-" + val : ""}" data-fb-key="${esc(key)}" data-fb-val="${val}">${label}</button>`;
+    return `<div class="session-card coach">
+      <div class="session-card__head">
+        <span class="session-kind session-kind--${esc(plan.kind)}">${esc(plan.kind)}</span>
+        ${badge(plan.impact)}
+        <span class="session-mins">${plan.min} min</span>
+        ${isPast ? `<span class="coach__progress ${doneN === allItems.length && doneN ? "is-done" : ""}" id="coach-progress">${doneN}/${allItems.length}</span>` : ""}
+      </div>
+      ${plan.blocks.map((b) => `
+        <div class="coachblock">
+          <div class="coachblock__head">${b.time ? `<span class="coachblock__time mono">${esc(b.time)}</span>` : ""}<span class="coachblock__label">${esc(b.label)}</span></div>
+          ${b.items.map((it) => `
+            <div class="coachitem">
+              <label class="check check--coach ${checks[it.id] ? "is-checked" : ""}">
+                <input type="checkbox" data-plan-check="${esc(it.id)}" ${checks[it.id] ? "checked" : ""} ${isPast ? "" : "disabled"} />
+                <span class="check__box"></span>
+                <span class="check__label">${esc(it.text)}</span>
+              </label>
+              ${it.fbKey && isPast ? `<div class="fbchips">${chip(it.fbKey, "easy", "too easy")}${chip(it.fbKey, "ok", "just right")}${chip(it.fbKey, "hard", "too hard")}</div>` : ""}
+            </div>`).join("")}
+        </div>`).join("")}
+      <p class="coach__effort mono">${esc(plan.effort)}</p>
+      ${plan.adjustments.length ? `<div class="coach__adjust">
+        <div class="coach__adjust-title">Coach notes</div>
+        <ul>${plan.adjustments.map((a) => `<li>${esc(a)}</li>`).join("")}</ul>
+      </div>` : ""}
+      ${isPast ? `<div class="coach__foot"><button type="button" class="btn btn--ghost btn--sm" id="regen-plan">Regenerate from latest history</button></div>` : ""}
+    </div>`;
   }
 
   // What you can tick off on a day. Sets/reps/splits still live in Hevy and the
@@ -413,7 +512,7 @@
         const entry = logs[dateStr] || { date: dateStr };
         const v = Number(btn.dataset.heel);
         entry.heelPain = entry.heelPain === v ? null : v;  // tap again to clear
-        entry.date = dateStr;
+        stampEntry(entry, dateStr);
         logs[dateStr] = entry;
         store.saveLogs(logs);
         $$("#heel-scale .heelscale__btn").forEach((b) =>
@@ -421,6 +520,79 @@
         maybeSync(dateStr);
       });
     });
+
+    // Generated-plan item checkoffs — every line of the class is tickable.
+    $$("#day-detail input[data-plan-check]").forEach((cb) => {
+      cb.addEventListener("change", () => {
+        const logs = store.logs();
+        const entry = logs[dateStr] || { date: dateStr };
+        entry.checks = entry.checks || {};
+        if (cb.checked) entry.checks[cb.dataset.planCheck] = true;
+        else delete entry.checks[cb.dataset.planCheck];
+        stampEntry(entry, dateStr);
+        logs[dateStr] = entry;
+        store.saveLogs(logs);
+        cb.closest(".check").classList.toggle("is-checked", cb.checked);
+        const prog = $("#coach-progress");
+        if (prog) {
+          const total = $$("#day-detail input[data-plan-check]").length;
+          const done = Object.keys(entry.checks).length;
+          prog.textContent = `${done}/${total}`;
+          prog.classList.toggle("is-done", done === total && done > 0);
+        }
+        maybeSync(dateStr);
+      });
+    });
+
+    // Feedback chips on weighted exercises — this is what moves your weights.
+    $$("#day-detail .fbchip").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const logs = store.logs();
+        const entry = logs[dateStr] || { date: dateStr };
+        entry.fb = entry.fb || {};
+        const k = btn.dataset.fbKey, v = btn.dataset.fbVal;
+        if (entry.fb[k] === v) delete entry.fb[k];
+        else entry.fb[k] = v;
+        stampEntry(entry, dateStr);
+        logs[dateStr] = entry;
+        store.saveLogs(logs);
+        const row = btn.closest(".fbchips");
+        $$(".fbchip", row).forEach((b) => {
+          b.className = "fbchip" + (entry.fb[k] === b.dataset.fbVal ? " is-on is-" + b.dataset.fbVal : "");
+        });
+        maybeSync(dateStr);
+      });
+    });
+
+    // Session RPE 0–10 — same tap pattern as heel pain.
+    $$("#rpe-scale .heelscale__btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const logs = store.logs();
+        const entry = logs[dateStr] || { date: dateStr };
+        const v = Number(btn.dataset.rpe);
+        entry.rpe = entry.rpe === v ? null : v;
+        stampEntry(entry, dateStr);
+        logs[dateStr] = entry;
+        store.saveLogs(logs);
+        $$("#rpe-scale .heelscale__btn").forEach((b) =>
+          b.classList.toggle("is-on", Number(b.dataset.rpe) === entry.rpe));
+        maybeSync(dateStr);
+      });
+    });
+
+    // Regenerate: unfreeze the stored plan (and its checkoffs) on purpose.
+    const regen = $("#regen-plan");
+    if (regen) {
+      regen.addEventListener("click", () => {
+        const plans = store.dayplans();
+        delete plans[dateStr];
+        store.saveDayplans(plans);
+        const logs = store.logs();
+        if (logs[dateStr]) { delete logs[dateStr].checks; store.saveLogs(logs); }
+        renderDayDetail(dateStr);
+        toast("Regenerated from your latest history ✓");
+      });
+    }
 
     $$("#day-foot input[data-foot]").forEach((cb) => {
       cb.addEventListener("change", () => {
@@ -496,6 +668,14 @@
     return bits.join(" · ");
   }
 
+  // "leg-press=easy;chest-press=hard | Leg press: too easy · ... · RPE 8"
+  function fbLine(e) {
+    const machine = Object.keys(e.fb || {}).map((k) => k + "=" + e.fb[k]).join(";");
+    const human = window.Coach ? window.Coach.feedbackSummary(e, store.baselines()) : "";
+    if (!machine && e.rpe == null) return "";
+    return machine + (human ? " | " + human : "");
+  }
+
   function renderHeroStreakBits() {
     const n = $(".streak-pill .streak-pill__n");
     if (n) n.textContent = footStreak();
@@ -523,6 +703,10 @@
       // Always send notes — including "" — so clearing a note in the app clears
       // it in Airtable rather than leaving a stale one behind.
       notes: e.notes || "",
+      rpe: e.rpe != null ? e.rpe : null,
+      // Feedback line: machine-readable "key=easy;key2=hard" before the pipe
+      // (the morning cron parses it), human summary after.
+      feedback: fbLine(e),
       // Per-modality detail. Distances as typed; times normalised to seconds
       // for Airtable Duration fields.
       modalities: ["run", "ski", "row", "bike", "swim"].reduce((acc, k) => {
@@ -890,8 +1074,22 @@
       const rd = raceDate(r.key);
       return `<li><strong>${esc(r.label)}</strong> — ${prettyDate(rd.date)}${rd.estimated ? " (estimated)" : ""}<br /><span class="muted">${esc(r.note)}</span></li>`;
     }).join("");
+    const r = store.rules();
+    const learned = (r.log || []).slice(-5).reverse();
+    const coachCard = window.Coach ? `
+      <h3 class="section-title section-title--loose">Adaptive coach</h3>
+      <div class="card">
+        <p class="muted small">Every day is generated fresh from the season template, your logs,
+        your weights, and these rules — v${r.version || 1}. Weights move on your
+        too&nbsp;easy&nbsp;/&nbsp;too&nbsp;hard feedback; cardio targets come from your own recent paces;
+        the ★ heel gate overrides everything.</p>
+        ${learned.length ? `<div class="coach__adjust"><div class="coach__adjust-title">What the coach has learned</div>
+          <ul>${learned.map((l) => `<li><span class="mono small">${esc(l.date)}</span> — ${esc(l.note)}</li>`).join("")}</ul></div>`
+        : `<p class="muted small">No rule changes yet — the engine tunes itself once it has a few sessions of consistent feedback.</p>`}
+      </div>` : "";
     $("#panel-info").innerHTML = `
       <h3 class="section-title">The rules</h3>${rules}
+      ${coachCard}
       <h3 class="section-title section-title--loose">Fueling</h3>${fuel}
       <h3 class="section-title section-title--loose">Your races</h3>
       <div class="card"><ul class="racelist">${races}</ul>
@@ -923,8 +1121,22 @@
         <input type="checkbox" id="set-sync" ${s.syncOff ? "" : "checked"} />
         <span class="check__box"></span><span class="check__label"><strong>Auto-sync my workouts to Airtable</strong></span>
       </label>` : ""}
+
+      <hr class="rule-line" />
+      <h3 class="section-title">Weights</h3>
+      <p class="muted small">Starting values are placeholders — set what you actually lift.
+      The coach prescribes from these and moves them when you tag an exercise
+      too easy / too hard after a workout.</p>
+      <div class="blgrid">
+        ${window.Coach ? Object.entries(window.Coach.mergeBaselines(store.baselines())).map(([k, b]) => `
+          <label class="minifield blfield">
+            <span>${esc(b.name)}${b.unit === "lb/hand" ? " <span class=\"muted\">/hand</span>" : ""}${b.pretend ? ' <em class="bl-pretend">pretend</em>' : ""}</span>
+            <input class="input input--mini" type="number" inputmode="decimal" step="any" min="0" data-bl-key="${esc(k)}" value="${b.weight}" />
+          </label>`).join("") : ""}
+      </div>
       <div class="btnrow">
         <button class="btn btn--primary" id="save-settings">Save</button>
+        <button class="btn btn--ghost" id="reset-baselines">Reset weights</button>
       </div>
 
       <hr class="rule-line" />
@@ -945,9 +1157,54 @@
       ns.races.tri = $("#set-tri").value || null;
       if ($("#set-sync")) ns.syncOff = !$("#set-sync").checked;
       store.saveSettings(ns);
+
+      // Weight baselines: store an override only when it differs from what the
+      // coach currently uses. Editing a weight resets its progression history
+      // (progression is derived from feedback AFTER the baseline's date).
+      if (window.Coach) {
+        const merged = window.Coach.mergeBaselines(store.baselines());
+        const overrides = store.baselines();
+        let blChanged = false;
+        $$("#drawer-body input[data-bl-key]").forEach((inp) => {
+          const k = inp.dataset.blKey;
+          const v = Number(inp.value);
+          if (!isFinite(v) || v <= 0 || !merged[k]) return;
+          if (v !== merged[k].weight) {
+            overrides[k] = Object.assign({}, overrides[k], { weight: v, updated: fmtISO(today()), pretend: false });
+            blChanged = true;
+          }
+        });
+        if (blChanged) {
+          store.saveBaselines(overrides);
+          // New weights should show up today — drop stored plans that have no
+          // checkoffs yet so they regenerate with the real numbers.
+          const plans = store.dayplans();
+          const logs = store.logs();
+          Object.keys(plans).forEach((d) => {
+            const hasChecks = logs[d] && logs[d].checks && Object.keys(logs[d].checks).length;
+            if (!hasChecks) delete plans[d];
+          });
+          store.saveDayplans(plans);
+        }
+      }
+
       toast("Settings saved ✓");
       renderAll();
       closeDrawer();
+    });
+
+    const resetBl = $("#reset-baselines");
+    if (resetBl) resetBl.addEventListener("click", () => {
+      store.saveBaselines({});
+      const plans = store.dayplans();
+      const logs = store.logs();
+      Object.keys(plans).forEach((d) => {
+        const hasChecks = logs[d] && logs[d].checks && Object.keys(logs[d].checks).length;
+        if (!hasChecks) delete plans[d];
+      });
+      store.saveDayplans(plans);
+      renderDrawer();
+      toast("Weights reset to the placeholder defaults");
     });
 
     $("#logout-btn").addEventListener("click", () => {
@@ -1031,6 +1288,7 @@
   function init() {
     injectChrome();
     registerSW();
+    ensureLearning();   // once a day: let the rule engine tune itself from feedback
     renderAll();
     wireLogin();
     $$(".tab").forEach((t) => t.addEventListener("click", () => switchTab(t.dataset.panel)));
