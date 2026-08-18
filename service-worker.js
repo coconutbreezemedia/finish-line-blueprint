@@ -1,5 +1,5 @@
 /* service-worker.js — offline app shell for Fit Bitch (PWA). */
-const CACHE = "fitbitch-v10";
+const CACHE = "fitbitch-v11";
 const SHELL = [
   "./",
   "index.html",

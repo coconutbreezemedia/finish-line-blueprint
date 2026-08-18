@@ -49,6 +49,10 @@
     version: 1,
     "progression-strength": { upSignals: 2, rpeCap: 8, downAfterHard: 2, downPct: 0.05 },
     "run-gate":             { heelMax: 3, streakDays: 5, backOffAbove: 4 },
+    // "walk" converts every running segment into brisk power-walking — for a
+    // plantar flare-up when running shouldn't be on the menu at all. Switch to
+    // "run" in Settings when the heel has earned it; the ★ gate then takes over.
+    "run-mode":             { mode: "walk" },
     "cardio-target":        { lookbackDays: 28, skiPadSec: [3, 8], rowPadSec: [3, 8],
                               runPadSecPerKm: [10, 25], swimPadSecPer100: [5, 10], bikePadSecPerKm: [5, 15] },
     "class-format":         { minutes: 45 },
@@ -159,7 +163,7 @@
       const e = entries[fmtISO(addDays(parseDate(dateStr), -i))];
       if (e && e.heelPain != null) {
         if (e.heelPain > params.backOffAbove) {
-          return { open: false, reason: `heel pain hit ${e.heelPain}/10 — back to zero-impact until it settles` };
+          return { open: false, spike: true, reason: `heel pain hit ${e.heelPain}/10 — back to zero-impact until it settles` };
         }
         break;
       }
@@ -249,6 +253,33 @@
     };
   }
 
+  // ---------- power-walk conversions ---------------------------------------------
+  // Running is off the menu (plantar flare): the day keeps its cardio shape but
+  // every running segment becomes brisk power-walking. Bricks keep their bike
+  // prescription; only the run half is swapped.
+  function walkTarget(day, raw, mk) {
+    if (day.k === "brick") {
+      const items = [mk("POWER-WALK SWAP: every run segment becomes a brisk walk segment of the same duration — strong pace, quick arms, zero jogging")];
+      (raw.match(/[^.]+(?:\.|$)/g) || [raw]).map((s) => s.trim()).filter(Boolean).slice(0, 4)
+        .forEach((s) => items.push(mk(s)));
+      return items;
+    }
+    const min = day.min || 45;
+    const isIntervals = /\d\s*[×x]\s*\d/.test(raw) || /interval/i.test(day.t || "");
+    if (isIntervals) {
+      const reps = Math.max(4, Math.floor((min - 15) / 5));
+      return [
+        mk("Power-walk intervals — 10 min brisk warm-up walk"),
+        mk(`${reps} × (3 min strong pace, RPE 6–7 / 2 min easy walk)`),
+        mk("Easy walk to the finish — tall posture, quick arms, zero jogging"),
+      ];
+    }
+    return [
+      mk(`${min}-min brisk power walk — strong purposeful pace (RPE 5–6), you can talk but not sing`),
+      mk("Flat, cushioned route or treadmill; cut it short the moment the heel talks"),
+    ];
+  }
+
   // ---------- feedback → next-day fatigue check ---------------------------------
   function fatigueEase(logs, dateStr, rules) {
     const p = rules["recovery-adjust"];
@@ -280,6 +311,7 @@
     const isEvent = day.format === "event";
     let targetItems = [];
     let gateInfo = null;
+    let impact = day.impact;
 
     // -- fatigue check applies to every hard day --
     const eased = !isEvent && day.k !== "rest" ? fatigueEase(logs, date, R) : null;
@@ -319,21 +351,32 @@
       adjustments.push("Machine order is the rule: lower machines → upper machines → Hyrox skill. Keep 2–3 clean reps in reserve.");
     } else {
       // Cardio and rest days: template target + a pace target from your history.
+      const walkMode = ((R["run-mode"] && R["run-mode"].mode) || "run") === "walk" && !!day.run;
       const gate = day.run ? heelGate(logs, date, R["run-gate"]) : null;
-      if (gate) {
+      if (gate) gateInfo = gate;
+      if (walkMode) rulesFired.push("run-mode");
+      if (gate && !walkMode) {
         rulesFired.push("run-gate");
-        gateInfo = gate;
-        if (!gate.open) {
-          adjustments.push(`★ Run gate CLOSED — ${gate.reason}. Running is swapped for zero-impact work today.`);
-        } else {
-          adjustments.push(`★ Run gate open — ${gate.reason}.`);
-        }
+        adjustments.push(gate.open
+          ? `★ Run gate open — ${gate.reason}.`
+          : `★ Run gate CLOSED — ${gate.reason}. Running is swapped for zero-impact work today.`);
       }
-      if (gate && !gate.open) {
-        targetItems = [
-          mk("SWAP (gate closed): SkiErg or row — match the planned running time at the same effort cues"),
-          mk("Keep every interval zero-impact today; the plan resumes running once the heel settles"),
-        ];
+      if (gate && gate.spike) {
+        if (walkMode) { rulesFired.push("run-gate"); adjustments.push(`★ ${gate.reason} — even walking waits today; keep it zero-impact.`); }
+      }
+      const ergSwap = () => [
+        mk("SWAP (gate closed): SkiErg or row — match the planned running time at the same effort cues"),
+        mk("Keep every interval zero-impact today; the plan resumes running once the heel settles"),
+      ];
+      if (gate && gate.spike) {
+        // A flared heel overrides everything — including walking.
+        targetItems = ergSwap();
+      } else if (walkMode) {
+        targetItems = walkTarget(day, tpl.target || day.t, mk);
+        impact = "low";
+        adjustments.push("Power-walk mode is ON — every running segment is walked briskly, zero jogging, until you switch it off in Settings.");
+      } else if (gate && !gate.open) {
+        targetItems = ergSwap();
       } else {
         const raw = tpl.target || day.t;
         targetItems = (raw.match(/[^.]+(?:\.|$)/g) || [raw]).map((s) => s.trim()).filter(Boolean).slice(0, 4).map((s) => mk(s));
@@ -382,7 +425,7 @@
 
     return {
       date, title: day.t, kind: day.k, min: day.min, format: day.format || "otf45",
-      impact: day.impact,
+      impact,
       effort: tpl.effort || "Base = RPE 4–5 · Push = 6–7 · All Out = 8–9 in short bursts only",
       blocks, adjustments, rulesFired,
       gate: gateInfo,
