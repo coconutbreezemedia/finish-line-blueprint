@@ -1123,6 +1123,18 @@
       </label>` : ""}
 
       <hr class="rule-line" />
+      <h3 class="section-title">Training</h3>
+      ${(() => {
+        const rm = store.rules()["run-mode"];
+        const walking = !rm || !rm.mode || rm.mode === "walk";
+        return `<label class="check ${walking ? "is-checked" : ""} check--inline">
+          <input type="checkbox" id="set-walkmode" ${walking ? "checked" : ""} />
+          <span class="check__box"></span>
+          <span class="check__label"><strong>Power-walk mode</strong><em>every running segment becomes a brisk walk — plantar-safe. Untick when your heel has earned running back.</em></span>
+        </label>`;
+      })()}
+
+      <hr class="rule-line" />
       <h3 class="section-title">Weights</h3>
       <p class="muted small">Starting values are placeholders — set what you actually lift.
       The coach prescribes from these and moves them when you tag an exercise
@@ -1158,6 +1170,24 @@
       if ($("#set-sync")) ns.syncOff = !$("#set-sync").checked;
       store.saveSettings(ns);
 
+      // Power-walk mode: lives in the rules so the engine (and the cron, once
+      // the Airtable rule is mirrored) generates the same day.
+      let modeChanged = false;
+      const walkCb = $("#set-walkmode");
+      if (walkCb) {
+        const r = store.rules();
+        const cur = (r["run-mode"] && r["run-mode"].mode) || "walk";
+        const next = walkCb.checked ? "walk" : "run";
+        if (cur !== next) {
+          r["run-mode"] = Object.assign({}, r["run-mode"], { mode: next });
+          r.log = (r.log || []).concat([{ date: fmtISO(today()), note: next === "walk"
+            ? "Power-walk mode ON — all running walked (plantar flare)."
+            : "Power-walk mode OFF — running resumes, gated by the ★ heel rule." }]);
+          store.saveRules(r);
+          modeChanged = true;
+        }
+      }
+
       // Weight baselines: store an override only when it differs from what the
       // coach currently uses. Editing a weight resets its progression history
       // (progression is derived from feedback AFTER the baseline's date).
@@ -1174,10 +1204,10 @@
             blChanged = true;
           }
         });
-        if (blChanged) {
-          store.saveBaselines(overrides);
-          // New weights should show up today — drop stored plans that have no
-          // checkoffs yet so they regenerate with the real numbers.
+        if (blChanged) store.saveBaselines(overrides);
+        if (blChanged || modeChanged) {
+          // New weights / mode should show up today — drop stored plans that
+          // have no checkoffs yet so they regenerate with the new inputs.
           const plans = store.dayplans();
           const logs = store.logs();
           Object.keys(plans).forEach((d) => {
