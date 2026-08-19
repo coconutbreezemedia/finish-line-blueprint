@@ -85,8 +85,41 @@ window.Backend = (function () {
     return { ok: true, id: data.id };
   }
 
+  // Fetch the workout the AI coach wrote for a date (Airtable "Daily Plans",
+  // via /api/plan). Returns null for every failure mode — offline, no key, no
+  // row yet, bad JSON — because the caller's answer to all of them is the same:
+  // fall back to the local deterministic engine. A missing plan is NOT an error
+  // and must never mark the sync broken.
+  async function fetchPlan(dateStr) {
+    const s = session();
+    if (!s || !s.password) return null;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(dateStr))) return null;
+
+    let r;
+    try {
+      r = await fetch(
+        API_BASE + "/api/plan?date=" + encodeURIComponent(dateStr) +
+        "&password=" + encodeURIComponent(s.password)
+      );
+    } catch (_) {
+      return null; // offline — the local engine covers this
+    }
+    if (r.status === 401) { markBroken("rejected"); return null; }
+    if (!r.ok) return null;
+
+    const data = await r.json().catch(() => null);
+    if (!data || !data.ok || !data.found || !data.plan) return null;
+    if (!Array.isArray(data.plan.blocks)) return null;
+
+    // Tag provenance so the card can say which coach wrote this.
+    const plan = data.plan;
+    plan.source = data.source || "ai";
+    plan.generatedAt = data.generatedAt || "";
+    return plan;
+  }
+
   return {
-    isLoggedIn, canSync, login, loginOffline, logout, pushLog,
+    isLoggedIn, canSync, login, loginOffline, logout, pushLog, fetchPlan,
     syncState, markBroken, clearBroken, API_BASE,
   };
 })();

@@ -1593,6 +1593,21 @@ body::before {
 }
 .coach__progress.is-done { color: #071a24; background: var(--teal); border-color: transparent; }
 
+/* Who wrote this workout. The AI coach (Make -> Airtable) is the primary
+   planner; "Offline engine" means the on-device generator filled in. Takes the
+   margin-left:auto that used to push .coach__progress right, so the two chips
+   sit together at the end of the row. */
+.coach__src {
+  margin-left: auto; font-size: 0.62rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--muted); padding: 3px 8px; border-radius: 999px;
+  border: 1px solid var(--card-border); white-space: nowrap;
+}
+.coach__src--ai {
+  color: var(--teal); border-color: color-mix(in srgb, var(--teal) 45%, transparent);
+}
+.coach__progress { margin-left: 8px; }
+
 .coachblock { margin-top: 12px; }
 .coachblock__head {
   display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px;
