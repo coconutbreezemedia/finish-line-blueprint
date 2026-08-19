@@ -81,8 +81,32 @@
       date: dateStr, day: loc.day, week: loc.week,
       logs: store.logs(), baselines: store.baselines(), rules: store.rules(),
     });
+    plan.source = "local";
     if (parseDate(dateStr) <= today()) { plans[dateStr] = plan; store.saveDayplans(plans); }
     return plan;
+  }
+
+  // The AI coach (Make.com -> Airtable "Daily Plans") is the primary planner.
+  // dayPlan() above stays SYNCHRONOUS so the render path never waits on the
+  // network; this runs alongside it and re-renders only if the server actually
+  // has a different plan. Offline, logged out, or no row yet -> nothing happens
+  // and the local engine's plan stands.
+  const serverPlanTried = new Set();
+  function ensureServerPlan(dateStr, force) {
+    if (!window.Backend || !window.Backend.canSync()) return;
+    // One attempt per date per page load, or every checkoff re-render refetches.
+    if (!force && serverPlanTried.has(dateStr)) return;
+    serverPlanTried.add(dateStr);
+    window.Backend.fetchPlan(dateStr).then((plan) => {
+      if (!plan) return;
+      const plans = store.dayplans();
+      const cur = plans[dateStr];
+      // Replacing an identical plan would re-render forever.
+      if (cur && cur.source === plan.source && cur.generatedAt === plan.generatedAt) return;
+      plans[dateStr] = plan;
+      store.saveDayplans(plans);
+      if (calSelected === dateStr) renderDayDetail(dateStr);
+    }).catch(() => { /* the local plan already rendered — nothing to recover */ });
   }
 
   // Once a day, let the rule engine look at recent feedback and tune ONE knob.
@@ -286,6 +310,7 @@
       sessionTitle = day.t;
       html += `<h2 class="big">${esc(day.t)}</h2><p class="muted">Week ${w.n} · Phase ${w.phase} · ${esc(w.focus)}</p></div>`;
       const plan = dayPlan(dateStr);
+      ensureServerPlan(dateStr);
       html += plan ? coachCardHTML(plan, log, dateStr) : `
         <div class="session-card">
           <div class="session-card__head"><span class="session-kind session-kind--${esc(day.k)}">${esc(day.k)}</span>${badge(day.impact)}<span class="session-mins">${day.min} min</span></div>
@@ -364,6 +389,9 @@
         <span class="session-kind session-kind--${esc(plan.kind)}">${esc(plan.kind)}</span>
         ${badge(plan.impact)}
         <span class="session-mins">${plan.min} min</span>
+        <span class="coach__src ${plan.source && plan.source !== "local" ? "coach__src--ai" : ""}"
+          title="${plan.source && plan.source !== "local" ? "Written by your AI coach" + (plan.generatedAt ? " on " + esc(String(plan.generatedAt).slice(0, 10)) : "") : "Generated on this device from your history"}"
+          >${plan.source && plan.source !== "local" ? "AI coach" : "Offline engine"}</span>
         ${isPast ? `<span class="coach__progress ${doneN === allItems.length && doneN ? "is-done" : ""}" id="coach-progress">${doneN}/${allItems.length}</span>` : ""}
       </div>
       ${plan.blocks.map((b) => `
@@ -590,6 +618,7 @@
         const logs = store.logs();
         if (logs[dateStr]) { delete logs[dateStr].checks; store.saveLogs(logs); }
         renderDayDetail(dateStr);
+        ensureServerPlan(dateStr, true);
         toast("Regenerated from your latest history ✓");
       });
     }
