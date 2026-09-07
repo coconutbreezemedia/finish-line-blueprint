@@ -118,8 +118,38 @@ window.Backend = (function () {
     return plan;
   }
 
+  async function savePlan(dateStr, plan) {
+    const s = session();
+    if (!s || !s.password) return { ok: false, reason: "offline" };
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(dateStr))) return { ok: false, reason: "invalid" };
+
+    let r, data;
+    try {
+      r = await fetch(API_BASE + "/api/plan", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: s.password, date: dateStr, plan }),
+      });
+      data = await r.json().catch(() => ({}));
+    } catch (_) {
+      markBroken("unreachable");
+      return { ok: false, reason: "unreachable" };
+    }
+    if (r.status === 401) { markBroken("rejected"); return { ok: false, reason: "rejected" }; }
+    if (!r.ok) {
+      markBroken("server");
+      return { ok: false, reason: data.error || "server", detail: data.detail };
+    }
+    clearBroken();
+    if (data.plan) {
+      data.plan.source = data.source || data.plan.source || "manual";
+      data.plan.generatedAt = data.generatedAt || data.plan.generatedAt || "";
+    }
+    return { ok: true, plan: data.plan, source: data.source, generatedAt: data.generatedAt };
+  }
+
   return {
-    isLoggedIn, canSync, login, loginOffline, logout, pushLog, fetchPlan,
+    isLoggedIn, canSync, login, loginOffline, logout, pushLog, fetchPlan, savePlan,
     syncState, markBroken, clearBroken, API_BASE,
   };
 })();
