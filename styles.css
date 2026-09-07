@@ -1659,6 +1659,27 @@ body::before {
 .coach__foot { margin-top: 12px; display: flex; align-items: center; gap: 10px; }
 .btn--sm { padding: 8px 12px; font-size: 0.75rem; }
 
+/* Inline daily-plan editor: large tap targets, compact enough for an iPhone. */
+.planedit[hidden] { display: none; }
+.planedit { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--card-border); }
+.planedit__heading { display: flex; flex-direction: column; gap: 2px; margin-bottom: 12px; }
+.planedit__heading strong { color: var(--gold); }
+.planedit__heading span, .planedit__hint { color: var(--muted); font-size: 0.75rem; line-height: 1.4; }
+.planedit__top, .planedit__blockhead { display: grid; grid-template-columns: 1fr 92px; gap: 8px; }
+.planedit label { color: var(--muted); font-size: 0.7rem; }
+.planedit label .input { width: 100%; margin-top: 4px; }
+.planedit__block { margin-top: 12px; padding: 12px; border: 1px solid var(--card-border); border-radius: 12px; background: rgba(255,255,255,0.025); }
+.planedit__item { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; margin-top: 8px; }
+.planedit__text { width: 100%; resize: vertical; }
+.planedit__remove { min-height: 44px; padding: 6px 8px; border: 0; background: transparent; color: var(--coral); font-size: 0.7rem; font-weight: 800; }
+.planedit__row, .planedit__actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px; }
+.planedit__hint { margin: 10px 0 0; }
+@media (max-width: 380px) {
+  .planedit__top, .planedit__blockhead { grid-template-columns: 1fr; }
+  .planedit__item { grid-template-columns: 1fr; }
+  .planedit__remove { justify-self: start; }
+}
+
 /* --- settings: weight baselines grid --- */
 .blgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; margin: 10px 0 4px; }
 .blfield span { display: block; font-size: 0.72rem; color: var(--muted); margin-bottom: 3px; }

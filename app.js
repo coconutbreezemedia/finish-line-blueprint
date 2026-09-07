@@ -307,9 +307,9 @@
 
     if (loc.state === "in") {
       const w = loc.week, day = loc.day;
-      sessionTitle = day.t;
-      html += `<h2 class="big">${esc(day.t)}</h2><p class="muted">Week ${w.n} · Phase ${w.phase} · ${esc(w.focus)}</p></div>`;
       const plan = dayPlan(dateStr);
+      sessionTitle = plan && plan.title || day.t;
+      html += `<h2 class="big">${esc(sessionTitle)}</h2><p class="muted">Week ${w.n} · Phase ${w.phase} · ${esc(w.focus)}</p></div>`;
       ensureServerPlan(dateStr);
       html += plan ? coachCardHTML(plan, log, dateStr) : `
         <div class="session-card">
@@ -412,8 +412,51 @@
         <div class="coach__adjust-title">Coach notes</div>
         <ul>${plan.adjustments.map((a) => `<li>${esc(a)}</li>`).join("")}</ul>
       </div>` : ""}
-      ${isPast ? `<div class="coach__foot"><button type="button" class="btn btn--ghost btn--sm" id="regen-plan">Regenerate from latest history</button></div>` : ""}
+      <div class="coach__foot">
+        ${window.Backend.canSync() ? `<button type="button" class="btn btn--primary btn--sm" id="edit-plan">Edit workout</button>` : ""}
+        ${isPast ? `<button type="button" class="btn btn--ghost btn--sm" id="regen-plan">Regenerate</button>` : ""}
+      </div>
+      ${window.Backend.canSync() ? planEditorHTML(plan, dateStr) : ""}
     </div>`;
+  }
+
+  function planEditorItemHTML(item, blockIndex, itemIndex) {
+    return `<div class="planedit__item" data-source-block="${blockIndex}" data-source-item="${itemIndex}">
+      <textarea class="input textarea planedit__text" rows="2" maxlength="240" placeholder="Exercise or instruction">${esc(item && item.text || "")}</textarea>
+      <button type="button" class="planedit__remove" data-remove-item aria-label="Remove item">Remove</button>
+    </div>`;
+  }
+
+  function planEditorBlockHTML(block, blockIndex) {
+    const value = block || { label: "TODAY'S TARGET", time: "", items: [{ text: "" }] };
+    return `<div class="planedit__block" data-source-block="${blockIndex}">
+      <div class="planedit__blockhead">
+        <label>Section<input class="input planedit__label" maxlength="48" value="${esc(value.label || "")}" /></label>
+        <label>Time<input class="input planedit__time" maxlength="24" value="${esc(value.time || "")}" placeholder="5-15" /></label>
+      </div>
+      <div class="planedit__items">${value.items.map((item, itemIndex) => planEditorItemHTML(item, blockIndex, itemIndex)).join("")}</div>
+      <div class="planedit__row">
+        <button type="button" class="btn btn--ghost btn--sm" data-add-item>Add item</button>
+        <button type="button" class="planedit__remove" data-remove-block>Remove section</button>
+      </div>
+    </div>`;
+  }
+
+  function planEditorHTML(plan, dateStr) {
+    return `<form class="planedit" id="plan-editor" data-date="${esc(dateStr)}" hidden>
+      <div class="planedit__heading"><strong>Edit this day</strong><span>Saved changes sync to your watch.</span></div>
+      <div class="planedit__top">
+        <label>Workout name<input class="input" id="plan-edit-title" maxlength="80" value="${esc(plan.title || "")}" /></label>
+        <label>Minutes<input class="input" id="plan-edit-min" type="number" min="1" max="360" value="${Number(plan.min) || 45}" /></label>
+      </div>
+      <div id="plan-edit-blocks">${plan.blocks.map((block, blockIndex) => planEditorBlockHTML(block, blockIndex)).join("")}</div>
+      <button type="button" class="btn btn--ghost btn--sm" id="plan-add-block">Add section</button>
+      <div class="planedit__actions">
+        <button type="submit" class="btn btn--primary btn--sm" id="plan-save">Save and sync</button>
+        <button type="button" class="btn btn--ghost btn--sm" id="plan-cancel">Cancel</button>
+      </div>
+      <p class="planedit__hint">After saving, choose <strong>Refresh from phone</strong> in Fit Bitch on the watch before starting.</p>
+    </form>`;
   }
 
   // What you can tick off on a day. Sets/reps/splits still live in Hevy and the
@@ -620,6 +663,86 @@
         renderDayDetail(dateStr);
         ensureServerPlan(dateStr, true);
         toast("Regenerated from your latest history ✓");
+      });
+    }
+
+    const editor = $("#plan-editor");
+    const editButton = $("#edit-plan");
+    if (editor && editButton) {
+      editButton.addEventListener("click", () => {
+        editor.hidden = false;
+        editButton.hidden = true;
+        editor.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      });
+      $("#plan-cancel").addEventListener("click", () => {
+        editor.hidden = true;
+        editButton.hidden = false;
+      });
+      editor.addEventListener("click", (event) => {
+        const target = event.target;
+        if (target.matches("[data-add-item]")) {
+          const block = target.closest(".planedit__block");
+          block.querySelector(".planedit__items").insertAdjacentHTML("beforeend", planEditorItemHTML({ text: "" }, -1, -1));
+        } else if (target.matches("[data-remove-item]")) {
+          const items = target.closest(".planedit__items").querySelectorAll(".planedit__item");
+          if (items.length === 1) toast("Each section needs at least one item", true);
+          else target.closest(".planedit__item").remove();
+        } else if (target.matches("[data-remove-block]")) {
+          const blocks = editor.querySelectorAll(".planedit__block");
+          if (blocks.length === 1) toast("A workout needs at least one section", true);
+          else target.closest(".planedit__block").remove();
+        }
+      });
+      $("#plan-add-block").addEventListener("click", () => {
+        $("#plan-edit-blocks").insertAdjacentHTML("beforeend", planEditorBlockHTML(null, -1));
+      });
+      editor.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const current = dayPlan(dateStr);
+        const blocks = Array.from(editor.querySelectorAll(".planedit__block")).map((block, blockIndex) => {
+          const oldBlockIndex = Number(block.dataset.sourceBlock);
+          const oldBlock = oldBlockIndex >= 0 && current.blocks[oldBlockIndex];
+          const items = Array.from(block.querySelectorAll(".planedit__item")).map((row, itemIndex) => {
+            const value = row.querySelector(".planedit__text").value.trim();
+            const oldItemIndex = Number(row.dataset.sourceItem);
+            const oldItem = oldBlock && oldItemIndex >= 0 && oldBlock.items[oldItemIndex];
+            if (oldItem && oldItem.text === value) return Object.assign({}, oldItem);
+            return { id: `manual-${Date.now()}-${blockIndex + 1}-${itemIndex + 1}`, text: value };
+          });
+          return {
+            label: block.querySelector(".planedit__label").value.trim(),
+            time: block.querySelector(".planedit__time").value.trim() || null,
+            items,
+          };
+        });
+        if (blocks.some((block) => !block.label || block.items.some((item) => !item.text))) {
+          toast("Fill in every section and item", true);
+          return;
+        }
+        const edited = Object.assign({}, current, {
+          date: dateStr,
+          title: $("#plan-edit-title").value.trim(),
+          min: Number($("#plan-edit-min").value) || 45,
+          blocks,
+        });
+        const saveButton = $("#plan-save");
+        saveButton.disabled = true;
+        saveButton.textContent = "Saving...";
+        const result = await window.Backend.savePlan(dateStr, edited);
+        if (!result.ok || !result.plan) {
+          saveButton.disabled = false;
+          saveButton.textContent = "Save and sync";
+          toast("Couldn't save the workout. Check sync and try again.", true);
+          return;
+        }
+        const plans = store.dayplans();
+        plans[dateStr] = result.plan;
+        store.saveDayplans(plans);
+        const logs = store.logs();
+        if (logs[dateStr]) { delete logs[dateStr].checks; store.saveLogs(logs); }
+        serverPlanTried.add(dateStr);
+        renderDayDetail(dateStr);
+        toast("Workout saved — refresh it on your watch ✓");
       });
     }
 
